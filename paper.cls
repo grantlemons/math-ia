@@ -7,7 +7,7 @@
 
 % Paragraph jump and intents
 \setlength{\parskip}{1em}
-\setlength{\parindent}{1em}
+\setlength{\parindent}{0em}
 
 % Package mass import
 \usepackage{microtype}
