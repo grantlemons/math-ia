@@ -16,7 +16,7 @@ As such, many methods have been developed to allow computers to approximate area
 This general field of mathematical study is known as quadrature, and contains many established methods used to quickly and accurately approximate the function.
 The most basic method used to approximate area is the rectangle.
 By splitting the interval to be integrated into smaller subintervals and fitting rectangles beneath the curve based on the value of the function at a bound of the subinterval's bound, area can be approximated to a reasonable degree of accuracy.
-Since the area of a rectangle is extremely easy to calculate, this method is extremely simple to implement using \ref{eqn:rect_rule}.
+Since the area of a rectangle is extremely easy to calculate, this method is extremely simple to implement using \eqref{eqn:rect_rule}.
 
 \begin{equation}
     \label{eqn:rect_rule}
@@ -25,7 +25,7 @@ Since the area of a rectangle is extremely easy to calculate, this method is ext
 
 An alternative means typically used in place of this method, typically called the rectangle rule, utilizes trapezoids instead of rectangles.
 Instead of picking a single point at which to base the height on, the trapezoid rule utilizes the value of the function at both the left and right bounds, and uses them to approximate a trapezoid under the curve.
-The equation for a trapezoid (\ref{eqn:trap_rule}) is only marginally more complicated than \ref{eqn:rect_rule}, but provides significantly more accuracy.
+The equation for a trapezoid \eqref{eqn:trap_rule} is only marginally more complicated than \eqref{eqn:rect_rule}, but provides significantly more accuracy.
 
 \begin{equation}
     \label{eqn:trap_rule}
@@ -33,7 +33,7 @@ The equation for a trapezoid (\ref{eqn:trap_rule}) is only marginally more compl
 \end{equation}
 
 Beyond these simple methods, other techniques use polynomials in an attempt to fit the curve as closely as possible.
-One such method is the Composite Simpson's 13 rule, which uses the left, right, and, mid-interval values of each subinterval to construct a polynomial using Lagrange Quadratic Interpolation as shown in \ref{eqn:lagrange} below.
+One such method is the Composite Simpson's 13 rule, which uses the left, right, and, mid-interval values of each subinterval to construct a polynomial using Lagrange Quadratic Interpolation as shown in \eqref{eqn:lagrange} below.
 
 \begin{equation}
     \label{eqn:lagrange}
@@ -42,49 +42,53 @@ One such method is the Composite Simpson's 13 rule, which uses the left, right, 
 
 Where the x and y values are the coordinates of the left-bound, right-bound, and mid-interval values of the integrand.
 The use of polynomials allows the Composite Simpson's 13 rule to approximate the integrand with easily integrable functions that fit the integrand extremely closely.
-Using Lagrange Quadratic Interpolation with the midpoint \(m\), left bound \(a\), and right bound \(b\), produces \ref{eqn:lagrange_smps} below.
+Using Lagrange Quadratic Interpolation with the midpoint \(m\), left bound \(a\), and right bound \(b\), produces \eqref{eqn:lagrange_smps} below.
 
 \begin{equation}
     \label{eqn:lagrange_smps}
     P(x) = f(a) \dfrac{(x - m)(x - b)}{(a - m)(a - b)} + f(m) \dfrac{(x - a)(x - b)}{(m - a)(m - b)} + f(b) \dfrac{(x - a)(x - m)}{(b - a)(b - m)}
 \end{equation}
 
-As \(m\) is the midpoint with the value of \((a + b) / 2\), this can be stated in terms of a and b as shown below in \ref{eqn:lagrange_smps_ab}.
+As \(m\) is the midpoint with the value of \((a + b) / 2\), this can be stated in terms of a and b as shown below in \eqref{eqn:lagrange_smps_ab}.
 
 \begin{equation}
     \label{eqn:lagrange_smps_ab}
-    P(x) = f(a) \dfrac{(x - \dfrac{a+b}{2})(x - b)}{(a - \dfrac{a+b}{2})(a - b)} + f(\dfrac{a+b}{2}) \dfrac{(x - a)(x - b)}{(\dfrac{a+b}{2} - a)(\dfrac{a+b}{2} - b)} + f(b) \dfrac{(x - a)(x - \dfrac{a+b}{2})}{(b - a)(b - \dfrac{a+b}{2})}
+    \resizebox{.9\textwidth}{!} 
+    {$
+    P(x) = f(a) \dfrac{\left(x - \dfrac{a+b}{2}\right)(x - b)}{\left(a - \dfrac{a+b}{2}\right)(a - b)} + f\left(\dfrac{a+b}{2}\right) \dfrac{(x - a)(x - b)}{\left(\dfrac{a+b}{2} - a\right)\left(\dfrac{a+b}{2} - b\right)} + f(b) \dfrac{(x - a)\left(x - \dfrac{a+b}{2}\right)}{(b - a)\left(b - \dfrac{a+b}{2}\right)}
+    $}
 \end{equation}
 
-Utilizing integration by substitution, this can be differentiated into the equation below. (\ref{eqn:smps_rule})
+Utilizing integration by substitution, this can be differentiated into \eqref{eqn:smps_rule} below.
 
 \begin{equation}
     \label{eqn:smps_rule}
-    \int_a^b P(x) dx = \dfrac{a - b}{6} [f(a) + 4f(\dfrac{a + b}{2}) + f(b)] \\
-    h = \dfrac{a - b}{2} \\
+    \begin{gathered}
+    \int_a^b P(x) dx = \dfrac{a - b}{6} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]          \\
+    h = \dfrac{a - b}{2}                                                                                    \\
     \begin{split}
-        \int_a^b P(x) dx &= \dfrac{h}{3} [f(a) + 4f(\dfrac{a + b}{2}) + f(b)]   \\
-        \int_a^b P(x) dx &\approxeq \int_a^b f(x) dx                            \\
-        \int_a^b f(x) dx &\approxeq \dfrac{h}{3} [f(a) + 4f(\dfrac{a + b}{2}) + f(b)]   \\
+        \int_a^b P(x) dx &= \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]         \\
+        \int_a^b P(x) dx &\approx \int_a^b f(x) dx                                                          \\
+        \int_a^b f(x) dx &\approx \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]   \\
     \end{split}
+\end{gathered}
 \end{equation}
 
-\ref{eqn:smps_rule} gives an approximate value for the integral value of the interval as a whole using a single polynomial function.
-In order to utilize this method for complex integrands, the interval must be split into a number of subintervals for which each will have \ref{eqn:smps_rule} applied.
+The equation \eqref{eqn:smps_rule} gives an approximate value for the integral value of the interval as a whole using a single polynomial function.
+In order to utilize this method for complex integrands, the interval must be split into a number of subintervals for which each will have \eqref{eqn:smps_rule} applied.
 By summing the values calculated for each subinterval, a highly accurate approximation of the integral can be obtained.
-The equation below (\ref{eqn:composite_smps_rule}) shows the complete equation of the Composite Simpson's Rule.
+The equation below \eqref{eqn:composite_smps_rule} shows the complete equation of the Composite Simpson's Rule.
 
 \begin{equation}
     \label{eqn:composite_smps_rule}
-    \int_a^b f(x) dx \approxeq \dfrac{h}{3} \sum_{j=1}^{n / 2} [f(x_{2j-1}) + 4f(x_{2j-1}) + f(x_{2j})]
+    \int_a^b f(x) dx \approxeq \dfrac{h}{3} \sum_{j=1}^{n / 2} \left[f(x_{2j-1}) + 4f(x_{2j-1}) + f(x_{2j})\right]
 \end{equation}
 
-Which can be further simplified for efficiency to the following (\ref{eqn:smplfd_composite_smps_rule}):
+Which can be further simplified for efficiency to the following \eqref{eqn:smplfd_composite_smps_rule}:
 
 \begin{equation}
     \label{eqn:smplfd_composite_smps_rule}
-    \int_a^b f(x) dx \approxeq \dfrac{h}{3} [f(a) + 4 \sum_{j=1}^{n / 2} f(x_{2j-1}) + 2  \sum_{j=1}^{n / 2 - 1} f(x_{2j}) + f(b)]
+    \int_a^b f(x) dx \approxeq \dfrac{h}{3} \left[f(a) + 4 \sum_{j=1}^{n / 2} f(x_{2j-1}) + 2  \sum_{j=1}^{n / 2 - 1} f(x_{2j}) + f(b)\right]
 \end{equation}
 
 \end{document}
-
