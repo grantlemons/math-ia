@@ -4,6 +4,9 @@
 \newcommand{\researchquestion}{}
 \author{Grant Lemons}
 
+\usepackage{amsmath}
+\usepackage{amssymb}
+
 \begin{document}
 % \insertTitlePage
 
@@ -16,8 +19,8 @@ By splitting the interval to be integrated into smaller subintervals and fitting
 Since the area of a rectangle is extremely easy to calculate, this method is extremely simple to implement using \ref{eqn:rect_rule}.
 
 \begin{equation}
-    A = l \times w
     \label{eqn:rect_rule}
+    A = l \times w
 \end{equation}
 
 An alternative means typically used in place of this method, typically called the rectangle rule, utilizes trapezoids instead of rectangles.
@@ -25,16 +28,16 @@ Instead of picking a single point at which to base the height on, the trapezoid 
 The equation for a trapezoid (\ref{eqn:trap_rule}) is only marginally more complicated than \ref{eqn:rect_rule}, but provides significantly more accuracy.
 
 \begin{equation}
-    A = \dfrac{a + b}{2} \times h
     \label{eqn:trap_rule}
+    A = \dfrac{a + b}{2} \times h
 \end{equation}
 
 Beyond these simple methods, other techniques use polynomials in an attempt to fit the curve as closely as possible.
 One such method is the Composite Simpson's 13 rule, which uses the left, right, and, mid-interval values of each subinterval to construct a polynomial using Lagrange Quadratic Interpolation as shown in \ref{eqn:lagrange} below.
 
 \begin{equation}
-    P(x) = \sum_j=1^n y_j \prod_{\substack{k = 1 \\ k \neq j}}^n \dfrac{x - x_k}{x_j - x_k}
     \label{eqn:lagrange}
+    P(x) = \sum_j=1^n y_j \prod_{\substack{k = 1 \\ k \neq j}}^n \dfrac{x - x_k}{x_j - x_k}
 \end{equation}
 
 Where the x and y values are the coordinates of the left-bound, right-bound, and mid-interval values of the integrand.
@@ -42,28 +45,28 @@ The use of polynomials allows the Composite Simpson's 13 rule to approximate the
 Using Lagrange Quadratic Interpolation with the midpoint \(m\), left bound \(a\), and right bound \(b\), produces \ref{eqn:lagrange_smps} below.
 
 \begin{equation}
-    P(x) = f(a) \dfrac{(x - m)(x - b)}{(a - m)(a - b)} + f(m) \dfrac{(x - a)(x - b)}{(m - a)(m - b)} + f(b) \dfrac{(x - a)(x - m)}{(b - a)(b - m)}
     \label{eqn:lagrange_smps}
+    P(x) = f(a) \dfrac{(x - m)(x - b)}{(a - m)(a - b)} + f(m) \dfrac{(x - a)(x - b)}{(m - a)(m - b)} + f(b) \dfrac{(x - a)(x - m)}{(b - a)(b - m)}
 \end{equation}
 
 As \(m\) is the midpoint with the value of \((a + b) / 2\), this can be stated in terms of a and b as shown below in \ref{eqn:lagrange_smps_ab}.
 
 \begin{equation}
-    P(x) = f(a) \dfrac{(x - \dfrac{a+b}{2})(x - b)}{(a - \dfrac{a+b}{2})(a - b)} + f(\dfrac{a+b}{2}) \dfrac{(x - a)(x - b)}{(\dfrac{a+b}{2} - a)(\dfrac{a+b}{2} - b)} + f(b) \dfrac{(x - a)(x - \dfrac{a+b}{2})}{(b - a)(b - \dfrac{a+b}{2})}
     \label{eqn:lagrange_smps_ab}
+    P(x) = f(a) \dfrac{(x - \dfrac{a+b}{2})(x - b)}{(a - \dfrac{a+b}{2})(a - b)} + f(\dfrac{a+b}{2}) \dfrac{(x - a)(x - b)}{(\dfrac{a+b}{2} - a)(\dfrac{a+b}{2} - b)} + f(b) \dfrac{(x - a)(x - \dfrac{a+b}{2})}{(b - a)(b - \dfrac{a+b}{2})}
 \end{equation}
 
 Utilizing integration by substitution, this can be differentiated into the equation below. (\ref{eqn:smps_rule})
 
 \begin{equation}
-    \int_a^b P(x) dx = \dfrac{a - b}{6} [f(a) + 4f(\dfrac{a + b}{2}) + f(b)]
-    h = \dfrac{a - b}{2}
+    \label{eqn:smps_rule}
+    \int_a^b P(x) dx = \dfrac{a - b}{6} [f(a) + 4f(\dfrac{a + b}{2}) + f(b)] \\
+    h = \dfrac{a - b}{2} \\
     \begin{split}
         \int_a^b P(x) dx &= \dfrac{h}{3} [f(a) + 4f(\dfrac{a + b}{2}) + f(b)]   \\
         \int_a^b P(x) dx &\approxeq \int_a^b f(x) dx                            \\
         \int_a^b f(x) dx &\approxeq \dfrac{h}{3} [f(a) + 4f(\dfrac{a + b}{2}) + f(b)]   \\
     \end{split}
-    \label{eqn:smps_rule}
 \end{equation}
 
 \ref{eqn:smps_rule} gives an approximate value for the integral value of the interval as a whole using a single polynomial function.
@@ -72,15 +75,16 @@ By summing the values calculated for each subinterval, a highly accurate approxi
 The equation below (\ref{eqn:composite_smps_rule}) shows the complete equation of the Composite Simpson's Rule.
 
 \begin{equation}
-    \int_a^b f(x) dx &\approxeq \dfrac{h}{3} \sum_{j=1}^{n / 2} [f(x_{2j-1}) + 4f(x_{2j-1}) + f(x_{2j})]
     \label{eqn:composite_smps_rule}
+    \int_a^b f(x) dx \approxeq \dfrac{h}{3} \sum_{j=1}^{n / 2} [f(x_{2j-1}) + 4f(x_{2j-1}) + f(x_{2j})]
 \end{equation}
 
 Which can be further simplified for efficiency to the following (\ref{eqn:smplfd_composite_smps_rule}):
 
 \begin{equation}
-    \int_a^b f(x) dx &\approxeq \dfrac{h}{3} [f(a) + 4 \sum_{j=1}^{n / 2} f(x_{2j-1}) + 2  \sum_{j=1}^{n / 2 - 1} f(x_{2j}) + f(b)]
     \label{eqn:smplfd_composite_smps_rule}
+    \int_a^b f(x) dx \approxeq \dfrac{h}{3} [f(a) + 4 \sum_{j=1}^{n / 2} f(x_{2j-1}) + 2  \sum_{j=1}^{n / 2 - 1} f(x_{2j}) + f(b)]
 \end{equation}
 
 \end{document}
+
