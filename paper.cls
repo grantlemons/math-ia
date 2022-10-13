@@ -41,8 +41,6 @@
 	\textbf{\huge\thetitle}\\
 	\vspace*{0.5cm}
 	\textit{\researchquestion}\\
-	\vspace{2.5cm}
-	\textit{Word count: \wordcount}\\
 	\vspace{0.6cm}
 	\textit{\today}\\
         \flushleft
