@@ -22,7 +22,7 @@ Since the area of a rectangle is extremely easy to calculate, this method is ext
 
 \begin{equation}
     \label{eqn:rect_rule}
-    \int_a^b f(x) dx = \sum_{i=1}^n (x_{x-1} - x_i) \times f(x_i + x_{i+1})
+    \int_a^b f(x) dx \approx \sum_{i=1}^n (x_{x-1} - x_i) \times f(x_i + x_{i+1})
 \end{equation}
  
 An alternative means typically used in place of this method utilizes trapezoids instead of rectangles.
@@ -31,7 +31,7 @@ The equation for a trapezoid \eqref{eqn:trap_rule} is only marginally more compl
 
 \begin{equation}
     \label{eqn:trap_rule}
-    \int_a^b f(x) dx = \dfrac{b - a}{2n} \sum_{i=1}^n (f(x_{i-1})+f(x_i))
+    \int_a^b f(x) dx \approx \dfrac{b - a}{2n} \sum_{i=1}^n (f(x_{i-1})+f(x_i))
 \end{equation}
 
 Beyond these simple methods, other techniques use polynomials in an attempt to fit the curve as closely as possible.
