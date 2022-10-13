@@ -20,16 +20,16 @@ Since the area of a rectangle is extremely easy to calculate, this method is ext
 
 \begin{equation}
     \label{eqn:rect_rule}
-    A = l \times w
+    A = \sum_{i=1}^n (x_{x-1} - x_i) \times f(x_i + x_{i+1})
 \end{equation}
-
-An alternative means typically used in place of this method, typically called the rectangle rule, utilizes trapezoids instead of rectangles.
+ 
+An alternative means typically used in place of this method utilizes trapezoids instead of rectangles.
 Instead of picking a single point at which to base the height on, the trapezoid rule utilizes the value of the function at both the left and right bounds, and uses them to approximate a trapezoid under the curve.
 The equation for a trapezoid \eqref{eqn:trap_rule} is only marginally more complicated than \eqref{eqn:rect_rule}, but provides significantly more accuracy.
 
 \begin{equation}
     \label{eqn:trap_rule}
-    A = \dfrac{a + b}{2} \times h
+    A = \dfrac{b - a}{2n} \sum_{i=1}^n (f(x_{i-1})+f(x_i))
 \end{equation}
 
 Beyond these simple methods, other techniques use polynomials in an attempt to fit the curve as closely as possible.
