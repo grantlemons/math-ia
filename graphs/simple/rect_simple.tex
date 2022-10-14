@@ -3,10 +3,10 @@
 \begin{document}
 
 \newcommand{\sumdiv}{3}
-\newcommand{\leftbound}{2}
-\newcommand{\rightbound}{8}
+\newcommand{\leftbound}{-3.5}
+\newcommand{\rightbound}{1}
 
-\newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=2:8] plot(\x,{2*\x^3 + \x^2 + 3*\x + 1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
+\newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x,{((\x+(2/3))^3 + 2*(\x)^2)/3}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \begin{figure}[ht]
     \centering
     \resizebox{.9\textwidth}{!}{
@@ -16,14 +16,14 @@
             {
                 \pgfmathsetmacro\BLx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}
                 \pgfmathsetmacro\TRx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
-                \pgfmathsetmacro\TRy{2*\BLx^3 + \BLx^2 + 3*\BLx + 1}
+                \pgfmathsetmacro\TRy{((\BLx+(2/3))^3 + 2*(\BLx)^2)/3}
                 \coordinate (BL) at (\BLx, 0);
                 \coordinate (TR) at (\TRx, \TRy);
 
                 \path [draw = gray, thin, pattern=north west lines, pattern color=gray] (BL) rectangle (TR);
             }
 
-            \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-5.7cm] {\scriptsize \(x\)};
+            \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-4.3cm] {\scriptsize \(x\)};
             \graphFunc
         \end{tikzpicture}
     }
