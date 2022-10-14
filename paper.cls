@@ -7,7 +7,7 @@
 
 % Paragraph jump and intents
 \setlength{\parskip}{1em}
-\setlength{\parindent}{0em}
+\setlength{\parindent}{1em}
 
 % Package mass import
 \usepackage{microtype}
@@ -35,18 +35,20 @@
 \titleformat{\chapter}[display]{\vspace{-1.8cm}\normalfont\bfseries}{}{0pt}{\Large}
 \newcommand{\insertTitlePage}{
 	\centering
-        \setcounter{page}{1}
-        \pagenumbering{roman}
-	\vspace*{6.3cm}
+    \setcounter{page}{1}
+    \pagenumbering{roman}
+	\vspace*{7.5cm}
 	\textbf{\huge\thetitle}\\
 	\vspace*{0.5cm}
 	\textit{\researchquestion}\\
-	\vspace{0.6cm}
+	\vspace{1.0cm}
 	\textit{\today}\\
-        \flushleft
+	\vspace{1.0cm}
+	\textit{\theauthor}\\
+    \flushleft
 	\newpage
 	\setcounter{page}{1}
-        \pagenumbering{arabic}
+    \pagenumbering{arabic}
 }
 
 % Link setup
