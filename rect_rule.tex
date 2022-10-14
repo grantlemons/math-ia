@@ -1,26 +1,25 @@
 \documentclass[IA.tex]{subfiles}
 
 \begin{document}
+
+\newcommand{\sumdiv}{6}
+\newcommand{\leftbound}{2}
+\newcommand{\rightbound}{8}
+
 \newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=2:8] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \begin{figure}[ht]
     \centering
     \resizebox{.6\textwidth}{!}{
         \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}]
-            \newcommand{\AxL}{2}
-            \newcommand{\AxR}{4}
-            \newcommand{\Ah}{0.583}
+            \pgfmathparse{int(\sumdiv-1)}
+            \foreach \i in {0, ..., \pgfmathresult}
+            {
+                \coordinate (BL) at ({\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}, 0);
+                \coordinate (TR) at ({\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}, {cos((\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)) r)+1});
 
-            \newcommand{\BxL}{4}
-            \newcommand{\BxR}{6}
-            \newcommand{\Bh}{0.346}
+                \path [draw = gray, thin, pattern=north west lines, pattern color=gray] (BL) rectangle (TR);
+            }
 
-            \newcommand{\CxL}{6}
-            \newcommand{\CxR}{8}
-            \newcommand{\Ch}{1.960}
-
-            \path [draw = gray, thin, pattern=north west lines, pattern color=gray] (\AxL, 0) rectangle (\AxR, \Ah);
-            \path [draw = gray, thin, pattern=north west lines, pattern color=gray] (\BxL, 0) rectangle (\BxR, \Bh);
-            \path [draw = gray, thin, pattern=north west lines, pattern color=gray] (\CxL, 0) rectangle (\CxR, \Ch);
             \draw[black, thick] (2, -0.02) -- (8, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-5.6cm] {\scriptsize \(x\)};
             \graphFunc
         \end{tikzpicture}

@@ -1,28 +1,25 @@
 \documentclass[IA.tex]{subfiles}
 
 \begin{document}
-\newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=2:8] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
+
+\newcommand{\sumdiv}{6}
+\newcommand{\leftbound}{2}
+\newcommand{\rightbound}{8}
+
+\newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \begin{figure}[ht]
     \centering
     \resizebox{.6\textwidth}{!}{
         \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}]
-            \coordinate (BL) at (2, 0);
-            \coordinate (BR) at (4, 0);
-            \coordinate (TL) at (2, 0.584);
-            \coordinate (TR) at (4, 0.346);
-            \draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
-
-            \coordinate (BL) at (4, 0);
-            \coordinate (BR) at (6, 0);
-            \coordinate (TL) at (4, 0.346);
-            \coordinate (TR) at (6, 1.960);
-            \draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
-
-            \coordinate (BL) at (6, 0);
-            \coordinate (BR) at (8, 0);
-            \coordinate (TL) at (6, 1.960);
-            \coordinate (TR) at (8, 0.854);
-            \draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
+            \pgfmathparse{int(\sumdiv-1)}
+            \foreach \i in {0, ..., \pgfmathresult}
+            {
+                \coordinate (BL) at ({\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}, 0);
+                \coordinate (BR) at ({\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}, 0);
+                \coordinate (TL) at ({\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}, {cos((\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)) r)+1});
+                \coordinate (TR) at ({\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}, {cos((\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))) r)+1});
+                \draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
+            }
 
             \draw[black, thick] (2, -0.02) -- (8, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-5.6cm] {\scriptsize \(x\)};
             \graphFunc
