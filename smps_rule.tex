@@ -1,0 +1,39 @@
+\documentclass[IA.tex]{subfiles}
+
+\begin{document}
+
+\newcommand{\sumdiv}{6}
+\newcommand{\leftbound}{2}
+\newcommand{\rightbound}{8}
+
+\newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
+\begin{figure}[ht]
+    \centering
+    \resizebox{.6\textwidth}{!}{
+        \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}]
+            \pgfmathparse{int(\sumdiv-1)}
+            \foreach \i in {0, ..., \pgfmathresult}
+            {
+                \pgfmathsetmacro\a{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i))}
+                \pgfmathsetmacro\b{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
+                \pgfmathsetmacro\m{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+.5))}
+
+                \pgfmathsetmacro\fA{cos((\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i))) r)+1}
+                \pgfmathsetmacro\fB{cos((\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))) r)+1}
+                \pgfmathsetmacro\fM{cos((\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+.5))) r)+1}
+
+                \fill [gray, thin, pattern=north west lines, pattern color=gray, samples=100, domain=\a:\b, variable=\x] (\a, 0) -- plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))}) -- (\b, 0) -- cycle;
+                \draw [gray, thin] (\a, 0) -- (\a, \fA);
+                \draw [gray, thin] (\b, 0) -- (\b, \fB);
+                \draw [gray, thin] (\a, 0) -- (\b, 0);
+            }
+
+            \draw[black, thick] (2, -0.02) -- (8, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-5.6cm] {\scriptsize \(x\)};
+            \graphFunc
+        \end{tikzpicture}
+    }
+    \vspace{-.9cm}
+    \caption{Composite Simpson's 1/3 Rule}
+    \label{fig:smps_rule}
+\end{figure}
+\end{document}
