@@ -50,7 +50,7 @@ The equation for a trapezoid~\eqref{eqn:trap_rule} is only marginally more compl
 \subfile{trap_rule}
 
 Beyond these simple methods, other techniques use polynomials in an attempt to fit the curve as closely as possible.
-One such method is the Composite Simpson's 13 rule, which uses the left, right, and, mid-interval values of each subinterval to construct a polynomial using Lagrange Quadratic Interpolation as shown in~\eqref{eqn:lagrange} below.
+One such method is the Composite Simpson's 1/3 rule, which uses the left, right, and, mid-interval values of each subinterval to construct a polynomial using Lagrange Quadratic Interpolation as shown in~\eqref{eqn:lagrange} below.
 
 \begin{equation}
     \label{eqn:lagrange}
@@ -58,7 +58,7 @@ One such method is the Composite Simpson's 13 rule, which uses the left, right, 
 \end{equation}
 
 Where the x and y values are the coordinates of the left-bound, right-bound, and mid-interval values of the integrand.
-The use of polynomials allows the Composite Simpson's 13 rule to approximate the integrand with easily integrable functions that fit the integrand extremely closely.
+The use of polynomials allows the Composite Simpson's 1/3 rule to approximate the integrand with easily integrable functions that fit the integrand extremely closely.
 Using Lagrange Quadratic Interpolation with the midpoint \(m\), left bound \(a\), and right bound \(b\), produces~\eqref{eqn:lagrange_smps} below.
 
 \begin{equation}
@@ -94,7 +94,7 @@ Utilizing integration by substitution, this can be differentiated into~\eqref{eq
 The equation~\eqref{eqn:smps_rule} gives an approximate value for the integral value of the interval as a whole using a single polynomial function.
 In order to utilize this method for complex integrands, the interval must be split into a number of subintervals for which each will have~\eqref{eqn:smps_rule} applied.
 By summing the values calculated for each subinterval, a highly accurate approximation of the integral can be obtained.
-The equation below~\eqref{eqn:composite_smps_rule} shows the complete equation of the Composite Simpson's Rule.
+The equation below~\eqref{eqn:composite_smps_rule} shows the complete equation of the Composite Simpson's 1/3 Rule.
 
 \begin{equation}
     \label{eqn:composite_smps_rule}
