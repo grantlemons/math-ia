@@ -6,7 +6,7 @@
 \newcommand{\leftbound}{2}
 \newcommand{\rightbound}{8}
 
-\newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
+\newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x,{2*\x^3 + \x^2 + 3*\x + 1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \begin{figure}[ht]
     \centering
     \resizebox{.6\textwidth}{!}{
@@ -18,9 +18,9 @@
                 \pgfmathsetmacro\b{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
                 \pgfmathsetmacro\m{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+.5))}
 
-                \pgfmathsetmacro\fA{cos(\a r)+1}
-                \pgfmathsetmacro\fB{cos(\b r)+1}
-                \pgfmathsetmacro\fM{cos(\m r)+1}
+                \pgfmathsetmacro\fA{2*\a^3 + \a^2 + 3*\a + 1}
+                \pgfmathsetmacro\fB{2*\b^3 + \b^2 + 3*\b + 1}
+                \pgfmathsetmacro\fM{2*\c^3 + \c^2 + 3*\c + 1}
 
                 \fill [gray, thin, pattern=north west lines, pattern color=gray, samples=100, domain=\a:\b, variable=\x] (\a, 0) -- plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))}) -- (\b, 0) -- cycle;
                 \draw [gray, thin] (\a, \fA) -- (\a, 0) -- (\b, 0) -- (\b, \fB);
@@ -29,10 +29,10 @@
             \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-5.7cm] {\scriptsize \(x\)};
             \graphFunc
 
-            \pgfmathsetmacro\SX{5.5}
-            \coordinate (S) at (\SX, {cos(\SX r) + 1 - 0.03});
-            \coordinate (SA) at ({\SX+.25}, -1.2);
-            \spy [darkgray] on (S) in node [right] at (SA);
+            % \pgfmathsetmacro\SX{5.5}
+            % \coordinate (S) at (\SX, {2*\SX^3 + \SX^2 + 3*\SX + 1 - 0.03});
+            % \coordinate (SA) at ({\SX+.25}, -1.2);
+            % \spy [darkgray] on (S) in node [right] at (SA);
         \end{tikzpicture}
     }
     \vspace{-.4cm}
