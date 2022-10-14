@@ -2,13 +2,6 @@
 
 \begin{document}
 \newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=2:8] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
-\newcommand{\trapezoid}{
-    \draw [gray, thin] (BL) -- (BR);
-    \draw [gray, thin] (BR) -- (TR);
-    \draw [gray, thin] (TR) -- (TL);
-    \draw [gray, thin] (TL) -- (BL);
-    \fill [pattern=north west lines, pattern color=gray] (BL) to (TL) to (TR) to (BR);
-}
 \begin{figure}[ht]
     \centering
     \resizebox{.6\textwidth}{!}{
@@ -17,19 +10,19 @@
             \coordinate (BR) at (4, 0);
             \coordinate (TL) at (2, 0.584);
             \coordinate (TR) at (4, 0.346);
-            \trapezoid
+            \draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
 
             \coordinate (BL) at (4, 0);
             \coordinate (BR) at (6, 0);
             \coordinate (TL) at (4, 0.346);
             \coordinate (TR) at (6, 1.960);
-            \trapezoid
+            \draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
 
             \coordinate (BL) at (6, 0);
             \coordinate (BR) at (8, 0);
             \coordinate (TL) at (6, 1.960);
             \coordinate (TR) at (8, 0.854);
-            \trapezoid
+            \draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
 
             \draw[black, thick] (2, -0.02) -- (8, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-5.6cm] {\scriptsize \(x\)};
             \graphFunc
