@@ -9,6 +9,12 @@
 \usepackage{amsfonts}
 \usepackage{XCharter}
 \usepackage{fancyhdr}
+\usepackage{subfiles}
+
+% Tikz
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -22,25 +28,29 @@ While most problems can be quickly solved by using integration, some mathematica
 As such, many methods have been developed to allow computers to approximate area by filling it with shapes of known area.
 This general field of mathematical study is known as quadrature, and contains many established methods used to quickly and accurately approximate the function.
 The most basic method used to approximate area is the rectangle.
-By splitting the interval to be integrated into smaller subintervals and fitting rectangles beneath the curve based on the value of the function at a bound of the subinterval's bound, area can be approximated to a reasonable degree of accuracy.
-Since the area of a rectangle is extremely easy to calculate, this method is extremely simple to implement using \eqref{eqn:rect_rule}.
+By splitting the interval to be integrated into smaller subintervals and fitting rectangles beneath the curve based on the value of the function at a bound of the subinterval's bound, area can be approximated to a reasonable degree of accuracy as shown by Figure~\ref{fig:rect_rule}.
+Since the area of a rectangle is extremely easy to calculate, this method is extremely simple to implement using~\eqref{eqn:rect_rule}.
 
 \begin{equation}
     \label{eqn:rect_rule}
     \int_a^b f(x) dx \approx \sum_{i=1}^n (x_{x-1} - x_i) \times f(x_i + x_{i+1})
 \end{equation}
+
+\subfile{rect_rule}
  
 An alternative means typically used in place of this method utilizes trapezoids instead of rectangles.
 Instead of picking a single point at which to base the height on, the trapezoid rule utilizes the value of the function at both the left and right bounds, and uses them to approximate a trapezoid under the curve.
-The equation for a trapezoid \eqref{eqn:trap_rule} is only marginally more complicated than \eqref{eqn:rect_rule}, but provides significantly more accuracy.
+The equation for a trapezoid~\eqref{eqn:trap_rule} is only marginally more complicated than~\eqref{eqn:rect_rule}, but provides significantly more accuracy as seen in Figure~\ref{fig:trap_rule}.
 
 \begin{equation}
     \label{eqn:trap_rule}
     \int_a^b f(x) dx \approx \dfrac{b - a}{2n} \sum_{i=1}^n (f(x_{i-1})+f(x_i))
 \end{equation}
 
+\subfile{trap_rule}
+
 Beyond these simple methods, other techniques use polynomials in an attempt to fit the curve as closely as possible.
-One such method is the Composite Simpson's 13 rule, which uses the left, right, and, mid-interval values of each subinterval to construct a polynomial using Lagrange Quadratic Interpolation as shown in \eqref{eqn:lagrange} below.
+One such method is the Composite Simpson's 13 rule, which uses the left, right, and, mid-interval values of each subinterval to construct a polynomial using Lagrange Quadratic Interpolation as shown in~\eqref{eqn:lagrange} below.
 
 \begin{equation}
     \label{eqn:lagrange}
@@ -49,14 +59,14 @@ One such method is the Composite Simpson's 13 rule, which uses the left, right, 
 
 Where the x and y values are the coordinates of the left-bound, right-bound, and mid-interval values of the integrand.
 The use of polynomials allows the Composite Simpson's 13 rule to approximate the integrand with easily integrable functions that fit the integrand extremely closely.
-Using Lagrange Quadratic Interpolation with the midpoint \(m\), left bound \(a\), and right bound \(b\), produces \eqref{eqn:lagrange_smps} below.
+Using Lagrange Quadratic Interpolation with the midpoint \(m\), left bound \(a\), and right bound \(b\), produces~\eqref{eqn:lagrange_smps} below.
 
 \begin{equation}
     \label{eqn:lagrange_smps}
     P(x) = f(a) \dfrac{(x - m)(x - b)}{(a - m)(a - b)} + f(m) \dfrac{(x - a)(x - b)}{(m - a)(m - b)} + f(b) \dfrac{(x - a)(x - m)}{(b - a)(b - m)}
 \end{equation}
 
-As \(m\) is the midpoint with the value of \((a + b) / 2\), this can be stated in terms of a and b as shown below in \eqref{eqn:lagrange_smps_ab}.
+As \(m\) is the midpoint with the value of \((a + b) / 2\), this can be stated in terms of a and b as shown below in~\eqref{eqn:lagrange_smps_ab}.
 
 \begin{equation}
     \label{eqn:lagrange_smps_ab}
@@ -66,7 +76,7 @@ As \(m\) is the midpoint with the value of \((a + b) / 2\), this can be stated i
     }
 \end{equation}
 
-Utilizing integration by substitution, this can be differentiated into \eqref{eqn:smps_rule} below.
+Utilizing integration by substitution, this can be differentiated into~\eqref{eqn:smps_rule} below.
 
 \begin{equation}
     \label{eqn:smps_rule}
@@ -81,17 +91,17 @@ Utilizing integration by substitution, this can be differentiated into \eqref{eq
 \end{gathered}
 \end{equation}
 
-The equation \eqref{eqn:smps_rule} gives an approximate value for the integral value of the interval as a whole using a single polynomial function.
-In order to utilize this method for complex integrands, the interval must be split into a number of subintervals for which each will have \eqref{eqn:smps_rule} applied.
+The equation~\eqref{eqn:smps_rule} gives an approximate value for the integral value of the interval as a whole using a single polynomial function.
+In order to utilize this method for complex integrands, the interval must be split into a number of subintervals for which each will have~\eqref{eqn:smps_rule} applied.
 By summing the values calculated for each subinterval, a highly accurate approximation of the integral can be obtained.
-The equation below \eqref{eqn:composite_smps_rule} shows the complete equation of the Composite Simpson's Rule.
+The equation below~\eqref{eqn:composite_smps_rule} shows the complete equation of the Composite Simpson's Rule.
 
 \begin{equation}
     \label{eqn:composite_smps_rule}
     \int_a^b f(x) dx \approx \dfrac{h}{3} \sum_{j=1}^{n / 2} \left[f(x_{2j-1}) + 4f(x_{2j-1}) + f(x_{2j})\right]
 \end{equation}
 
-Which can be further simplified for efficiency to the following \eqref{eqn:smplfd_composite_smps_rule}:
+Which can be further simplified for efficiency to the following~\eqref{eqn:smplfd_composite_smps_rule}:
 
 \begin{equation}
     \label{eqn:smplfd_composite_smps_rule}
