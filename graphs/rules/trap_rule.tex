@@ -9,7 +9,7 @@
 \newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \begin{figure}[ht]
     \centering
-    \resizebox{.6\textwidth}{!}{
+    \resizebox{.7\textwidth}{!}{
         \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}]
             \pgfmathparse{int(\sumdiv-1)}
             \foreach \i in {0, ..., \pgfmathresult}
@@ -29,8 +29,8 @@
             \graphFunc
         \end{tikzpicture}
     }
-    \vspace{-.8cm}
-    \caption{Trapezoid Rule}
+    \vspace{-.4cm}
+    \caption{A sketch showing the error of the trapezoid rule on a function}
     \label{fig:trap_rule}
 \end{figure}
 \end{document}

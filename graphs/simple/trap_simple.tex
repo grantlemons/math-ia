@@ -9,7 +9,7 @@
 \newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x,{2*\x^3 + \x^2 + 3*\x + 1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \begin{figure}[ht]
     \centering
-    \resizebox{.6\textwidth}{!}{
+    \resizebox{.9\textwidth}{!}{
         \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}]
             \pgfmathparse{int(\sumdiv-1)}
             \foreach \i in {0, ..., \pgfmathresult}
@@ -29,8 +29,8 @@
             \graphFunc
         \end{tikzpicture}
     }
-    \vspace{-.8cm}
+    \vspace{-.4cm}
     \caption{Trapezoid Rule}
-    \label{fig:trap_rule}
+    \label{fig:trap_rule_simple}
 \end{figure}
 \end{document}
