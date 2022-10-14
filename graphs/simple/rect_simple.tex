@@ -9,7 +9,7 @@
 \newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x,{((\x+(2/3))^3 + 2*(\x)^2)/3}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \begin{figure}[ht]
     \centering
-    \resizebox{.9\textwidth}{!}{
+    \resizebox{.7\textwidth}{!}{
         \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}]
             \pgfmathparse{int(\sumdiv-1)}
             \foreach \i in {0, ..., \pgfmathresult}
