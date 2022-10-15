@@ -104,18 +104,16 @@ As \(m\) represnts the midpoint \((a + b) / 2\), this can be stated in terms of 
 \noindent
 Utilizing integration by substitution, Equation~\ref{eqn:lagrange_smps_ab} can be integrated into the form expressed in~\eqref{eqn:smps_rule} below.
 
-\begin{equation}
-    \label{eqn:smps_rule}
-    \begin{gathered}
-    \int_a^b P(x) dx = \dfrac{a - b}{6} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]          \\
-    h = \dfrac{a - b}{2}                                                                                    \\
-    \begin{aligned}
-        \int_a^b P(x) dx &= \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]         \\
-        \int_a^b P(x) dx &\approx \int_a^b f(x) dx                                                          \\
-        \int_a^b f(x) dx &\approx \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]   \\
-    \end{aligned}
-\end{gathered}
-\end{equation}
+\begin{gather}
+\int_a^b P(x) dx = \dfrac{b - a}{6} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]         \label{eqn:basic_smps}               \\
+h = \dfrac{b - a}{2}                                                                                   \label{eqn:h_eq}
+\end{gather}
+\begin{align}
+    \int_a^b P(x) dx &= \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]        \label{eqn:integrap_lagrange}        \\
+    \int_a^b P(x) dx &\approx \int_a^b f(x) dx                                                         \label{eqn:approx_eq}                \\
+    \int_a^b f(x) dx &\approx \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]  \label{eqn:smps_rule}
+\end{align}
+
 
 \noindent
 Equation~\ref{eqn:smps_rule} gives an approximate value for the integral of the subinterval using a single polynomial function.
