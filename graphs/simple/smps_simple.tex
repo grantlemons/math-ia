@@ -2,11 +2,10 @@
 
 \begin{document}
 
-\newcommand{\sumdiv}{12}
+\newcommand{\sumdiv}{10}
 \newcommand{\leftbound}{-3.5}
 \newcommand{\rightbound}{1}
 
-\newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x, {((\x+(2/3))^3 + 2*(\x)^2)/3}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \begin{figure}[ht]
     \centering
     \resizebox{.7\textwidth}{!}{
@@ -27,7 +26,7 @@
             }
 
             \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-4.3cm] {\scriptsize \(x\)};
-            \graphFunc
+            \graphSimple
 
             % \pgfmathsetmacro\SX{5.5}
             % \coordinate (S) at (\SX, {(((\SX+(2/3))^3 + 2*(\SX)^2)/3) - 0.03});

@@ -6,7 +6,6 @@
 \newcommand{\leftbound}{2}
 \newcommand{\rightbound}{8}
 
-\newcommand{\graphFunc}{\draw[darkgray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \begin{figure}[ht]
     \centering
     \resizebox{.7\textwidth}{!}{
@@ -27,7 +26,7 @@
             }
 
             \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-5.7cm] {\scriptsize \(x\)};
-            \graphFunc
+            \graphRule
         \end{tikzpicture}
     }
     \vspace{-.4cm}

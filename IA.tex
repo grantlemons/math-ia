@@ -18,9 +18,15 @@
 \usetikzlibrary{fpu}
 \usetikzlibrary{spy}
 
+% Tikz Graphs
+\newcommand{\graphRule}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
+\newcommand{\graphSimple}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {((\x+(2/3))^3 + 2*(\x)^2)/3}) node[darkgray, align=left, right, yshift=-0.2cm, xshift=-2.9cm] {\tiny\(f(x)\)};}
+
+% Page Numbering
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[R]{\thepage}
+\setlength{\headheight}{15pt}
 
 \begin{document}
 \thispagestyle{empty}
