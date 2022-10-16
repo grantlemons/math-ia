@@ -20,7 +20,7 @@
 
 % Tikz Graphs
 \newcommand{\graphRule}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x,{cos(\x r)+1}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
-\newcommand{\graphSimple}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {((\x+(2/3))^3 + 2*(\x)^2)/3}) node[darkgray, align=left, right, yshift=-0.2cm, xshift=-2.9cm] {\tiny\(f(x)\)};}
+\newcommand{\graphSimple}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {((\x+(2/3))^3 + 2*(\x)^2)/3}) node[darkgray, align=left, right, yshift=-0.5cm, xshift=-3.0cm] {\tiny\(f(x)\)};}
 
 % Page Numbering
 \pagestyle{fancy}
@@ -135,7 +135,11 @@ Equation~\ref{eqn:composite_smps_rule} can be expressed in the form of Equation~
 
 \subsection{Example --- Polynomial}
 
+The effectiveness of the trapezoid rule and the composite Simpson's 1/3 rule can be seen in Figures \ref{fig:trap_rule_simple} and \ref{fig:smps_rule_simple} below.
+
 \subfile{graphs/simple/trap_simple}
 \subfile{graphs/simple/smps_simple}
+
+Both methods are effictive at fitting the curve of a relatively simple function such as a polynomial, but become less effective the more complex the integrand.
 
 \end{document}
