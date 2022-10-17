@@ -112,12 +112,12 @@ As \(m\) represnts the midpoint \((a + b) / 2\), this can be stated in terms of 
 Utilizing integration by substitution, Equation~\ref{eqn:lagrange_smps_ab} can be integrated into the form expressed in~\eqref{eqn:smps_rule} below.
 
 \begin{gather}
-\int_a^b P(x) dx = \dfrac{b - a}{6} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]         \label{eqn:basic_smps}               \\
-\dfrac{b - a}{2} = h                                                                                   \label{eqn:h_eq}
+\int_a^b P(x) dx = \dfrac{b - a}{6} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]                          \\
+\dfrac{b - a}{2} = h                                                                                                    \\
 \end{gather}
 \begin{align}
-    \int_a^b P(x) dx &= \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]        \label{eqn:integrap_lagrange}        \\
-    \int_a^b P(x) dx &\approx \int_a^b f(x) dx                                                         \label{eqn:approx_eq}                \\
+    \int_a^b P(x) dx &= \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]                         \\
+    \int_a^b P(x) dx &\approx \int_a^b f(x) dx                                                                          \\
     \int_a^b f(x) dx &\approx \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]  \label{eqn:smps_rule}
 \end{align}
 
@@ -161,5 +161,7 @@ Had the integrand been more complex, as in Figures \ref{fig:trap_rule_complex_lo
 The only way to improve the accuracy of the estimate produced by these methods is to increase the number of subintervals.
 The main issue with this, however, is that the the methods consume significantly more processing power to execute.
 Increasing the subinterval count of these methods has other issues, although it is effective on complex portions of the integrand, it is inefficient and unnecessary over the portions of the integrand that are relatively simple.
+
+\subinterval{}
 
 \end{document}
