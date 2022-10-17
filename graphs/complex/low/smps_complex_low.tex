@@ -3,8 +3,8 @@
 \begin{document}
 
 \newcommand{\sumdiv}{10}
-\newcommand{\leftbound}{-3.5}
-\newcommand{\rightbound}{1}
+\newcommand{\leftbound}{-2.25}
+\newcommand{\rightbound}{2.25}
 
 \begin{figure}[ht]
     \centering
@@ -17,16 +17,16 @@
                 \pgfmathsetmacro\b{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
                 \pgfmathsetmacro\m{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+.5))}
 
-                \pgfmathsetmacro\fA{((\a+(2/3))^3 + 2*(\a)^2)/6}
-                \pgfmathsetmacro\fM{((\m+(2/3))^3 + 2*(\m)^2)/6}
-                \pgfmathsetmacro\fB{((\b+(2/3))^3 + 2*(\b)^2)/6}
+                \pgfmathsetmacro\fA{2*(sin((3)/(abs(\a)+.3) r)^2)}
+                \pgfmathsetmacro\fM{2*(sin((3)/(abs(\m)+.3) r)^2)}
+                \pgfmathsetmacro\fB{2*(sin((3)/(abs(\b)+.3) r)^2)}
 
                 \fill [gray, thin, pattern=north west lines, pattern color=gray, samples=100, domain=\a:\b, variable=\x] (\a, 0) -- plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))}) -- (\b, 0) -- cycle;
                 \draw [gray, thin] (\a, \fA) -- (\a, 0) -- (\b, 0) -- (\b, \fB);
             }
 
             \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-4.3cm] {\scriptsize \(x\)};
-            \graphSimple
+            \graphComplex
 
             % \pgfmathsetmacro\SX{5.5}
             % \coordinate (S) at (\SX, {(((\SX+(2/3))^3 + 2*(\SX)^2)/3) - 0.03});
@@ -36,6 +36,6 @@
     }
     \vspace{-.4cm}
     \caption{A sketch showing the effectiveness of the composite Simpson's 1/3 rule on a simple function.}
-    \label{fig:smps_rule_simple}
+    \label{fig:smps_rule_complex_low}
 \end{figure}
 \end{document}

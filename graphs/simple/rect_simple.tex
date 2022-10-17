@@ -15,7 +15,7 @@
             {
                 \pgfmathsetmacro\BLx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}
                 \pgfmathsetmacro\TRx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
-                \pgfmathsetmacro\TRy{((\BLx+(2/3))^3 + 2*(\BLx)^2)/3}
+                \pgfmathsetmacro\TRy{((\BLx+(2/3))^3 + 2*(\BLx)^2)/6}
                 \coordinate (BL) at (\BLx, 0);
                 \coordinate (TR) at (\TRx, \TRy);
 

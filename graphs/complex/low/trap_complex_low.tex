@@ -3,8 +3,8 @@
 \begin{document}
 
 \newcommand{\sumdiv}{10}
-\newcommand{\leftbound}{-3.5}
-\newcommand{\rightbound}{1}
+\newcommand{\leftbound}{-2.25}
+\newcommand{\rightbound}{2.25}
 
 \begin{figure}[ht]
     \centering
@@ -15,8 +15,8 @@
             {
                 \pgfmathsetmacro\Ax{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}
                 \pgfmathsetmacro\Bx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
-                \pgfmathsetmacro\Ay{((\Ax+(2/3))^3 + 2*(\Ax)^2)/6}
-                \pgfmathsetmacro\By{((\Bx+(2/3))^3 + 2*(\Bx)^2)/6}
+                \pgfmathsetmacro\Ay{2*(sin((3)/(abs(\Ax)+.3) r)^2)}
+                \pgfmathsetmacro\By{2*(sin((3)/(abs(\Bx)+.3) r)^2)}
                 \coordinate (BL) at (\Ax, 0);
                 \coordinate (BR) at (\Bx, 0);
                 \coordinate (TL) at (\Ax, \Ay);
@@ -25,11 +25,11 @@
             }
 
             \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-4.3cm] {\scriptsize \(x\)};
-            \graphSimple
+            \graphComplex
         \end{tikzpicture}
     }
     \vspace{-.4cm}
     \caption{A sketch showing the effectiveness of the trapezoid rule on a simple function.}
-    \label{fig:trap_rule_simple}
+    \label{fig:trap_rule_complex_low}
 \end{figure}
 \end{document}
