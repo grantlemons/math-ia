@@ -150,11 +150,16 @@ Both methods are effective at fitting the curve of a relatively simple function 
 \subfile{graphs/simple/smps_simple}
 
 Even with the relatively large subinterval size, these methods are effective, because the function has no fluctuations that the method would not account for with the subinterval count being used.
+Because both methods only sample a few points of the integrand, if these are not representative of the integrand over the subinterval, the methods will not effectively approximate the integral value.
 
 \subsubsection{Complex Function}
 Had the integrand been more complex, as in Figures \ref{fig:trap_rule_complex_low} and \ref{fig:smps_rule_complex_low} below, the area enclosed by the fluctuations would not be taken into account by these two rules.
 
 \subfile{graphs/complex/low/trap_complex_low}
 \subfile{graphs/complex/low/smps_complex_low}
+
+The only way to improve the accuracy of the estimate produced by these methods is to increase the number of subintervals.
+The issue with increasing the number of subintervals is that the the methods consume significantly more processing power to execute.
+Increasing the subinterval count of these methods has other issues, although it is effective on complex portions of the integrand, it is inefficient and unnecessary over the portions of the integrand that are relatively simple.
 
 \end{document}
