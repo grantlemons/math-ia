@@ -15,8 +15,8 @@
             {
                 \pgfmathsetmacro\Ax{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}
                 \pgfmathsetmacro\Bx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
-                \pgfmathsetmacro\Ay{((\Ax+(2/3))^3 + 2*(\Ax)^2)/6}
-                \pgfmathsetmacro\By{((\Bx+(2/3))^3 + 2*(\Bx)^2)/6}
+                \pgfmathsetmacro\Ay{\simpleEq{\Ax}}
+                \pgfmathsetmacro\By{\simpleEq{\Bx}}
                 \coordinate (BL) at (\Ax, 0);
                 \coordinate (BR) at (\Bx, 0);
                 \coordinate (TL) at (\Ax, \Ay);

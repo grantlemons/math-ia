@@ -15,8 +15,8 @@
             {
                 \pgfmathsetmacro\Ax{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}
                 \pgfmathsetmacro\Bx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
-                \pgfmathsetmacro\Ay{cos(\Ax r)+1}
-                \pgfmathsetmacro\By{cos(\Bx r)+1}
+                \pgfmathsetmacro\Ay{\ruleEq{\Ax}}
+                \pgfmathsetmacro\By{\ruleEq{\Bx}}
                 \coordinate (BL) at (\Ax, 0);
                 \coordinate (BR) at (\Bx, 0);
                 \coordinate (TL) at (\Ax, \Ay);

@@ -18,7 +18,7 @@
 
                 \pgfmathsetmacro\BLx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}
                 \pgfmathsetmacro\TRx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
-                \pgfmathsetmacro\TRy{cos(\BLx r)+1}
+                \pgfmathsetmacro\TRy{\ruleEq{\BLx}}
                 \coordinate (BL) at (\BLx, 0);
                 \coordinate (TR) at (\TRx, \TRy);
 

@@ -15,8 +15,8 @@
             {
                 \pgfmathsetmacro\Ax{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*\i)}
                 \pgfmathsetmacro\Bx{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
-                \pgfmathsetmacro\Ay{2*(sin((3)/(abs(\Ax)+.3) r)^2)}
-                \pgfmathsetmacro\By{2*(sin((3)/(abs(\Bx)+.3) r)^2)}
+                \pgfmathsetmacro\Ay{\complexEq{\Ax}}
+                \pgfmathsetmacro\By{\complexEq{\Ax}}
                 \coordinate (BL) at (\Ax, 0);
                 \coordinate (BR) at (\Bx, 0);
                 \coordinate (TL) at (\Ax, \Ay);
