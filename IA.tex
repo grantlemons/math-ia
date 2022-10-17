@@ -20,7 +20,7 @@
 \usetikzlibrary{spy}
 
 % Tikz Graphs
-\newcommand{\ruleSubintervals}{3}
+\newcommand{\ruleSubintervals}{4}
 \newcommand{\exampleSubintervals}{6}
 \newcommand{\ruleEq}[1]{cos(#1 r)+1}
 \newcommand{\simpleEq}[1]{((#1+(2/3))^3 + 2*(#1)^2)/6}
@@ -159,7 +159,7 @@ Had the integrand been more complex, as in Figures \ref{fig:trap_rule_complex_lo
 \subfile{graphs/complex/low/smps_complex_low}
 
 The only way to improve the accuracy of the estimate produced by these methods is to increase the number of subintervals.
-The issue with increasing the number of subintervals is that the the methods consume significantly more processing power to execute.
+The main issue with this, however, is that the the methods consume significantly more processing power to execute.
 Increasing the subinterval count of these methods has other issues, although it is effective on complex portions of the integrand, it is inefficient and unnecessary over the portions of the integrand that are relatively simple.
 
 \end{document}
