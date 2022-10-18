@@ -2,7 +2,7 @@
 
 \begin{document}
 
-\newcommand{\sumdiv}{\exampleLowSubintervals}
+\newcommand{\sumdiv}{\exampleHighSubintervals}
 \newcommand{\leftbound}{-2.25}
 \newcommand{\rightbound}{2.25}
 
@@ -21,7 +21,7 @@
                 \coordinate (BR) at (\Bx, 0);
                 \coordinate (TL) at (\Ax, \Ay);
                 \coordinate (TR) at (\Bx, \By);
-                \draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
+		\fill [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
             }
 
             \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-4.3cm] {\scriptsize \(x\)};
@@ -29,7 +29,7 @@
         \end{tikzpicture}
     }
     \vspace{-.4cm}
-    \caption{A sketch showing the ineffectiveness of the trapezoid rule on a complex function with a low subinterval count.}
-    \label{fig:trap_rule_complex_low}
+    \caption{A sketch showing the effectiveness of the trapezoid rule on a complex function with a high subinterval count.}
+    \label{fig:trap_rule_complex_high}
 \end{figure}
 \end{document}
