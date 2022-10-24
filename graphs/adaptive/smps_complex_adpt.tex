@@ -14,9 +14,9 @@
             \pgfmathparse{dim(\arr)}
             \foreach \i in {0, ..., \pgfmathresult}
             {
-                \pgfmathsetmacro\a{\arr[i]}
-                \pgfmathsetmacro\m{(\arr[i]+\arr[i+1])/2}
-                \pgfmathsetmacro\b{\arr[i+1]}
+                \pgfmathsetmacro\a{\arr[\i]}
+                \pgfmathsetmacro\m{(\arr[i]+\arr[\i+1])/2}
+                \pgfmathsetmacro\b{\arr[\i+1]}
 
                 \pgfmathsetmacro\fA{\normalEq{\a}}
                 \pgfmathsetmacro\fM{\normalEq{\m}}
