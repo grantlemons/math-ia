@@ -17,16 +17,16 @@
                 \pgfmathsetmacro\m{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+.5))}
                 \pgfmathsetmacro\b{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
 
-                \pgfmathsetmacro\fA{\complexEq{\a}}
-                \pgfmathsetmacro\fM{\complexEq{\m}}
-                \pgfmathsetmacro\fB{\complexEq{\b}}
+                \pgfmathsetmacro\fA{\normalEq{\a}}
+                \pgfmathsetmacro\fM{\normalEq{\m}}
+                \pgfmathsetmacro\fB{\normalEq{\b}}
 
                 \draw [gray, thin, pattern=north west lines, pattern color=gray, samples=100, domain=\a:\b, variable=\x] (\a, 0) -- plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))}) -- (\b, 0) -- cycle;
                 \draw [gray, thin] (\a, \fA) -- (\a, 0) -- (\b, 0) -- (\b, \fB);
             }
 
             \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-4.3cm] {\scriptsize \(x\)};
-            \graphComplex
+            \graphNormal
 
             % \pgfmathsetmacro\SX{5.5}
             % \coordinate (S) at (\SX, {(((\SX+(2/3))^3 + 2*(\SX)^2)/3) - 0.03});
