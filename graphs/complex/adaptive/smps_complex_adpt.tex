@@ -1,0 +1,41 @@
+\documentclass[../../../IA.tex]{subfiles}
+
+\begin{document}
+
+\newcommand{\sumdiv}{\exampleLowSubintervals}
+\newcommand{\leftbound}{-2.25}
+\newcommand{\rightbound}{2.25}
+
+\begin{figure}[ht]
+    \centering
+    \resizebox{.7\textwidth}{!}{
+        \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}, spy using outlines={circle, magnification=9, size=2cm, connect spies}]
+            \pgfmathparse{int(\sumdiv-1)}
+            \foreach \i in {-4.0, -3.0, -2.75, -2.5, -2.375, -2.25, -2.125, -2.0, -1.875, -1.75, -1.625, -1.5, -1.375, -1.25, -1.0, -0.75, -0.625, -0.5625, -0.5, -0.4375, -0.375, -0.3125, -0.25, -0.21875, -0.1875, -0.15625, -0.125, -0.09375, -0.0625, -0.03125, 0.0, 0.03125, 0.0625, 0.09375, 0.125, 0.15625, 0.1875, 0.21875, 0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0.625, 0.75, 1.0, 1.25, 1.375, 1.5, 1.625, 1.75, 1.875, 2.0, 2.125, 2.25, 2.375, 2.5, 2.75, 3.0, 4.0}
+            {
+                \pgfmathsetmacro\a{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i))}
+                \pgfmathsetmacro\m{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+.5))}
+                \pgfmathsetmacro\b{\leftbound + (((\rightbound - \leftbound)/\sumdiv)*(\i+1))}
+
+                \pgfmathsetmacro\fA{\complexEq{\a}}
+                \pgfmathsetmacro\fM{\complexEq{\m}}
+                \pgfmathsetmacro\fB{\complexEq{\b}}
+
+                \draw [gray, thin, pattern=north west lines, pattern color=gray, samples=100, domain=\a:\b, variable=\x] (\a, 0) -- plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))}) -- (\b, 0) -- cycle;
+                \draw [gray, thin] (\a, \fA) -- (\a, 0) -- (\b, 0) -- (\b, \fB);
+            }
+
+            \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-4.3cm] {\scriptsize \(x\)};
+            \graphComplex
+
+            % \pgfmathsetmacro\SX{5.5}
+            % \coordinate (S) at (\SX, {(((\SX+(2/3))^3 + 2*(\SX)^2)/3) - 0.03});
+            % \coordinate (SA) at ({\SX+.25}, -1.2);
+            % \spy [darkgray] on (S) in node [right] at (SA);
+        \end{tikzpicture}
+    }
+    \vspace{-.4cm}
+    \caption{A sketch demonstrating adaptive quadrature.}
+    \label{fig:smps_rule_complex_adpt}
+\end{figure}
+\end{document}

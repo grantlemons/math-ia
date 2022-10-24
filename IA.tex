@@ -164,6 +164,10 @@ Had the integrand been more complex, as in Figures \ref{fig:trap_rule_complex_lo
 The only way to improve the accuracy of the estimate produced by these methods is to increase the number of subintervals.
 The main issue with this, however, is that the methods consume a significant amount of processing power per subinterval.
 By scaling the number of subintervals by a factor of \(n\), the number of calculations required also scales linearly by \(n\).
+
+\subfile{graphs/complex/high/trap_complex_high}
+\subfile{graphs/complex/high/smps_complex_high}
+
 Although increasing the subinterval count is effective on complex portions of the integrand, it is inefficient and unnecessary over the portions of the integrand that are relatively simple.
 This means we should seek to maximize subinterval count only when necessary, and, in all other circumstances, minimize subintervals.
 
@@ -171,7 +175,6 @@ This means we should seek to maximize subinterval count only when necessary, and
 Adaptive Quadrature is the method of changing the width of each subinterval depending on the complexity of the function within each subinterval.
 An easy-to-implement process calculates the values of both the trapezoid and composite Simpson's 1/3 rules for the current subinterval, compares the two, and---should they significantly differ---splits the subinterval in two and repeats the process.%~\ref{https://www.math.usm.edu/lambers/mat460/fall09/lecture30.pdf}
 
-\subfile{graphs/complex/high/trap_complex_high}
-\subfile{graphs/complex/high/smps_complex_high}
+\subfile{graphs/complex/adaptive/smps_complex_adpt}
 
 \end{document}
