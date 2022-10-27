@@ -155,12 +155,13 @@ As \(m\) represents the midpoint \((a + b) / 2\), this can be stated in terms of
 Utilizing integration by substitution, Equation~\ref{eqn:lagrange_smps_ab} can be integrated into the form expressed in Equation~\ref{eqn:smps_rule}, which is called Simpson's Rule.
 %
 \begin{gather*}
-\int_a^b P(x) dx = \dfrac{b - a}{6} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]                          \\
-\dfrac{b - a}{2} = h                                                                                                    \\
+    \int_a^b P(x) dx = \dfrac{b - a}{6} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]                                  \\
+    \dfrac{b - a}{2} = h                                                                                                            \\
 \end{gather*}
+\vspace*{-1.5cm}
 \begin{align*}
-    \int_a^b P(x) dx &= \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]                         \\
-    \int_a^b P(x) dx &\approx \int_a^b f(x) dx                                                                          \\
+    \int_a^b P(x) dx &= \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]                                     \\
+    \int_a^b P(x) dx &\approx \int_a^b f(x) dx                                                                                      \\
     \int_a^b f(x) dx &\approx \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]  \tageq\label{eqn:smps_rule}
 \end{align*}
 %
@@ -192,13 +193,13 @@ Even with the relatively large subinterval size, these methods are effective, be
 Because both methods only sample a few points of the integrand, however, if these points are not representative of the integrand over the subinterval, neither method will not effectively approximate the integral value.
 
 \subsubsection{Complex Function}
-Had the integrand been more complex, as in Figure~\ref{fig:smps_rule_complex_low}, the area enclosed by the fluctuations would not have been taken into account by these two rules.
+Had the integrand been more complex, as in Figure~\ref{fig:smps_rule_complex_low}, the area enclosed by the fluctuations would not have been taken into account by either rule.
 %
 %\subfile{graphs/complex/low/trap_complex_low}
 \subfile{graphs/complex/low/smps_complex_low}
 %
-The only way to improve the accuracy of the estimate produced by these methods is to increase the number of subintervals as in Figure~\ref{fig:smps_rule_complex_high}.
-The issue with this, however, is that---no matter the method---a largue amount of subintervals requires a large amount of computing power.
+The only way to improve the accuracy of the estimate is to increase the number of subintervals as in Figure~\ref{fig:smps_rule_complex_high}.
+The issue with this, however, is that---no matter the method---a large amount of subintervals requires a large amount of computing power.
 By scaling the number of subintervals by a factor of \(n\), the number of calculations required also scales linearly by \(n\).
 %
 %\subfile{graphs/complex/high/trap_complex_high}
