@@ -1,0 +1,32 @@
+\documentclass[../IA.tex]{subfiles}
+
+\begin{document}
+\begin{listing}[H]
+\centering
+\snippet{Functions in the Rust program used to calculate the Trapezoid Rule and Simpsons's 1/3 Rule of the function \(f(x)\) over the interval \(a\) to \(b\)}
+\caption{Functions in the Rust program used to calculate the Trapezoid Rule and Simpsons's 1/3 Rule of the function \(f(x)\) over the interval \(a\) to \(b\)}
+\label{lst:rust_rules}
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1,
+fontsize=\footnotesize,
+]{rust}
+pub fn trapezoid_rule(a: f32, b: f32) -> f32 {
+    // Check input validity
+    assert!(b > a, "Right bound must be greater than left bound");
+
+    // calculate trapezoidal area
+    ((b - a) / 2.0) * (f(a) + f(b))
+}
+
+pub fn simpsons_rule(a: f32, b: f32) -> f32 {
+    // Check input validity
+    assert!(b > a, "Right bound must be greater than left bound");
+
+    // calculate area
+    (f(a) + 4.0 * f((a + b) / 2.0) + f(b)) * ((b - a) / 6.0)
+}
+\end{minted}
+\end{listing}
+\end{document}

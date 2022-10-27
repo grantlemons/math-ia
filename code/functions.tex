@@ -1,0 +1,29 @@
+\documentclass[../IA.tex]{subfiles}
+
+\begin{document}
+\begin{listing}[H]
+\centering
+\snippet{Various functions in the Rust program representing the function \(f(x)\), its derivative, and its second derivative respectively}
+\caption{Various functions in the Rust program representing the function \(f(x)\), its derivative, and its second derivative respectively}
+\label{lst:rust_functions}
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1,
+fontsize=\footnotesize,
+]{rust}
+fn f(x: f32) -> f32 {
+    (10_f32 / f32::sqrt(2_f32 * f32::consts::PI))
+        * f32::powf(f32::consts::E, -(1_f32 / 2_f32) * f32::powi(x, 2))
+}
+
+fn f_prime(x: f32) -> f32 {
+    -x * f(x)
+}
+
+fn f_prime_prime(x: f32) -> f32 {
+    f(x)*(x.powf(2.0) - 1.0)
+}
+\end{minted}
+\end{listing}
+\end{document}

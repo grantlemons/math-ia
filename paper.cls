@@ -17,10 +17,10 @@
 \usepackage{setspace}
 \singlespacing
 \usepackage{titlesec}
-\titlespacing{\chapter}{0pt}{0pt}{0pt}
-\titlespacing{\section}{0pt}{0pt}{0pt}
-\titlespacing{\subsection}{0pt}{0pt}{0pt}
-\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
+\titlespacing{\chapter}{0pt}{0pt}{-0.8em}
+\titlespacing{\section}{0pt}{0pt}{-0.8em}
+\titlespacing{\subsection}{0pt}{0pt}{-0.8em}
+\titlespacing{\subsubsection}{0pt}{0pt}{-0.8em}
 
 % Images
 \usepackage{graphicx}

@@ -1,0 +1,27 @@
+\documentclass[../IA.tex]{subfiles}
+
+\begin{document}
+\begin{listing}[H]
+\centering
+\snippet{Functions in the Rust program used for calculating the complexity over a subinterval and the error percentage between two values that are used by other functions}
+\caption{Functions in the Rust program used for calculating the complexity over a subinterval and the error percentage between two values that are used by other functions}
+\label{lst:rust_helpers}
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1,
+fontsize=\footnotesize,
+]{rust}
+fn complexity(a: f32, b: f32) -> f32 {
+    // Check input validity
+    assert!(b > a, "Right bound must be greater than left bound");
+
+    f32::abs(f_prime_prime(b) - f_prime_prime(a))
+}
+
+fn error(value: f32, correct_value: f32) -> f32 {
+    f32::abs(((correct_value - value) / correct_value) * 100.0)
+}
+\end{minted}
+\end{listing}
+\end{document}
