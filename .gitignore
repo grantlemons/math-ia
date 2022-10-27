@@ -1,7 +1,7 @@
-*/aux-files/*
-*.pdf
-*.fls
-*.out
-*.aux
-*.log
-*.toc
+*
+!*.tex
+!*.cls
+!*.png
+!*.jpg
+!*.jpeg
+!*.svg
