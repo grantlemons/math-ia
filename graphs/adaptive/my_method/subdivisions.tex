@@ -9,24 +9,12 @@
     \centering
     \resizebox{.9\textwidth}{!}{
         \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}, spy using outlines={circle, magnification=9, size=2cm, connect spies}]
-            \def\arr{-3.0, -2.75, -2.5, -2.25, -2.0, -1.5, -1.375, -1.25, -1.1875, -1.125, -1.0625, -1.0, -0.9375, -0.875, -0.8125, -0.75, -0.6875, -0.625, -0.5625, -0.5, -0.4375, -0.375, -0.3125, -0.25, 0.0, 0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0.625, 0.6875, 0.75, 0.8125, 0.875, 0.9375, 1.0, 1.0625, 1.125, 1.1875, 1.25, 1.375, 1.5, 2.0, 2.25, 2.5, 2.75, 3.0, 4.0}
-            \def\p{-4.0}
+            \def\arr{-4.0, -3.0, -2.75, -2.5, -2.25, -2.0, -1.5, -1.375, -1.25, -1.1875, -1.125, -1.0625, -1.0, -0.9375, -0.875, -0.8125, -0.75, -0.6875, -0.625, -0.5625, -0.5, -0.4375, -0.375, -0.3125, -0.25, 0.0, 0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0.625, 0.6875, 0.75, 0.8125, 0.875, 0.9375, 1.0, 1.0625, 1.125, 1.1875, 1.25, 1.375, 1.5, 2.0, 2.25, 2.5, 2.75, 3.0, 4.0}
             \foreach \x in \arr
             {
-                \pgfmathsetmacro\a{\p}
-                \pgfmathsetmacro\m{(\p+\x)/2}
-                \pgfmathsetmacro\b{\x}
-
-                \pgfmathsetmacro\fA{\normalEq{\a}}
-                \pgfmathsetmacro\fM{\normalEq{\m}}
-                \pgfmathsetmacro\fB{\normalEq{\b}}
+                \pgfmathsetmacro\fA{\normalEq{0}}
                 
-                \draw[gray, thin] (\p, 0) -- (\p, \fA);
-                \draw[gray, thin] (\x, 0) -- (\x, \fB);
-                
-                % \draw [gray, thin, pattern=north west lines, pattern color=gray] (\a, \fA) -- (\a, 0) -- (\b, 0) -- (\b, \fB);
-                
-                \xdef\p{\x}
+                \draw[gray, thin] (\x, 0) -- (\x, \fA);
             }
 
             \draw[black, thick] ({\leftbound-.1}, 0) -- ({\rightbound+.1}, 0) node[black, align=center, left, yshift=-0.2cm, xshift=-7.5cm] {\small \(x\)};
