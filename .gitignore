@@ -1,7 +1,7 @@
 *
-!*.tex
-!*.cls
-!*.png
-!*.jpg
-!*.jpeg
-!*.svg
+!*/*.tex
+!*/*.cls
+!*/*.png
+!*/*.jpg
+!*/*.jpeg
+!*/*.svg
