@@ -193,8 +193,8 @@ The only way to improve the accuracy of the estimate produced by these methods i
 The issue with this, however, is that the methods consume a significant amount of processing power per subinterval.
 By scaling the number of subintervals by a factor of \(n\), the number of calculations required also scales linearly by \(n\).
 %
-% \subfile{graphs/complex/high/trap_complex_high}
-% \subfile{graphs/complex/high/smps_complex_high}
+\subfile{graphs/complex/high/trap_complex_high}
+\subfile{graphs/complex/high/smps_complex_high}
 %
 Although increasing the subinterval count is effective on complex portions of the integrand, it is inefficient and unnecessary over the portions of the integrand that are relatively simple.
 This means we should seek to maximize subinterval count only when necessary, and, in all other circumstances, minimize subintervals.
