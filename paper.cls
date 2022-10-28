@@ -54,8 +54,8 @@
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
     linkcolor=black,  %choose some color if you want links to stand out
-	citecolor=black,
-	urlcolor=black,
+    citecolor=black,
+    urlcolor=black,
 }
 
 \endinput
