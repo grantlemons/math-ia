@@ -1,0 +1,34 @@
+\documentclass[../../../IA.tex]{subfiles}
+
+\begin{document}
+\newcommand{\sumdiv}{\exampleLowSubintervals}
+\newcommand{\leftbound}{-4}
+\newcommand{\rightbound}{4}
+
+\begin{figure}[H]
+    \centering
+    \resizebox{.55\textwidth}{!}{
+        \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}]
+            \def\arr{-4.0/1.600, -2.0/-5.609, 0.0/5.609, 2.0/-1.600}
+            \foreach \x/\v in \arr
+            {   
+                \pgfmathsetmacro\fA{\normalEq{0}}
+                \draw[gray, thin] (\x, 0) -- (\x, \fA) node[xshift=.85cm, yshift=.2cm]{\small \v};
+            }
+            \draw[gray, thin] (4, 0) -- (4, {\normalEq{0}});
+
+            \draw[dashed, lightgray, thin] (-2.0, {\DerDerNormalEq{-2}}) -- (-2.0, {\DerDerNormalEq{0}}) -- (0, {\DerDerNormalEq{0}}) node[xshift=-3.1cm, yshift=2cm, gray]{\small \(\Delta\sder{f(x)}\)};
+            \draw[dashed, lightgray, thin] (0, {\DerDerNormalEq{0}}) -- (0, 0);
+            \node at (0.0, {\DerDerNormalEq{0}}) [darkgray, circle, fill, inner sep=1.5pt]{};
+            \node at (-2.0, {\DerDerNormalEq{-2}}) [darkgray, circle, fill, inner sep=1.5pt]{};
+
+            \draw[black, thick] ({\leftbound-.1}, 0) -- ({\rightbound+.1}, 0) node[black, align=center, left, yshift=-0.2cm, xshift=-7.5cm] {\small \(x\)};
+            \graphNormal
+            \graphDerDerNormal
+        \end{tikzpicture}
+    }
+    \vspace{-.2cm}
+    \caption{A sketch demonstrating the subdivisions during the first step of my method of adaptive quadrature}
+    \label{fig:my_adpt_stepone}
+\end{figure}
+\end{document}

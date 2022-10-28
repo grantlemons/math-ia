@@ -13,9 +13,10 @@
 \usepackage{fancyhdr}
 \usepackage{subfiles}
 \usepackage[section]{placeins}
-\usepackage[width=.95\textwidth]{caption}
+\usepackage[width=.95\textwidth, font={footnotesize}]{caption}
 \usepackage{float}
 \usepackage[all]{nowidow}
+\usepackage[nameinlink, noabbrev, capitalize]{cleveref}
 
 %Needspace
 \usepackage{needspace}
@@ -69,12 +70,12 @@
 \newcommand{\simpleEq}[1]{((#1+(2/3))^3 + 2*(#1)^2)/6}
 \newcommand{\complexEq}[1]{2*(sin((3)/(abs(#1)+.3) r)^2)}
 \newcommand{\normalEq}[1]{(10/sqrt(2*pi))*e^((-1/2)*((#1)^2))}
-\newcommand{\DerDerNormalEq}[1]{\normalEq{#1}*((#1)^2 - 1)}
+\newcommand{\DerDerNormalEq}[1]{(\normalEq{#1})*((#1)^2 - 1)}
 \newcommand{\graphRule}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\ruleEq{\x}}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
 \newcommand{\graphSimple}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\simpleEq{\x}}) node[darkgray, align=left, right, yshift=-0.2cm, xshift=-3.0cm] {\tiny\(f(x)\)};}
 \newcommand{\graphComplex}{\draw[darkgray, smooth, thick, samples=1500, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\complexEq{\x}}) node[darkgray, align=left, right, yshift=.15cm, xshift=-3.6cm] {\tiny\(f(x)\)};}
 \newcommand{\graphNormal}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\normalEq{\x}}) node[darkgray, align=left, right, yshift=2.5cm, xshift=-3cm] {\small\(f(x)\)};}
-\newcommand{\graphDerDerNormal}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\DerDerNormalEq{\x}}) node[darkgray, align=left, right, yshift=2.5cm, xshift=-3cm] {\small\(f(x)\)};}
+\newcommand{\graphDerDerNormal}{\draw[dashed, darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\DerDerNormalEq{\x}}) node[darkgray, align=left, right, yshift=-1.5cm, xshift=-3.3cm] {\small\(\sder{f(x)}\)};}
 
 
 %Page Numbering
@@ -98,9 +99,6 @@
 \newpage
 \setcounter{page}{1}
 
-\section{Introduction}
-
-
 \section{Background}
 \subsection{Rectangle Rule}
 The problem of finding the area contained by a function and the \(x\)-axis is more complex than it might appear.
@@ -108,12 +106,12 @@ While most enclosed areas can be found easily using integration, some mathematic
 As such, many methods have been developed to allow computers to approximate area by filling it with shapes of a known area.
 This general field of mathematical study is known as quadrature, and contains many established methods used to quickly and accurately approximate the function.
 The most basic method used to approximate area is by splitting the interval into smaller subintervals and fitting rectangles beneath the curve.
-The height of each rectangle is based on the value of the function at one of its subinterval's bounds, which makes area easy to approximate to a reasonable degree of accuracy as shown by Figure~\ref{fig:rect_rule}.
-Since the area of a rectangle is extremely easy to calculate~(Equation~\ref{eqn:rect_area}), this method is simple to implement over the entire function by summing the areas of each subinterval as demonstrated in Equation~\ref{eqn:rect_rule}.
+The height of each rectangle is based on the value of the function at one of its subinterval's bounds, which makes area easy to approximate to a reasonable degree of accuracy as shown by \cref{fig:rect_rule}.
+Since the area of a rectangle is extremely easy to calculate~(\cref{eqn:rect_area}), this method is simple to implement over the entire function by summing the areas of each subinterval as demonstrated in \cref{eqn:rect_rule}.
 %
 \begin{equation}
     \label{eqn:rect_area}
-    A = l \cdot width
+    A = l \cdot w
 \end{equation}
 \begin{equation}
     \label{eqn:rect_rule}
@@ -125,7 +123,7 @@ Since the area of a rectangle is extremely easy to calculate~(Equation~\ref{eqn:
 \subsection{Trapezoid Rule}
 An alternative means typically used in place of this method utilizes trapezoids instead of rectangles.
 Instead of picking a single point at which to base the height on, the trapezoid rule utilizes the value of the function at both the left and right bounds, and uses them to approximate a trapezoid under the curve.
-The equation for the Trapezoid Rule~(Equation~\ref{eqn:trap_rule}) is only marginally more complicated than that of the Rectangle Rule~(Equation~\ref{eqn:rect_rule}), but fits functions more closely, which provides significantly more accuracy as can be observed in in Figure~\ref{fig:trap_rule}.
+The equation for the Trapezoid Rule~(\cref{eqn:trap_rule}) is only marginally more complicated than that of the Rectangle Rule~(\cref{eqn:rect_rule}), but fits functions more closely, which provides significantly more accuracy as can be observed in in \cref{fig:trap_rule}.
 %
 \begin{equation}
     \label{eqn:trap_rule}
@@ -137,26 +135,26 @@ The equation for the Trapezoid Rule~(Equation~\ref{eqn:trap_rule}) is only margi
 \subsection{Composite Simpson's 1/3 Rule}
 Beyond these simple methods, other techniques use polynomials in an attempt to fit the curve as closely as possible.
 One such method is the Composite Simpson's 1/3 rule, which uses the left, right, and, mid-interval values of each subinterval to construct a polynomial.
-The use of polynomials allows the Composite Simpson's 1/3 rule to approximate the complex integrand with easily integrable functions that fit the integrand extremely closely as shown in Figure~\ref{fig:smps_rule}.
+The use of polynomials allows the Composite Simpson's 1/3 rule to approximate the complex integrand with easily integrable functions that fit the integrand extremely closely as shown in \cref{fig:smps_rule}.
 %
 \subfile{graphs/rules/smps_rule}
 %
-Lagrange Polynomial Interpolation~(Equation~\ref{eqn:lagrange}) is a means of constructing a polynomial that passes through a set of points.
-In Simpson's 1/3 Rule, this method is used to construct more easily integrated polynomials (as demonstrated in Equation~\ref{eqn:lagrange_smps}), using the \(x\) and \(y\) values of the left-bound, right-bound, and mid-interval values of the subinterval.
+Lagrange Polynomial Interpolation~(\cref{eqn:lagrange}) is a means of constructing a polynomial that passes through a set of points.
+In Simpson's 1/3 Rule, this method is used to construct more easily integrated polynomials (as demonstrated in \cref{eqn:lagrange_smps}), using the \(x\) and \(y\) values of the left-bound, right-bound, and mid-interval values of the subinterval.
 %
 \begin{equation}
     \label{eqn:lagrange}
     P(x) = \sum_{j=1}^n y_j \prod_{\substack{k = 1 \\ k \neq j}}^n \dfrac{x - x_k}{x_j - x_k}
 \end{equation}
 %
-Expanding Equation~\ref{eqn:lagrange} with the points \(m\), \(a\), and \(b\) for midpoint, left-bound, and right-bounds respectively produces Equation~\ref{eqn:lagrange_smps}.
+Expanding \cref{eqn:lagrange} with the points \(m\), \(a\), and \(b\) for midpoint, left-bound, and right-bounds respectively produces \cref{eqn:lagrange_smps}.
 %
 \begin{equation}
     \label{eqn:lagrange_smps}
     P(x) = f(a) \dfrac{(x - m)(x - b)}{(a - m)(a - b)} + f(m) \dfrac{(x - a)(x - b)}{(m - a)(m - b)} + f(b) \dfrac{(x - a)(x - m)}{(b - a)(b - m)}
 \end{equation}
 %
-As \(m\) represents the midpoint \((a + b) / 2\), this can be restated in terms of \(a\) and \(b\) as demonstrated in Equation~\ref{eqn:lagrange_smps_ab}.
+As \(m\) represents the midpoint \((a + b) / 2\), this can be restated in terms of \(a\) and \(b\) as demonstrated in \cref{eqn:lagrange_smps_ab}.
 %
 \begin{equation}
     \label{eqn:lagrange_smps_ab}
@@ -166,7 +164,7 @@ As \(m\) represents the midpoint \((a + b) / 2\), this can be restated in terms 
     }
 \end{equation}
 %
-Utilizing integration by substitution, Equation~\ref{eqn:lagrange_smps_ab} can be integrated into the form expressed in Equation~\ref{eqn:smps_rule}, which is the equation for Simpson's Rule.
+Utilizing integration by substitution, \cref{eqn:lagrange_smps_ab} can be integrated into the form expressed in \cref{eqn:smps_rule}, which is the equation for Simpson's Rule.
 %
 \begin{gather*}
     \int_a^b P(x) dx = \dfrac{b - a}{6} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]                                  \\
@@ -179,16 +177,16 @@ Utilizing integration by substitution, Equation~\ref{eqn:lagrange_smps_ab} can b
     \int_a^b f(x) dx &\approx \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]  \tageq\label{eqn:smps_rule}
 \end{align*}
 %
-Equation~\ref{eqn:smps_rule} gives an approximate value for the integral of the subinterval using a single polynomial function.
-Like in the Trapezoid and Rectangle rules (Equations~\ref{eqn:trap_rule}~and~\ref{eqn:rect_rule}), the interval can be split into smaller subintervals in order to increase accuracy.
-Expressed mathematically, the equation for the approximate value of the interval as a whole is equal to the sum of the values of each subinterval, the equation of which takes the form of Equation~\ref{eqn:composite_smps_rule}.
+\cref{eqn:smps_rule} gives an approximate value for the integral of the subinterval using a single polynomial function.
+Like in the Trapezoid and Rectangle rules~(\cref{eqn:trap_rule,eqn:rect_rule}), the interval can be split into smaller subintervals in order to increase accuracy.
+Expressed mathematically, the equation for the approximate value of the interval as a whole is equal to the sum of the values of each subinterval, the equation of which takes the form of \cref{eqn:composite_smps_rule}.
 %
 \begin{equation}
     \label{eqn:composite_smps_rule}
     \int_a^b f(x) dx \approx \dfrac{h}{3} \sum_{j=1}^{n / 2} \biggl[f(x_{2j-2}) + 4f(x_{2j-1}) + f(x_{2j})\biggr]
 \end{equation}
 %
-%Equation~\ref{eqn:composite_smps_rule} can be expressed in the form of Equation~\ref{eqn:smplfd_composite_smps_rule} for computational efficiency.
+%\cref{eqn:composite_smps_rule} can be expressed in the form of \cref{eqn:smplfd_composite_smps_rule} for computational efficiency.
 %
 %\begin{equation}
 %    \label{eqn:smplfd_composite_smps_rule}
@@ -197,18 +195,18 @@ Expressed mathematically, the equation for the approximate value of the interval
 %
 \subsection{Effectiveness Examples}
 \subsubsection{Simple Function}
-The effectiveness of the trapezoid rule and the composite Simpson's 1/3 rule can be seen in Figures~\ref{fig:trap_rule}~and~\ref{fig:smps_rule}.
+The effectiveness of the trapezoid rule and the composite Simpson's 1/3 rule can be seen in \cref{fig:trap_rule,fig:smps_rule}.
 Even with the relatively large subinterval size, these methods are effective, because the function has no fluctuations that the method would not account for with the subinterval count being used.
 Because the methods only sample a few points of the integrand, however, if these few points are not representative of the integrand over the subinterval, neither method will not effectively approximate the integral value.
 This means that, although both methods are effective at fitting the curve of a relatively simple function such as a polynomial with relatively few subintervals, they get significantly less effective the more complex the integrand.
 
 \subsubsection{Complex Function}
-Had the integrand been more complex, as in Figure~\ref{fig:smps_rule_complex_low}, the area enclosed by the fluctuations would not have been taken into account by either rule.
+Had the integrand been more complex, as in \cref{fig:smps_rule_complex_low}, the area enclosed by the fluctuations would not have been taken into account by either rule.
 %
 %\subfile{graphs/complex/low/trap_complex_low}
 \subfile{graphs/complex/low/smps_complex_low}
 %
-The only way to improve the accuracy of the estimate is to increase the number of subintervals as in Figure~\ref{fig:smps_rule_complex_high}.
+The only way to improve the accuracy of the estimate is to increase the number of subintervals as in \cref{fig:smps_rule_complex_high}.
 The issue with this, however, is that---no matter the method---a large amount of subintervals requires a large amount of computing power.
 By scaling the number of subintervals by a factor of \(n\), the number of calculations required also scales linearly by \(n\).
 %
@@ -225,20 +223,23 @@ I seek to propose an alternative means of calculating a complexity value and to 
 
 \subsection{My Method}
 Because 2nd degree polynomials---which Simpson's 1/3 Rule uses---fit consistent curves well and only encounter difficulty when the curve changes over the course of the subinterval, my function for complexity will operate via detecting changes in curvature.
-In order to accomplish this, my function~(Equation~\ref{eqn:complexity}) finds the absolute value of the difference between the second derivatives of the two bounds.
-%
-\subfile{graphs/steps/my_method/first_step}
-\subfile{graphs/steps/my_method/second_step}
+In order to accomplish this, my function~(\cref{eqn:complexity}) finds the absolute value of the difference between the second derivatives of the two bounds.
 %
 \begin{equation}
     \label{eqn:complexity}
-    c(x) = \left|\sder{f(b)} - \sder{f(a)}]\right|
+    c(x) = \left|\sder{f(b)} - \sder{f(a)}\right|
 \end{equation}
 %
-The value of calculating using Equation~\ref{eqn:complexity} is then---similarly to in the established method---compared to a defined threshold value, and if it exceeds it, the subdivision is split in two and the process is repeated for each.
+The value of calculating using \cref{eqn:complexity} is then---similarly to in the established method---compared to a defined threshold value, and if it exceeds it, the subdivision is split in two and the process is repeated for each.
+
+An example of two steps in this process is shown below in \cref{fig:my_adpt_stepone,fig:my_adpt_steptwo}. The numbers above each subinterval represent \(\Delta\sder{f(x)}\), and the threshold for subdivision is a complexity of \(2.000\).
+%
+\subfile{graphs/steps/my_method/first_step}
+\subfile{graphs/steps/my_method/second_step}
 
 \subsection{Comparison}
 In order to compare the two methods, I created a program that obtains the subdivision bounds, calculates the integral, and calculates the error as a percentage.
+\crefrange{lst:rust_functions}{lst:rust_composite} show the main functions that make this program function.
 %
 \subfile{code/functions}
 \subfile{code/helpers}
@@ -246,7 +247,7 @@ In order to compare the two methods, I created a program that obtains the subdiv
 \subfile{code/composite}
 %
 \subsubsection{Example Program Output --- Normal Distribution}
-The function I am using to test and compare both methods is a standard normal distribution as defined by Equation~\ref{eqn:normal}.
+The function I am using to test and compare both methods is a standard normal distribution as defined by \cref{eqn:normal}.
 A normal distribution is a good function to test quadrature on as it is impossible to integrate using the Fundamental Theorem of Calculus, and must be solved using quadrature.
 One effect that this has, however, is that error percentages cannot be 100\%correct, as the "correct value" has to be generated using quadrature as well.
 In order to mitigate this issue, the value considered "correct" was calculated with the composite simpsons rule with \(10,000\) subintervals.
@@ -256,7 +257,7 @@ In order to mitigate this issue, the value considered "correct" was calculated w
     f(x) = \dfrac{10}{\sqrt{2\pi}}e^{-\dfrac{x^2}{2}}
 \end{equation}
 %
-In order to use my method, the second derivative of Equation~\ref{eqn:normal} must be calculated and hard coded into my program as seen in Listing~\ref{lst:rust_functions}.
+In order to use my method, the second derivative of \cref{eqn:normal} must be calculated and hard coded into my program as seen in \cref{lst:rust_functions}.
 %
 \begin{align*}
     \der{f(x)} &= \dfrac{10}{\sqrt{2\pi}}e^{-\dfrac{x^2}{2}} \cdot \der{-\dfrac{x^2}{2}}\\
@@ -273,7 +274,7 @@ In order to use my method, the second derivative of Equation~\ref{eqn:normal} mu
     \sder{f(x)} &= \dfrac{10(x^2 - 1)}{\sqrt{2\pi}}e^{-\dfrac{x^2}{2}} \tageq\label{eqn:2nd_derivative_normal}
 \end{align*}
 %
-Using the program, my method and the established method subdivide the function as shown in Figures~\ref{fig:my_adpt_subdiv}~and~\ref{fig:other_adpt_subdiv} respectively.
+Using the program, my method and the established method subdivide the function as shown in \cref{fig:my_adpt_subdiv,fig:other_adpt_subdiv} respectively.
 %
 \subfile{graphs/adaptive/my_method/subdivisions}
 \subfile{graphs/adaptive/other_method/subdivisions}
@@ -284,6 +285,7 @@ It is hard to compare the overall accuracy of the two methods, as the thresholds
 When calculating the enclosed area of the interval \(-4\) to \(4\), using a threshold of \(0.002\) for the established method gave a value of \(9.999367\), which has an error of \(0.000210\%\), while using a threshold of \(0.4\) for my method gave a value of \(9.999754\), which has an error of \(0.004082\%\).
 
 \newpage
+\thispagestyle{empty}
 \listoffigures
 \vspace{1cm}
 \listofsnippets
