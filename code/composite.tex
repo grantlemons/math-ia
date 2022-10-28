@@ -29,24 +29,30 @@ pub fn composite(mode: Mode, subints: u16, a: f32, b: f32, xcoords: &mut Vec<f32
         xcoords.push(left);
 
         // Store outputs of respective rules
-        let mut simpsons_value = simpsons_rule(left, right);
+        let mut simpsons_value: Option<f32> = None;
 
         // Check the conditions for division dependent on mode parameter
         let condition = match mode {
             Mode::Established => {
-                f32::abs(trapezoid_rule(left, right) - simpsons_value) > mode.threshold()
+                simpsons_value = Some(simpsons_rule(left, right));
+                f32::abs(trapezoid_rule(left, right) - simpsons_value.unwrap())
+                    > mode.threshold()
             }
             Mode::Complexity => complexity(left, right) > mode.threshold(),
             Mode::Simple => false,
         };
 
-        // Recursively divide if above condition met
-        if condition {
-            simpsons_value = composite(mode, 2, left, right, xcoords);
-        }
+        // Recursively divide if above condition met, otherwise use simpsons rule
+        simpsons_value = if condition {
+            Some(composite(mode, 2, left, right, xcoords))
+        } else if simpsons_value.is_none() {
+            Some(simpsons_rule(left, right))
+        } else {
+            simpsons_value
+        };
 
         // Add values of local variables to sum variable
-        simpsons_sum += simpsons_value;
+        simpsons_sum += simpsons_value.unwrap();
     }
 
     // Return the two sums
