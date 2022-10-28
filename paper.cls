@@ -35,8 +35,7 @@
 \titleformat{\chapter}[display]{\vspace{-1.8cm}\normalfont\bfseries}{}{0pt}{\Large}
 \newcommand{\insertTitlePage}{
 	\centering
-    \setcounter{page}{1}
-    \pagenumbering{roman}
+    \thispagestyle{empty}
 	\vspace*{7.5cm}
 	\textbf{\huge\thetitle}\\
 	\vspace*{0.5cm}
@@ -47,8 +46,6 @@
 	\textit{\theauthor}\\
     \flushleft
 	\newpage
-	\setcounter{page}{1}
-    \pagenumbering{arabic}
 }
 
 % Link setup
@@ -57,6 +54,8 @@
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
     linkcolor=black,  %choose some color if you want links to stand out
+	citecolor=black,
+	urlcolor=black,
 }
 
 \endinput
