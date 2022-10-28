@@ -86,10 +86,9 @@
 
 
 %Page Numbering
-\usepackage{lastpage}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[R]{\thepage of \pageref{LastPage}}
+\fancyhead[R]{\thepage \hspace{1pt} of \pageref{mylastpage}}
 \setlength{\headheight}{15pt}
 
 %Equation Numbering
@@ -109,7 +108,7 @@
 
 \section{Introduction}
 \label{sec:intro}
-Integration is the process of calculating the area enclosed by a function (known as the integrand) over an inverval.
+Integration is the process of calculating the area enclosed by a function (known as the integrand) over an interval.
 This process is often done by hand using the Fundamental Theorem of Calculus, but can also by conducted by a computer.
 The means by which a computer conducts this operation is through a process called quadrature (also known as numerical integration).
 Quadrature is the process of fitting shapes of a known area to the integrand in order to closely approximate the area enclosed by the integrand.
@@ -343,8 +342,8 @@ Had the function's concavity shifted more rapidly, my method may have seen bette
 Regardless of which performed better, both methods were extremely effective. An error percentage of \(0.004\) (produced by my method), is still extremely low.
 This low error was accomplished with only 40 subintervals, which is significantly less than would have been needed had this function been evaluated in a non-adaptive manner.
 
+\label{mylastpage}
 \newpage
-\thispagestyle{empty}
 \listoffigures
 \vspace{1cm}
 \listofsnippets
@@ -352,4 +351,5 @@ This low error was accomplished with only 40 subintervals, which is significantl
 \phantomsection
 \addcontentsline{toc}{section}{References}
 \printbibliography
+\thispagestyle{empty}
 \end{document}
