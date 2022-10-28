@@ -13,14 +13,13 @@
             \foreach \x/\v in \arr
             {   
                 \pgfmathsetmacro\fA{\normalEq{0}}
-                \draw[gray, thin] (\x, 0) -- (\x, \fA) node[xshift=.7cm, yshift=.25cm, rotate=60]{\small \v};
+                \draw[gray, thin] (\x, 0) -- (\x, \fA) node[xshift=.6cm, yshift=.26cm, rotate=60]{\small \v};
             }
             \draw[gray, thin] (4, 0) -- (4, {\normalEq{0}});
 
-
-
-
-
+            \draw[dashed, lightgray, thin] (-1.0, {\DerDerNormalEq{-1}}) -- (-1.0, {\DerDerNormalEq{0}}) -- (0, {\DerDerNormalEq{0}});
+            \node at (0.0, {\DerDerNormalEq{0}}) [darkgray, circle, fill, inner sep=1.5pt]{};
+            \node at (-1.0, {\DerDerNormalEq{-1}}) [darkgray, circle, fill, inner sep=1.5pt]{};
 
             \draw[black, thick] ({\leftbound-.1}, 0) -- ({\rightbound+.1}, 0) node[black, align=center, left, yshift=-0.2cm, xshift=-7.5cm] {\small \(x\)};
             \graphNormal
