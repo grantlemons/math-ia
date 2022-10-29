@@ -21,10 +21,10 @@
                 \coordinate (BR) at (\Bx, 0);
                 \coordinate (TL) at (\Ax, \Ay);
                 \coordinate (TR) at (\Bx, \By);
-		\draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
+		        \draw [gray, thin, pattern=north west lines, pattern color=gray] (BL) -- (BR) -- (TR) -- (TL) -- (BL);
             }
 
-            \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-4.3cm] {\scriptsize \(x\)};
+            \numline{-2.0, -1.0, 0, 1.0, 2.0}
             \graphComplex
         \end{tikzpicture}
     }

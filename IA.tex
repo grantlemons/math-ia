@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
+\usepackage{mathtools}
 \usepackage{XCharter}
 \usepackage{fancyhdr}
 \usepackage{subfiles}
@@ -83,7 +84,17 @@
 \newcommand{\graphComplex}{\draw[darkgray, smooth, thick, samples=1500, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\complexEq{\x}}) node[darkgray, align=left, right, yshift=.15cm, xshift=-3.6cm] {\tiny\(f(x)\)};}
 \newcommand{\graphNormal}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\normalEq{\x}}) node[darkgray, align=left, right, yshift=2.5cm, xshift=-3cm] {\small\(f(x)\)};}
 \newcommand{\graphDerDerNormal}{\draw[dashed, darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\DerDerNormalEq{\x}}) node[darkgray, align=left, right, yshift=-1.5cm, xshift=-3.3cm] {\small\(\sder{f(x)}\)};}
+\newcommand{\numline}[1]{
+    \draw[black, thick] ({\rightbound+.1}, -0.02) -- ({\leftbound-.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=.5cm] {\scriptsize \(x\)};
+    \foreach \x in  {#1} {
+        \draw[color=black] (\x, 3pt) -- (\x, -3pt) node[below]{\tiny \(\x\)};
+    }
+}
 
+% Quotes
+\usepackage[english]{babel}
+\usepackage[autostyle, english=american]{csquotes}
+\MakeOuterQuote{"}
 
 %Page Numbering
 \pagestyle{fancy}
@@ -95,8 +106,10 @@
 \newcommand*\tageq{\refstepcounter{equation}\tag{\theequation}}
 
 %Derivative commands
-\newcommand{\der}[1]{\dfrac{d}{dx}\left[#1\right]}
-\newcommand{\sder}[1]{\dfrac{d^2}{dx^2}\left[#1\right]}
+\newcommand{\der}[1]{\dfrac{d(#1)}{dx}}
+\newcommand{\derf}[2]{\dfrac{d(#1)}{dx}(#2)}
+\newcommand{\sder}[1]{\dfrac{d^2(#1)}{dx^2}}
+\newcommand{\sderf}[2]{\dfrac{d^2(#1)}{dx^2}(#2)}
 
 \begin{document}
 \insertTitlePage
@@ -259,13 +272,13 @@ In order to accomplish this, my function~(see \cref{eqn:complexity}) finds the a
 %
 \begin{equation}
     \label{eqn:complexity}
-    c(x) = \left|\sder{f(b)} - \sder{f(a)}\right|
+    c(a, b) = \left|\sderf{f(x)}{b} - \sderf{f(x)}{a}\right|
 \end{equation}
 %
 The value of calculating using \cref{eqn:complexity} is then---similarly to in the established method---compared to a defined threshold value, and if it exceeds it, the subdivision is split in two and the process is repeated for each.
 
 An example of two steps in this process is shown below in \cref{fig:my_adpt_stepone,fig:my_adpt_steptwo}.
-The numbers above each subinterval represent \(\Delta\sder{f(x)}\), and the threshold for subdivision is a complexity of \(2.000\).
+The numbers above each subinterval represent the value of \cref{eqn:complexity} with the two bounds of the subinterval as input, and the threshold for subdivision is a complexity of \(2.000\).
 %
 \subfile{graphs/steps/my_method/first_step}
 \subfile{graphs/steps/my_method/second_step}
@@ -291,7 +304,7 @@ The major downside to my method is that it requires the user to calculate the se
 
 \subsubsection{Example Program Usage --- Normal Distribution}
 \label{sec:normal}
-The function I am using to test and compare both methods is a standard normal distribution as defined by \cref{eqn:normal}.
+The function I am using to test and compare both methods is a normal distribution as defined by \cref{eqn:normal}.
 A normal distribution is a good function to test quadrature on as it is impossible to integrate using the Fundamental Theorem of Calculus, and must be solved using quadrature.
 One effect that this has, however, is that error percentages cannot be 100\% correct, as the "correct value" has to be generated using quadrature as well.
 In order to mitigate this issue, the value considered "correct" was calculated with the composite simpsons rule with \(10,000\) subintervals.

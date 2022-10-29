@@ -22,7 +22,7 @@
                 \path [draw = gray, thin, pattern=north west lines, pattern color=gray] (BL) rectangle (TR);
             }
 
-            \draw[black, thick] ({\leftbound-.1}, -0.02) -- ({\rightbound+.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=-4.3cm] {\scriptsize \(x\)};
+            \numline{\leftbound, ..., \rightbound}
             \graphSimple
         \end{tikzpicture}
     }

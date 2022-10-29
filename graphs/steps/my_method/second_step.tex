@@ -9,7 +9,7 @@
     \centering
     \resizebox{.55\textwidth}{!}{
         \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}]
-            \def\arr{-4.0/1.600, -2.0/-1.620, -1.0/-3.989, 0.0/3.989, 1.0/1.620, 2.0/-1.600}
+            \def\arr{-4.0/1.600, -2.0/1.620, -1.0/3.989, 0.0/3.989, 1.0/1.620, 2.0/1.600}
             \foreach \x/\v in \arr
             {   
                 \pgfmathsetmacro\fA{\normalEq{0}}
@@ -21,7 +21,7 @@
             \node at (0.0, {\DerDerNormalEq{0}}) [darkgray, circle, fill, inner sep=1.5pt]{};
             \node at (-1.0, {\DerDerNormalEq{-1}}) [darkgray, circle, fill, inner sep=1.5pt]{};
 
-            \draw[black, thick] ({\leftbound-.1}, 0) -- ({\rightbound+.1}, 0) node[black, align=center, left, yshift=-0.2cm, xshift=-7.5cm] {\small \(x\)};
+            \numline{\leftbound, ..., \rightbound}
             \graphNormal
             \graphDerDerNormal
         \end{tikzpicture}
