@@ -58,4 +58,116 @@
     urlcolor=black,
 }
 
+%Document Info
+\newcommand{\thetitle}{Methods of Adaptive Quadrature}
+\newcommand{\researchquestion}{Comparing a new method of adaptive quadrature to an existing strategy.}
+\newcommand{\theauthor}{Grant Lemons}
+
+%Random imports
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{XCharter}
+\usepackage{fancyhdr}
+\usepackage{subfiles}
+\usepackage[section]{placeins}
+\usepackage[width=.95\textwidth, font={footnotesize}]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage[all]{nowidow}
+\usepackage[nameinlink, noabbrev, capitalize]{cleveref}
+\usepackage{ragged2e}
+
+%Needspace
+\usepackage{needspace}
+\AddToHook{cmd/section/before}{\Needspace*{3\baselineskip}}
+
+% Specific Hyphenation
+\hyphenation{Simpson}
+
+% Bibliography
+\usepackage[backend=biber, notes, sorting=cms, legalnotes=false]{biblatex-chicago}
+\usepackage{fnpct}
+\addbibresource{bibliography.bib}
+\usepackage[bottom]{footmisc}
+
+%Code Snippets
+\usepackage{minted}
+\usepackage{xcolor}
+\usemintedstyle{bw}
+\usepackage{fontspec}
+\setmonofont[
+    Path=/usr/share/fonts/TTF/,
+    Contextuals={Alternate},
+    UprightFont = FiraCode-Regular,
+    BoldFont = FiraCode-Bold,
+    Extension=.ttf
+]{FiraCode}
+\setlength\partopsep{-\topsep}
+\addtolength\partopsep{-\parskip}
+\addtolength\partopsep{0.5cm}
+
+%List of Snippets
+\usepackage{tocloft}
+\newcommand{\listsnippets}{List of Code Snippets}
+\newlistof{snippet}{snip}{\listsnippets}
+\newcommand{\snippet}[1]{%
+    \refstepcounter{snippet}
+    \addcontentsline{snip}{snippet}{\protect\numberline{\thesnippet}#1}\par}
+\usepackage{tocbibind}
+\newcommand{\listofsnippets}{
+    \begingroup
+        \tocfile{\listsnippets}{snip}
+    \endgroup
+}
+\renewcommand\cftsnippetindent{\cftfigindent}
+
+%Tikz
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{fpu}
+\usetikzlibrary{spy}
+
+%Tikz Graphs
+\newcommand{\exampleLowSubintervals}{6}
+\newcommand{\exampleHighSubintervals}{60}
+\newcommand{\ruleEq}[1]{cos(#1 r)+1}
+\newcommand{\simpleEq}[1]{((#1+(2/3))^3 + 2*(#1)^2)/6}
+\newcommand{\complexEq}[1]{2*(sin((3)/(abs(#1)+.3) r)^2)}
+\newcommand{\normalEq}[1]{(10/sqrt(2*pi))*e^((-1/2)*((#1)^2))}
+\newcommand{\DerDerNormalEq}[1]{(\normalEq{#1})*((#1)^2 - 1)}
+\newcommand{\graphRule}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\ruleEq{\x}}) node[darkgray, align=left, right, yshift=0.5cm, xshift=-3.9cm] {\scriptsize \(f(x)\)};}
+\newcommand{\graphSimple}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\simpleEq{\x}}) node[darkgray, align=left, right, yshift=-0.2cm, xshift=-3.0cm] {\tiny\(f(x)\)};}
+\newcommand{\graphComplex}{\draw[darkgray, smooth, thick, samples=1500, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\complexEq{\x}}) node[darkgray, align=left, right, yshift=.15cm, xshift=-3.6cm] {\tiny\(f(x)\)};}
+\newcommand{\graphNormal}{\draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\normalEq{\x}}) node[darkgray, align=left, right, yshift=2.5cm, xshift=-3cm] {\small\(f(x)\)};}
+\newcommand{\graphDerDerNormal}{\draw[dashed, darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\DerDerNormalEq{\x}}) node[darkgray, align=left, right, yshift=-1.5cm, xshift=-3.3cm] {\small\(\sder{f(x)}\)};}
+\newcommand{\numline}[1]{
+    \draw[black, thick] ({\rightbound+.1}, -0.02) -- ({\leftbound-.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=.5cm] {\scriptsize \(x\)};
+    \foreach \x in  {#1} {
+        \draw[color=black] (\x, 3pt) -- (\x, -3pt) node[below]{\tiny \(\x\)};
+    }
+}
+
+% Quotes
+\usepackage[english]{babel}
+\usepackage[autostyle, english=american]{csquotes}
+\MakeOuterQuote{"}
+
+%Page Numbering
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage \hspace{1pt} of \pageref{mylastpage}}
+\setlength{\headheight}{15pt}
+
+%Equation Numbering
+\newcommand*\tageq{\refstepcounter{equation}\tag{\theequation}}
+
+%Derivative commands
+\newcommand{\der}[1]{\dfrac{d(#1)}{dx}}
+\newcommand{\derf}[2]{\dfrac{d(#1)}{dx}(#2)}
+\newcommand{\sder}[1]{\dfrac{d^2(#1)}{dx^2}}
+\newcommand{\sderf}[2]{\dfrac{d^2(#1)}{dx^2}(#2)}
+
 \endinput
