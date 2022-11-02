@@ -11,7 +11,7 @@
 
 \section{Introduction}
 \label{sec:intro}
-Integration is the process of calculating the area enclosed by a function (known as the integrand) over an interval.
+Integration is the process of calculating the area enclosed by a function (known as the integrand) over an interval via the calculation of the definite integral.
 This process is often done by hand using the Fundamental Theorem of Calculus, but can also by conducted by a computer.
 The means by which a computer conducts this operation is through a process called quadrature (also known as numerical integration).
 Quadrature is the process of fitting shapes of a known area to the integrand in order to closely approximate the area enclosed by the integrand.
@@ -19,7 +19,7 @@ This often involves splitting the interval into smaller \textit{subintervals}, a
 In the most basic methods of quadrature, these subintervals are of a fixed width, but it is possible to use subintervals of varying widths for the sake of computational efficiency.
 This is known as Adaptive Quadrature, and can be accomplished in a variety of ways.
 This paper seeks to compare an existing method of adaptive quadrature to one of my own design, and examine the effectiveness and efficiency of the two methods.
-
+% the aim of
 My interest in this topic was sparked when we first covered integrals in our IB AA SL coursework.
 In class we only covered two methods of quadrature, the \hyperref[sec:rect_rule]{Rectangle} and \hyperref[sec:trap_rule]{Trapezoid} Rules, but through consulting with my teacher and self-study, I quickly learned all about advanced methods such as \hyperref[sec:smps_rule]{Simpson's 1/3} and 3/8 Rules.
 I didn't have the opportunity to channel this passion until the IA, but have used this opportunity to deepen my knowledge of the means by which advanced methods operate and the pros and cons of different quadrature rules.
@@ -33,16 +33,14 @@ I also used this opportunity to include one of my passions, computer science, ap
 \label{sec:rect_rule}
 The most basic method---or rule---used in quadrature is splitting the interval into smaller subintervals and fitting rectangles beneath the curve.
 The height of each rectangle is based on the value of the function at one of its subinterval's bounds, which makes area easy to approximate to a reasonable degree of accuracy as shown by \cref{fig:rect_rule}.
-Since the area of a rectangle is extremely easy to calculate~(see \cref{eqn:rect_area}), this method is simple to implement over the entire function by summing the areas of each subinterval as demonstrated in \cref{eqn:rect_rule}.
+Since the area of a rectangle is extremely easy to calculate~(see \cref{eqn:rect_area}), this method is simple to implement over the entire function by summing the areas of each subinterval as demonstrated in \cref{eqn:rect_rule}.~\autocite{num_methods}
 %
-\begin{equation}
-    \label{eqn:rect_area}
-    A = l \cdot w
-\end{equation}
-\begin{equation}
-    \label{eqn:rect_rule}
-    \int_a^b f(x) dx \approx \sum_{j=1}^n (x_{j-1} - x_i) \cdot f(x_i + x_{j+1})
-\end{equation}
+\begin{gather*}
+A = w \cdot l \tageq\label{eqn:rect_area}                                                   \\
+h = (b - a) / 2                                                                             \\
+A_{rect 0} = h \cdot f(x_0)                                                                 \\
+    \int_a^b f(x) dx \approx h \cdot \sum^{n-1}_{j=0}f(x_j) \tageq\label{eqn:rect_rule}
+\end{gather*}
 %
 \subfile{graphs/rules/rect_rule}
 %
@@ -50,12 +48,13 @@ Since the area of a rectangle is extremely easy to calculate~(see \cref{eqn:rect
 \label{sec:trap_rule}
 An alternative means typically used in place of this method utilizes trapezoids instead of rectangles.
 Instead of picking a single point at which to base the height on, the trapezoid rule utilizes the value of the function at both the left and right bounds, and uses them to approximate a trapezoid under the curve.
-The equation for the Trapezoid Rule~(see \cref{eqn:trap_rule}) is only marginally more complicated than that of the Rectangle Rule~(see \cref{eqn:rect_rule}), but fits functions more closely, which provides significantly more accuracy as can be observed in in \cref{fig:trap_rule}.
+The equation for the Trapezoid Rule~(see \cref{eqn:trap_rule}) is only marginally more complicated than that of the Rectangle Rule~(see \cref{eqn:rect_rule}), but fits functions more closely, which provides significantly more accuracy as can be observed in in \cref{fig:trap_rule}.~\autocite{num_methods}
 %
-\begin{equation}
-    \label{eqn:trap_rule}
-    \int_a^b f(x) dx \approx \dfrac{b - a}{2n} \sum_{j=1}^n (f(x_{j-1})+f(x_{j}))
-\end{equation}
+\begin{gather*}
+    h = (b - a) / 2                                                                                     \\
+    A_{trap 0} = \frac{1}{2} h \cdot \left[f(x_0) + f(x_1)\right]                                       \\
+    \int_a^b f(x) dx \approx \frac{1}{2}h \cdot \sum^{n-1}_{j=0}2f(x_j) \tageq\label{eqn:trap_rule}
+\end{gather*}
 %
 \subfile{graphs/rules/trap_rule}
 %
@@ -72,14 +71,14 @@ In Simpson's 1/3 Rule, this method is used to construct more easily integrated p
 %
 \begin{equation}
     \label{eqn:lagrange}
-    P(x) = \sum_{j=1}^n y_j \prod_{\substack{k = 1 \\ k \neq j}}^n \dfrac{x - x_k}{x_j - x_k}
+    P(x) = \sum_{j=1}^n f(x_j) \prod_{\substack{k = 1 \\ k \neq j}}^n \frac{x - x_k}{x_j - x_k}
 \end{equation}
 %
 Expanding \cref{eqn:lagrange} with the points \(m\), \(a\), and \(b\) for midpoint, left-bound, and right-bounds respectively produces \cref{eqn:lagrange_smps}.
 %
 \begin{equation}
     \label{eqn:lagrange_smps}
-    P(x) = f(a) \dfrac{(x - m)(x - b)}{(a - m)(a - b)} + f(m) \dfrac{(x - a)(x - b)}{(m - a)(m - b)} + f(b) \dfrac{(x - a)(x - m)}{(b - a)(b - m)}
+    P(x) = f(a) \frac{(x - m)(x - b)}{(a - m)(a - b)} + f(m) \frac{(x - a)(x - b)}{(m - a)(m - b)} + f(b) \frac{(x - a)(x - m)}{(b - a)(b - m)}
 \end{equation}
 %
 As \(m\) represents the midpoint \((a + b) / 2\), this can be restated in terms of \(a\) and \(b\) as demonstrated in \cref{eqn:lagrange_smps_ab}.
@@ -88,21 +87,21 @@ As \(m\) represents the midpoint \((a + b) / 2\), this can be restated in terms 
     \label{eqn:lagrange_smps_ab}
     \resizebox{.9\textwidth}{!} 
     {
-    $P(x) = f(a) \dfrac{\left(x - \dfrac{a+b}{2}\right)\biggl(x - b\biggr)}{\left(a - \dfrac{a+b}{2}\right)\biggl(a - b\biggr)} + f\left(\dfrac{a+b}{2}\right) \dfrac{\biggl(x - a\biggr)\biggl(x - b\biggr)}{\left(\dfrac{a+b}{2} - a\right)\left(\dfrac{a+b}{2} - b\right)} + f(b) \dfrac{\biggl(x - a\biggr)\left(x - \dfrac{a+b}{2}\right)}{\biggl(b - a\biggr)\left(b - \dfrac{a+b}{2}\right)}$
+    $P(x) = f(a) \frac{\left(x - \frac{a+b}{2}\right)\biggl(x - b\biggr)}{\left(a - \frac{a+b}{2}\right)\biggl(a - b\biggr)} + f\left(\frac{a+b}{2}\right) \frac{\biggl(x - a\biggr)\biggl(x - b\biggr)}{\left(\frac{a+b}{2} - a\right)\left(\frac{a+b}{2} - b\right)} + f(b) \frac{\biggl(x - a\biggr)\left(x - \frac{a+b}{2}\right)}{\biggl(b - a\biggr)\left(b - \frac{a+b}{2}\right)}$
     }
 \end{equation}
 %
 Utilizing integration by substitution, \cref{eqn:lagrange_smps_ab} can be integrated into the form expressed in \cref{eqn:smps_rule}, which is the equation for Simpson's Rule.
 %
 \begin{gather*}
-    \int_a^b P(x) dx = \dfrac{b - a}{6} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]                                      \\
-    \dfrac{b - a}{2} = h                                                                                                                \\
+    \int_a^b P(x) dx = \frac{b - a}{6} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]                                      \\
+    \frac{b - a }{2} = h                                                                                                                \\
 \end{gather*}
 \vspace*{-1.2cm}
 \begin{align*}
-    \int_a^b P(x) dx &= \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]                                         \\
+    \int_a^b P(x) dx &= \frac{h}{3} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]                                         \\
     \int_a^b f(x) dx & \approx \int_a^b P(x) dx                                                                                         \\
-    \int_a^b f(x) dx & \approx \dfrac{h}{3} \left[f(a) + 4f\left(\dfrac{a + b}{2}\right) + f(b)\right]  \tageq\label{eqn:smps_rule}
+    \int_a^b f(x) dx & \approx \frac{h}{3} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]  \tageq\label{eqn:smps_rule}
 \end{align*}
 %
 \cref{eqn:smps_rule} gives an approximate value for the integral of the subinterval using a single polynomial function.
@@ -111,14 +110,14 @@ Expressed mathematically, the equation for the approximate value of the interval
 %
 \begin{equation}
     \label{eqn:composite_smps_rule}
-    \int_a^b f(x) dx \approx \dfrac{h}{3} \sum_{j=1}^{n / 2} \biggl[f(x_{2j-2}) + 4f(x_{2j-1}) + f(x_{2j})\biggr]
+    \int_a^b f(x) dx \approx \frac{h}{3} \sum_{j=1}^{n / 2} \biggl[f(x_{2j-2}) + 4f(x_{2j-1}) + f(x_{2j})\biggr]
 \end{equation}
 %
 %\cref{eqn:composite_smps_rule} can be expressed in the form of \cref{eqn:smplfd_composite_smps_rule} for computational efficiency.
 %
 %\begin{equation}
 %    \label{eqn:smplfd_composite_smps_rule}
-%    \int_a^b f(x) dx \approx \dfrac{h}{3} \left[f(a) + 4 \sum_{j=1}^{n / 2} f(x_{2j-2}) + 2  \sum_{j=1}^{n / 2 - 1} f(x_{2j}) + f(b)\right]
+%    \int_a^b f(x) dx \approx \frac{h}{3} \left[f(a) + 4 \sum_{j=1}^{n / 2} f(x_{2j-2}) + 2  \sum_{j=1}^{n / 2 - 1} f(x_{2j}) + f(b)\right]
 %\end{equation}
 %
 \subsection{Effectiveness}
@@ -156,13 +155,14 @@ I seek to propose an alternative means of calculating a complexity value and to 
 \subsection{My Method}
 \label{sec:my_method}
 Because 2nd degree polynomials---which Simpson's 1/3 Rule uses---fit consistent curves well and only encounter difficulty when the curve changes over the course of the subinterval~(see \cref{fig:concavities}), my function for complexity will operate via detecting changes in curvature.
-In order to accomplish this, my function~(see \cref{eqn:complexity}) finds the absolute value of the difference between the second derivatives of the two bounds.
+In order to accomplish this, my function~(see \cref{eqn:complexity}) finds the absolute value of the difference between the second derivatives of the two bounds.\\
+\emph{In order to avoid confusion with the use of absolute value and derivative notation, the following will use the notation \(f''(a)\) to indicate the same as \(\left.\frac{d^2f}{dx^2}\right|_{x=a}\)}
 %
 \subfile{graphs/concavity/concavity}
 %
 \begin{equation}
     \label{eqn:complexity}
-    c(a, b) = \left|\sderf{f(x)}{b} - \sderf{f(x)}{a}\right|
+    c(a, b) = \left|f''(b) - f''(a)\right|
 \end{equation}
 %
 The value of calculating using \cref{eqn:complexity} is then---similarly to in the established method---compared to a defined threshold value, and if it exceeds it, the subdivision is split in two and the process is repeated for each.
@@ -201,15 +201,15 @@ In order to mitigate this issue, the value considered "correct" was calculated w
 %
 \begin{equation}
     \label{eqn:normal}
-    f(x) = \dfrac{10}{\sqrt{2\pi}}e^{-\dfrac{x^2}{2}}
+    f(x) = \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}
 \end{equation}
 %
 In order to use my method, the second derivative of \cref{eqn:normal} must be calculated and hard coded into my program as in \cref{lst:rust_functions}.
 %
 \begin{align*}
-    \der{f(x)} &= \dfrac{10}{\sqrt{2\pi}}e^{-\dfrac{x^2}{2}} \cdot \der{-\dfrac{x^2}{2}}\\
-    &= \dfrac{10}{\sqrt{2\pi}}e^{-\dfrac{x^2}{2}} \cdot \left(-\dfrac{1}{2} \cdot 2x\right)\\
-    &= -x \cdot \dfrac{10}{\sqrt{2\pi}}e^{-\dfrac{x^2}{2}}\\
+    \der{f(x)} &= \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \cdot \der{-\frac{x^2}{2}}\\
+    &= \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \cdot \left(-\frac{1}{2} \cdot 2x\right)\\
+    &= -x \cdot \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\\
     \der{f(x)} &= -x \cdot f(x)
 \end{align*}
 \begin{align*}
@@ -218,7 +218,7 @@ In order to use my method, the second derivative of \cref{eqn:normal} must be ca
     &= (-x) \cdot (-x \cdot f(x)) + (-1) \cdot f(x)\\
     &= -x^2f(x) + -f(x)\\
     &= f(x)(x^2-1)\\
-    \sder{f(x)} &= \dfrac{10(x^2 - 1)}{\sqrt{2\pi}}e^{-\dfrac{x^2}{2}} \tageq\label{eqn:2nd_derivative_normal}
+    \sder{f(x)} &= \frac{10(x^2 - 1)}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \tageq\label{eqn:2nd_derivative_normal}
 \end{align*}
 %
 Using the program, my method and the established method subdivide the function as shown in \cref{fig:my_adpt_subdiv,fig:other_adpt_subdiv} respectively.

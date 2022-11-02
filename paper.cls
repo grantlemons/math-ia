@@ -133,7 +133,7 @@
 %Tikz Graphs
 \newcommand{\exampleLowSubintervals}{6}
 \newcommand{\exampleHighSubintervals}{60}
-\newcommand{\ruleEq}[1]{cos(#1 r)+1}
+\newcommand{\ruleEq}[1]{cos(#1 + 2 r)+1}
 \newcommand{\simpleEq}[1]{((#1+(2/3))^3 + 2*(#1)^2)/6}
 \newcommand{\complexEq}[1]{2*(sin((3)/(abs(#1)+.3) r)^2)}
 \newcommand{\normalEq}[1]{(10/sqrt(2*pi))*e^((-1/2)*((#1)^2))}
@@ -165,9 +165,9 @@
 \newcommand*\tageq{\refstepcounter{equation}\tag{\theequation}}
 
 %Derivative commands
-\newcommand{\der}[1]{\dfrac{d(#1)}{dx}}
-\newcommand{\derf}[2]{\dfrac{d(#1)}{dx}(#2)}
-\newcommand{\sder}[1]{\dfrac{d^2(#1)}{dx^2}}
-\newcommand{\sderf}[2]{\dfrac{d^2(#1)}{dx^2}(#2)}
+\newcommand{\der}[1]{\frac{d(#1)}{dx}}
+\newcommand{\derf}[2]{\frac{d(#1)}{dx}(#2)}
+\newcommand{\sder}[1]{\frac{d^2(#1)}{dx^2}}
+\newcommand{\sderf}[2]{\frac{d^2(#1)}{dx^2}(#2)}
 
 \endinput
