@@ -35,7 +35,11 @@ clean:
 	@${copy_pdf}
 	@echo "Cleaning up..."
 	@rm -r build || true
-	@rm	${FILENAME}.{aux,bbl,bcf,blg,fdb_latexmk,fls,log,out,run.xml,xdv} xelatex* x.log || true
+	@rm ${FILENAME}.{aux,bbl,bcf,blg,fdb_latexmk,fls,log,out,run.xml,xdv} xelatex* x.log || true
+
+gitclean:
+	@echo "Cleaning up ignored files..."
+	@git clean -fXd
 
 define copy_pdf
 	echo "Copying PDF"
