@@ -4,7 +4,7 @@
 COMPILER = xelatex
 OUTPUT = build
 FILENAME = IA
-OPTIONS = -interaction=nonstopmode -output-directory=${OUTPUT}
+OPTIONS = -shell-escape -interaction=nonstopmode -output-directory=${OUTPUT}
 
 all: build bib build clean
 
