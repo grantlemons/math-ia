@@ -93,7 +93,7 @@
 \usepackage[bottom]{footmisc}
 
 %Code Snippets
-\usepackage{minted}
+\usepackage[outputdir=build]{minted}
 \usepackage{xcolor}
 \usemintedstyle{bw}
 \usepackage{fontspec}
