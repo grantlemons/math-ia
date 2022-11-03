@@ -3,7 +3,7 @@
 
 COMPILER = xelatex
 OUTPUT = build
-FILENAME = IA
+FILENAME = math-ia
 OPTIONS = -shell-escape -interaction=nonstopmode -output-directory=${OUTPUT}
 
 all: build bib build clean
