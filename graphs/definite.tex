@@ -1,0 +1,23 @@
+\documentclass[../IA.tex]{subfiles}
+
+\begin{document}
+
+\newcommand{\leftbound}{0}
+\newcommand{\rightbound}{6}
+
+\begin{figure}[hb]
+    \centering
+    \resizebox{.7\textwidth}{!}{
+        \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}]
+            \fill [gray, thin, pattern=north west lines, pattern color=gray, samples=100, domain=\leftbound:\rightbound, variable=\x] (\leftbound, 0) -- plot(\x, {\ruleEq{\x}}) -- (\rightbound, 0);
+            \draw [gray, thin] (\leftbound, {\ruleEq{\leftbound}}) -- (\leftbound, 0);
+            \draw [gray, thin] (\rightbound, {\ruleEq{\rightbound}}) -- (\rightbound, 0);
+            \numline{\leftbound, ..., \rightbound}
+            \graphRule
+        \end{tikzpicture}
+    }
+    \vspace{-.4cm}
+    \caption{A sketch showing the effectiveness of definite integration on a simple function}
+    \label{fig:definite_integration}
+\end{figure}
+\end{document}

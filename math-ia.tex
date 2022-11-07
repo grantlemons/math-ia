@@ -29,8 +29,35 @@ I also used this opportunity to include one of my passions, computer science, ap
 
 \section{Background}
 \label{sec:background}
-% \subsection{Notation}
-% \label{sec:notation}
+\subsection{Definite Integrals}
+\label{sec:definite}
+For integrable functions, the area enclosed by a function over an interval can be found through taking the \emph{definite integral} of the function.
+The value obtained through definite integration is exact, having no error.
+
+For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\), and the \(x\)-axis can be found exactly through the process between \crefrange{eqn:def_int_first_eqn}{eqn:def_int_result}.
+%
+\begin{equation}
+    f(x) = \cos(x + 2) + 1
+    \label{eqn:rule_eqn}
+\end{equation}
+%
+\begin{gather*}
+    A = \int_0^6 \cos(x + 2) + 1 dx         \tageq\label{eqn:def_int_first_eqn}                 \\
+    u = x + 2                                                                                   \\
+    \frac{du}{dx} = 1                                                                           \\
+    \frac{du}{1} = dx
+\end{gather*}
+\begin{align}
+    A                                   &=      \int_{x=0}^{x=6} \cos(u) + 1 du                 \\
+    \int_{x=0}^{x=6} \cos(u) + 1 du     &=      \left[ \sin(u) + x \right]_{x=0}^{x=6}          \\
+                                        &=      \left[ \sin(x + 2) + x \right]_0^6              \\
+                                        &=      (\sin(6 + 2) + 6) - (\sin(0 + 2) + 0)           \\
+                                        &=      \sin(8) - \sin(2) + 6                           \\
+    A                                   &=      6.0800608198    \tageq\label{eqn:def_int_result}
+\end{align}
+%
+\subfile{graphs/definite}
+%
 \subsection{Rectangle Rule}
 \label{sec:rect_rule}
 The most basic method---or rule---used in quadrature is splitting the interval into smaller subintervals and fitting rectangles beneath the curve.
