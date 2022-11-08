@@ -239,12 +239,12 @@ In order to use my method, the second derivative of \cref{eqn:normal} must be ca
     \der{f(x)} &= -x \cdot f(x)
 \end{align*}
 \begin{align*}
-    \sder{f(x)} &= \der{-x \cdot f(x)}\\
+    \sder{x} &= \der{-x \cdot f(x)}\\
     &= (-x) \cdot \der{f(x)} + \der{-x} \cdot f(x)\\
     &= (-x) \cdot (-x \cdot f(x)) + (-1) \cdot f(x)\\
     &= -x^2f(x) + -f(x)\\
     &= f(x)(x^2-1)\\
-    \sder{f(x)} &= \frac{10(x^2 - 1)}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \tageq\label{eqn:2nd_derivative_normal}
+    \sder{x} &= \frac{10(x^2 - 1)}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \tageq\label{eqn:2nd_derivative_normal}
 \end{align*}
 %
 Using the program, my method and the established method subdivide the function as shown in \cref{fig:my_adpt_subdiv,fig:other_adpt_subdiv} respectively.
