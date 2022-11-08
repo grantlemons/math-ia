@@ -34,7 +34,7 @@ I also used this opportunity to include one of my passions, computer science, ap
 For integrable functions, the area enclosed by a function over an interval can be found through taking the \emph{definite integral} of the function.
 The value obtained through definite integration is exact, having no error.
 
-For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\), and the \(x\)-axis can be found exactly through the process between \crefrange{eqn:def_int_first_eqn}{eqn:def_int_result}.
+For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\), and the \(x\)-axis can be found exactly through the process in \crefrange{eqn:def_int_first_eqn}{eqn:def_int_result}.
 %
 \begin{equation}
     f(x) = \cos(x + 2) + 1
@@ -42,21 +42,27 @@ For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\),
 \end{equation}
 %
 \begin{gather*}
-    A = \int_0^6 \cos(x + 2) + 1 dx         \tageq\label{eqn:def_int_first_eqn}                 \\
-    u = x + 2                                                                                   \\
-    \frac{du}{dx} = 1                                                                           \\
-    \frac{du}{1} = dx
+    A = \int_0^6 \cos(x + 2) + 1 \,dx                                       \tageq\label{eqn:def_int_first_eqn}             \\
+    u = x + 2                                                                                                               \\
+    \frac{du}{dx} = 1                                                                                                       \\
+    du = dx
 \end{gather*}
-\begin{align}
-    A                                   &=      \int_{x=0}^{x=6} \cos(u) + 1 du                 \\
-    \int_{x=0}^{x=6} \cos(u) + 1 du     &=      \left[ \sin(u) + x \right]_{x=0}^{x=6}          \\
-                                        &=      \left[ \sin(x + 2) + x \right]_0^6              \\
-                                        &=      (\sin(6 + 2) + 6) - (\sin(0 + 2) + 0)           \\
-                                        &=      \sin(8) - \sin(2) + 6                           \\
-    A                                   &=      6.0800608198    \tageq\label{eqn:def_int_result}
-\end{align}
+\begin{align*}
+    A                                                   &=      \int_{x=0}^{x=6} \cos(u) \,du + \int_0^6 1 \,dx             \\
+    \int_{x=0}^{x=6} \cos(u) \,du + \int_0^6 1 \,dx     &=      \left[ \sin(u)\right]_{x=0}^{x=6} + \left[ x \right]_0^6    \\
+                                                        &=      \left[ \sin(x + 2) + x \right]_0^6                          \\
+                                                        &=      (\sin(6 + 2) + 6) - (\sin(0 + 2) + 0)                       \\
+                                                        &=      \sin(8) - \sin(2) + 6                                       \\
+    A                                                   &=      6.0800608198    \tageq\label{eqn:def_int_result}
+\end{align*}
+%
+This result is exact, meaning that it fits the function \(f(x)\) perfectly as shown in \cref{fig:definite_integration}.
 %
 \subfile{graphs/definite}
+%
+This value is useful when evaluating methods of quadrature, as it allows us to have a "true" value to compare the result of each method to.
+Of course, definite integration has its limits: it needs to be performed by hand, it can be challenging with certain functions, and is impossible for a few functions.
+Because of this, quadrature can be used as a substitute to approximate the "true" value as closely as possible.
 %
 \subsection{Rectangle Rule}
 \label{sec:rect_rule}
@@ -68,7 +74,7 @@ Since the area of a rectangle is extremely easy to calculate~(see \cref{eqn:rect
     A = w \cdot l \tageq\label{eqn:rect_area}                                           \\
     h = (b - a) / 2                                                                     \\
     A_{0} = h \cdot f(x_0)                                                         \\
-    \int_a^b f(x) dx \approx h \cdot \sum^{n-1}_{j=0}f(x_j) \tageq\label{eqn:rect_rule}
+    \int_a^b f(x) \,dx \approx h \cdot \sum^{n-1}_{j=0}f(x_j) \tageq\label{eqn:rect_rule}
 \end{gather*}
 %
 \subfile{graphs/rules/rect_rule}
@@ -82,7 +88,7 @@ The equation for the Trapezoid Rule~(see \cref{eqn:trap_rule}) is only marginall
 \begin{gather*}
     h = (b - a) / 2                                                                                 \\
     A_{0} = \frac{1}{2} h \cdot \left[f(x_0) + f(x_1)\right]                                   \\
-    \int_a^b f(x) dx \approx \frac{1}{2}h \cdot \sum^{n-1}_{j=0}2f(x_j) \tageq\label{eqn:trap_rule}
+    \int_a^b f(x) \,dx \approx \frac{1}{2}h \cdot \sum^{n-1}_{j=0}2f(x_j) \tageq\label{eqn:trap_rule}
 \end{gather*}
 %
 \subfile{graphs/rules/trap_rule}
@@ -123,14 +129,14 @@ As \(m\) represents the midpoint \((a + b) / 2\), this can be restated in terms 
 Utilizing integration by substitution, \cref{eqn:lagrange_smps_ab} can be integrated into the form expressed in \cref{eqn:smps_rule}, which is the equation for Simpson's Rule.
 %
 \begin{gather*}
-    \int_a^b P(x) dx = \frac{b - a}{6} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]                                      \\
+    \int_a^b P(x) \,dx = \frac{b - a}{6} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]                                      \\
     \frac{b - a }{2} = h                                                                                                                \\
 \end{gather*}
 \vspace*{-1.2cm}
 \begin{align*}
-    \int_a^b P(x) dx &= \frac{h}{3} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]                                         \\
-    \int_a^b f(x) dx & \approx \int_a^b P(x) dx                                                                                         \\
-    \int_a^b f(x) dx & \approx \frac{h}{3} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]  \tageq\label{eqn:smps_rule}
+    \int_a^b P(x) \,dx &= \frac{h}{3} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]                                         \\
+    \int_a^b f(x) \,dx & \approx \int_a^b P(x) \,dx                                                                                     \\
+    \int_a^b f(x) \,dx & \approx \frac{h}{3} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]  \tageq\label{eqn:smps_rule}
 \end{align*}
 %
 \cref{eqn:smps_rule} gives an approximate value for the integral of the subinterval using a single polynomial function.
@@ -139,15 +145,8 @@ Expressed mathematically, the equation for the approximate value of the interval
 %
 \begin{equation}
     \label{eqn:composite_smps_rule}
-    \int_a^b f(x) dx \approx \frac{h}{3} \sum_{j=1}^{n / 2} \biggl[f(x_{2j-2}) + 4f(x_{2j-1}) + f(x_{2j})\biggr]
+    \int_a^b f(x) \,dx \approx \frac{h}{3} \sum_{j=1}^{n / 2} \biggl[f(x_{2j-2}) + 4f(x_{2j-1}) + f(x_{2j})\biggr]
 \end{equation}
-%
-%\cref{eqn:composite_smps_rule} can be expressed in the form of \cref{eqn:smplfd_composite_smps_rule} for computational efficiency.
-%
-%\begin{equation}
-%    \label{eqn:smplfd_composite_smps_rule}
-%    \int_a^b f(x) dx \approx \frac{h}{3} \left[f(a) + 4 \sum_{j=1}^{n / 2} f(x_{2j-2}) + 2  \sum_{j=1}^{n / 2 - 1} f(x_{2j}) + f(b)\right]
-%\end{equation}
 %
 \subsection{Effectiveness}
 \label{sec:effectiveness}
