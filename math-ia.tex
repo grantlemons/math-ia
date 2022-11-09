@@ -211,9 +211,9 @@ In order to compare the two methods, I created a program that obtains the subdiv
 %
 The two methods, in terms of number of operations per subinterval are extremely similar.
 The primary only difference between the two is that the established method calls the trapezoid rule~(see \cref{lst:rust_rules}), while my method calls the complexity function~(see \cref{lst:rust_helpers}).
-Even within the two methods called, the number of operations perfomed is extremely similar.
-In the trapezoid rule function, two calls to the function \(f(x)\) are made and four additional arithmatic operations are performed.
-On the other hand, using the complexity function, two calls to the function \(f(x)\) are made, and seven additional arithmatic operations are performed.
+Even within the two methods called, the number of operations performed is extremely similar.
+In the trapezoid rule function, two calls to the function \(f(x)\) are made and four additional arithmetic operations are performed.
+On the other hand, using the complexity function, two calls to the function \(f(x)\) are made, and seven additional arithmetic operations are performed.
 This means that per subinterval, my method performs three more arithmetic operations than the existing method.
 Although this is proportional to the number of subintervals, considering the extreme speed of an arithmetic operation, there is very little difference in performance between the methods.
 The major downside to my method is that it requires the user to calculate the second derivative by hand before using the method.
@@ -257,7 +257,7 @@ Since the Trapezoid Rule does not perform well at the most curved sections and S
 It is hard to compare the overall accuracy of the two methods, as the thresholds are completely different, but I've picked two thresholds that have a similar number of subdivisions.
 When calculating the enclosed area of the interval \(-4\) to \(4\), using a threshold of \(0.002\) for the established method gave a value of \(9.999367\), which has an error of \(0.000210\%\), while using a threshold of \(0.4\) for my method gave a value of \(9.999754\), which has an error of \(0.004082\%\).
 
-Suprisingly, in this case my method was less accurate than the existing method, despite using 30 more arithmetic operations.
+Surprisingly, in this case my method was less accurate than the existing method, despite using 30 more arithmetic operations.
 In addition, my method required the manual calculation of the second derivative of the integrand.
 
 \section{Conclusion}
@@ -272,7 +272,7 @@ Regardless of which performed better, both methods were extremely effective. An 
 This low error was accomplished with only 40 subintervals, which is significantly less than would have been needed had this function been evaluated in a non-adaptive manner.
 
 A further investigation could consider the effectiveness of the two methods on more complex functions.
-Although my method performed more poorly than the established one on this particular function, this could be attributed to the portion of the function at which the change in curvature was greatest being the simplist portion of the whole.
+Although my method performed more poorly than the established one on this particular function, this could be attributed to the portion of the function at which the change in curvature was greatest being the simplest portion of the whole.
 
 \label{mylastpage}
 \newpage
