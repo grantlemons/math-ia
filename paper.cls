@@ -157,6 +157,11 @@
 
 %Page Numbering
 \pagestyle{fancy}
+\fancypagestyle{frontorback}{%
+    \fancyhf{}
+    \fancyhead[R]{\thepage}
+    \setlength{\headheight}{15pt}
+}
 \fancyhf{}
 \fancyhead[R]{\thepage \hspace{1pt} of \pageref{mylastpage}}
 \setlength{\headheight}{15pt}

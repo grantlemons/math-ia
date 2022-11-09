@@ -2,8 +2,9 @@
 
 \begin{document}
 \insertTitlePage
+\pagenumbering{roman}
 \tableofcontents
-\thispagestyle{empty}
+\thispagestyle{frontorback}
 \newpage
 \setcounter{page}{1}
 \pagenumbering{arabic}
@@ -78,8 +79,8 @@ Since the area of a rectangle is extremely easy to calculate~(see \cref{eqn:rect
     \int_a^b f(x) \,dx \approx h \cdot \sum^{n-1}_{j=0}f(x_j) \tageq\label{eqn:rect_rule}
 \end{gather*}
 %
-The subscripts within the summation refer to the index of the \(x\)-value within a set of subinterval boundaries (i.e. \(x_n = a + h \ cdot n\)).
-For instance, in \cref{fig:rect_rule}, the set is \({0, 1.2, 2.4, 3.6, 4.8, 6}\), and as such, \(x_1\) is equivalent to \(1.2\).
+The subscripts within the summation refer to the index of the \(x\)-value within a set of subinterval boundaries (i.e. \(x_n = a + h \cdot n\)).
+For instance, in \cref{fig:rect_rule}, the set is \(\{0, 1.2, 2.4, 3.6, 4.8, 6\}\), and as such, \(x_1\) is equivalent to \(1.2\).
 Note that the set is zero-indexed, meaning the "first" value is at an index of \(0\).
 Keep this notation in mind, as it will be used in future rule equations.
 %
@@ -313,6 +314,7 @@ Although my method performed more poorly than the established one on this partic
 
 \label{mylastpage}
 \newpage
+\pagenumbering{Roman}
 \listoffigures
 \vspace{1cm}
 \listofsnippets
@@ -320,5 +322,6 @@ Although my method performed more poorly than the established one on this partic
 \phantomsection
 \addcontentsline{toc}{section}{References}
 \printbibliography
-\thispagestyle{empty}
+\thispagestyle{frontorback}
 \end{document}
+
