@@ -29,7 +29,7 @@
             \graphRule
 
             \pgfmathsetmacro\SX{3.5}
-            \coordinate (S) at (\SX, {cos(\SX r) + 1 - 0.03});
+            \coordinate (S) at (\SX, {\ruleEq{\SX}-0.03});
             \coordinate (SA) at ({\SX+.25}, -1.4);
             \spy [darkgray] on (S) in node [right] at (SA);
         \end{tikzpicture}
