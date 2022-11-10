@@ -13,7 +13,7 @@
 \section{Introduction}
 \label{sec:intro}
 Integration is the process of calculating the area enclosed by a function (known as the integrand) over an interval via the calculation of the definite integral.
-This process is often done by hand using the Fundamental Theorem of Calculus, but can also by conducted by a computer.
+This process is often done by hand using techniques such as the Fundamental Theorem of Calculus (see \cref{sec:definite}), but can be approximated by a computer.
 The means by which a computer conducts this operation is through a process called quadrature (also known as numerical integration).
 Quadrature is the process of fitting shapes of a known area to the integrand in order to closely approximate the area enclosed by the integrand.
 This often involves splitting the interval into smaller \textit{subintervals}, and summing the approximate areas of each.
@@ -22,7 +22,7 @@ This is known as Adaptive Quadrature, and can be accomplished in a variety of wa
 The aim of this paper is to compare an existing method of adaptive quadrature to one of my own design, and examine the effectiveness and efficiency of the two methods.
 
 My interest in this topic was sparked when we first covered integrals in our IB AA SL coursework.
-In class we only covered two methods of quadrature, the \hyperref[sec:rect_rule]{Rectangle} and \hyperref[sec:trap_rule]{Trapezoid} Rules, but through consulting with my teacher and self-study, I quickly learned all about advanced methods such as \hyperref[sec:smps_rule]{Simpson's 1/3} and 3/8 Rules.
+In class we only covered the \hyperref[sec:rect_rule]{Rectangle Rule} and briefly mentioned the \hyperref[sec:trap_rule]{Trapezoid Rule}, but through consulting with my teacher and self-study, I quickly learned all about advanced methods such as \hyperref[sec:smps_rule]{Simpson's 1/3} and 3/8 Rules.
 I didn't have the opportunity to channel this passion until the IA, but have used this opportunity to deepen my knowledge of the means by which advanced methods operate and the pros and cons of different quadrature rules.
 I also used this opportunity to include one of my passions, computer science, applying it in a useful manner to contribute to my understanding and this investigation.
 
@@ -33,7 +33,7 @@ I also used this opportunity to include one of my passions, computer science, ap
 \subsection{Definite Integrals}
 \label{sec:definite}
 For integrable functions, the area enclosed by a function over an interval can be found through taking the \emph{definite integral} of the function.
-The value obtained through definite integration is exact, having no error.
+The value obtained through definite integration is exact, having no error other than that from rounding.
 
 For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\), and the \(x\)-axis can be found exactly through the process in \crefrange{eqn:def_int_first_eqn}{eqn:def_int_result}.
 %
@@ -44,7 +44,7 @@ For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\),
 %
 \begin{gather*}
     A = \int_0^6 \cos(x + 2) \,dx + \int_0^6 1 \,dx                             \tageq\label{eqn:def_int_first_eqn}         \\
-    u = x + 2                                                                                                               \\
+    \text{let } u = x + 2                                                                                                               \\
     \frac{du}{dx} = 1                                                                                                       \\
     du = dx
 \end{gather*}
@@ -64,6 +64,8 @@ This result is exact, meaning that it fits the function \(f(x)\) perfectly as sh
 This calculated value is useful when evaluating methods of quadrature, as it allows us to have a "true" value to compare the result of each method to.
 Of course, definite integration has its limits: it needs to be performed by hand, it can be challenging with certain functions, and is impossible for a few functions.
 Because of this, quadrature can be used as a substitute to approximate the "true" value as closely as possible.
+
+\cref{eqn:rule_eqn} will be used to demonstrate the comparitive effectiveness of each method of quadrature when discussed in following sections for the sake of comparison to the calculated value and calculated of error percentage.
 %
 \subsection{Rectangle Rule}
 \label{sec:rect_rule}
@@ -73,32 +75,33 @@ Since the area of a rectangle is extremely easy to calculate~(see \cref{eqn:rect
 %
 \begin{gather*}
     \text{let } n = \text{number of subdivisions}                                        \\
-    A = w \cdot l \tageq\label{eqn:rect_area}                                           \\
-    h = (b - a) / n                                                                     \\
-    A_{0} = h \cdot f(x_0)                                                              \\
-    \int_a^b f(x) \,dx \approx h \cdot \sum^{n-1}_{j=0}f(x_j) \tageq\label{eqn:rect_rule}
+    A_{r} = w \cdot l \tageq\label{eqn:rect_area}                                           \\
+    % h = (b - a) / n                                                                     \\
+    A_{r_{0}} = h \cdot f(x_0)                                                              \\
+    \int_a^b f(x) \,dx \approx h \cdot \sum^{n_s-1}_{j=0}f(x_j) \tageq\label{eqn:rect_rule}
 \end{gather*}
 %
-The subscripts within the summation refer to the index of the \(x\)-value within a set of subinterval boundaries (i.e. \(x_n = a + h \cdot n\)).
+The subscripts within the summation refer to the index of the \(x\)-value within a set of subinterval boundaries (i.e. \(x_n = a + h \cdot n_s\)).
 For instance, in \cref{fig:rect_rule}, the set is \(\{0, 1.2, 2.4, 3.6, 4.8, 6\}\), and as such, \(x_1\) is equivalent to \(1.2\).
+
 Note that the set is zero-indexed, meaning the "first" value is at an index of \(0\).
 Keep this notation in mind, as it will be used in future rule equations.
 %
 \subfile{graphs/rules/rect_rule}
 %
-Applying the Rectangle Rule on \cref{rule_eq} with 5 subdivisions (\(n\)) (as in \cref{fig:rect_rule}), the calculations are as follows.
+Applying the Rectangle Rule on \cref{rule_eq} with 5 subdivisions (represented by \(n_s\)) (as in \cref{fig:rect_rule}), the calculations are as follows.
 \begin{gather*}
     \text{let } n = 5                                 \tageq\label{eqn:rect_example_first}           \\
     \text{let } a = 0                                                                                \\
     \text{let } b = 6                                                                                
 \end{gather*}
 \begin{align*}
-    h &= (b - a) / n                                                                                \\
+    % h &= (b - a) / n                                                                                \\
     h &= (6 - 0) / 5                                                                                \\
     h &= \frac{6}{5}                                                                                
 \end{align*}
 \begin{align*}
-    \int_a^b f(x) \,dx      &\approx    h \cdot \sum^{n-1}_{j=0}f(x_j)                              \\
+    \int_a^b f(x) \,dx      &\approx    h \cdot \sum^{n_s-1}_{j=0}f(x_j)                            \\
                             &\approx    \frac{6}{5} \cdot [f(0) + f(1.2) + ... + f(4.8)]            \\
                             &\approx    \frac{6}{5} \cdot 4.923188887                               \\
                             &\approx    5.907826664                                                 
@@ -116,11 +119,12 @@ One such rule is the Trapezoid Rule.
 \subsection{Trapezoid Rule}
 \label{sec:trap_rule}
 The Trapezoid Rule is an alternative means typically used in place of the Rectangle Rule utilizes trapezoids instead of rectangles.
-Instead of picking a single point at which to base the height on, the Trapezoid Rule utilizes the value of the function at both the left and right bounds, and uses them to approximate a trapezoid under the curve.
-The equation for the Trapezoid Rule~(see \cref{eqn:trap_rule}) is only marginally more complicated than that of the Rectangle Rule~(see \cref{eqn:rect_rule}), but fits functions more closely, which provides significantly more accuracy as can be observed in in \cref{fig:trap_rule}.\autocite{num_methods}
+Instead of picking a single point at which to base the height on, the Trapezoid Rule utilizes the value of the function at both the left and right bounds, and uses them to construct a trapezoid under the curve.
+This has the advantage that it can better account for slope in the integrand.
+The equation for the Trapezoid Rule~(see \cref{eqn:trap_rule}) is only marginally more complicated than that of the Rectangle Rule~(see \cref{eqn:rect_rule}), but fits functions more closely, which provides significantly more accuracy as can be observed in in \cref{fig:trap_rule}.
 %
 \begin{gather*}
-    h = (b - a) / 2                                                                                                 \\
+    % h = (b - a) / 2                                                                                                 \\
     A_{0} = \frac{1}{2} h \cdot \left[f(x_0) + f(x_1)\right]                                                        \\
     \int_a^b f(x) \,dx \approx \frac{1}{2}h \cdot \sum^{n}_{j=1}[f(x_{j-1}) + f(x_j)] \tageq\label{eqn:trap_rule} 
 \end{gather*}
