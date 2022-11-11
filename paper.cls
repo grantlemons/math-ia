@@ -16,7 +16,7 @@
 % Spacing
 \usepackage{setspace}
 \singlespacing
-\usepackage{titlesec}
+\usepackage[nobottomtitles]{titlesec}
 \titlespacing{\chapter}{0pt}{0pt}{-0.8em}
 \titlespacing{\section}{0pt}{0pt}{-0.8em}
 \titlespacing{\subsection}{0pt}{0pt}{-0.8em}
