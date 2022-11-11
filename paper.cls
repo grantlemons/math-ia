@@ -150,6 +150,10 @@
     }
 }
 
+% Top and bottom rules for tables
+\newcommand{\dtoprule}{\toprule[1pt]\midrule[0.3pt]}
+\newcommand{\dbottomrule}{\midrule[0.3pt]\bottomrule[1pt]}
+
 % Quotes
 \usepackage[english]{babel}
 \usepackage[autostyle, english=american]{csquotes}
