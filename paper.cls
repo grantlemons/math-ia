@@ -78,6 +78,7 @@
 \usepackage[all]{nowidow}
 \usepackage[nameinlink, noabbrev, capitalize]{cleveref}
 \usepackage{ragged2e}
+\usepackage{booktabs}
 
 %Needspace
 \usepackage{needspace}
