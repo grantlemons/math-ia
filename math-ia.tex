@@ -92,7 +92,7 @@ For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\),
     A                                                   &=      6.080060820    \tageq\label{eqn:def_int_result}
 \end{align*}
 %
-This result is exact, meaning that it fits the function \(f(x)\) perfectly as shown in \cref{fig:definite_integration}.
+This result is exact, meaning the calculated area matches that enclosed by \(f(x)\) perfectly, as shown in \cref{fig:definite_integration}.
 %
 \subfile{graphs/definite}
 %
@@ -100,7 +100,7 @@ This calculated value is useful when evaluating methods of quadrature, as it all
 Of course, definite integration has its limitations: it needs to be performed by hand, it can be challenging with certain functions, and is impossible for a few functions.
 Because of this, quadrature can be used as a substitute to approximate the "true" value as closely as possible.
 
-\cref{eqn:rule_eqn} will be used to demonstrate the comparitive effectiveness of each method of quadrature when discussed in following sections for the sake of comparison to the calculated value and calculated of error percentage.
+\cref{eqn:rule_eqn} will be used to demonstrate the comparative effectiveness of each method of quadrature when discussed in following sections for the sake of comparison to the calculated value and calculated of error percentage.
 %
 \subsection{Rectangle Rule}
 \label{sec:rect_rule}
@@ -122,7 +122,7 @@ Keep this notation in mind, as it will be used in future rule equations.
 %
 \subfile{graphs/rules/rect_rule}
 %
-Applying the Rectangle Rule on \cref{rule_eqn} with 5 subdivisions (represented by \(n_s\)) (as in \cref{fig:rect_rule}), the calculations are as follows.
+Applying the Rectangle Rule on \cref{eqn:rule_eqn} with 5 subdivisions (represented by \(n_s\)) (as in \cref{fig:rect_rule}), the calculations are as follows.
 \begin{gather*}
     \text{let } b = 6                              \tageq\label{eqn:rect_example_first}             \\
     \text{let } a = 0                                                                               \\
@@ -150,7 +150,7 @@ One such rule is the Trapezoid Rule.
 %
 \subsection{Trapezoid Rule}
 \label{sec:trap_rule}
-The Trapezoid Rule is an alternative means typically used in place of the Rectangle Rule utilizes trapezoids instead of rectangles.
+The Trapezoid Rule is an alternative means typically used in place of the Rectangle Rule that utilizes trapezoids instead of rectangles.
 Instead of picking a single point at which to base the height on, the Trapezoid Rule utilizes the value of the function at both the left and right bounds, and uses them to construct a trapezoid under the integrand.
 This has the advantage that it can better account for slope in the integrand.\autocite{num_methods}
 
@@ -166,7 +166,7 @@ The equation for the Trapezoid Rule~(see \cref{eqn:trap_rule}) is only marginall
 %
 Applying the same methodology of computation as in \crefrange{eqn:rect_example_first}{eqn:rect_example_last}---only using the Trapezoid Rule instead of the Rectangle Rule---the Trapezoid Rule's error in this example can be evaluated to be \(0.162\%\).
 
-Trapezoids have many advantages over rectangles for quadrature, but fails to account for change in slope over the interval.
+Trapezoids have many advantages over rectangles for quadrature, but fail to account for change in slope over the interval.
 In moving from rectangles to trapezoids, we moved from fitting the function with a zeroth order polynomial to a first order polynomial, but in order to fit the function even more closely, polynomials of a higher order can be used.
 %
 \subsection{Composite Simpson's 1/3 Rule}
