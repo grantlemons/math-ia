@@ -1,0 +1,39 @@
+\documentclass[../../IA.tex]{subfiles}
+
+\begin{document}
+
+\newcommand{\sumdiv}{3}
+\newcommand{\leftbound}{2}
+\newcommand{\rightbound}{4}
+
+\begin{figure}[ht]
+    \centering
+    \resizebox{.7\textwidth}{!}{
+        \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}, spy using outlines={circle, magnification=9, size=2cm, connect spies}]
+                \pgfmathsetmacro\a{2}
+                \pgfmathsetmacro\m{3}
+                \pgfmathsetmacro\b{4}
+
+                \pgfmathsetmacro\fA{\ruleEq{\a}}
+                \pgfmathsetmacro\fM{\ruleEq{\m}}
+                \pgfmathsetmacro\fB{\ruleEq{\b}}
+
+                \draw [gray, thin, pattern=north west lines, pattern color=gray, samples=100, domain=\a:\b, variable=\x] (\a, 0) -- plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))}) -- (\b, 0) -- cycle;
+                \draw [gray, thin, samples=100, domain={\a-0.5}:{\b+0.5}, variable=\x] plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))});
+                \draw [gray, thin] (\a, \fA) -- (\a, 0) node[yshift=-.25cm] {\footnotesize \(x_0\)};
+                \draw [gray, thin] (\b, \fB) -- (\b, 0) node[yshift=-.25cm] {\footnotesize \(x_1\)};
+                \draw [gray, thin, dashed] (\m, \fM) -- (\m, 0) node[yshift=-.25cm] {\footnotesize \(x_2\)};
+
+            \draw[black, thick] ({\rightbound+1.6}, -0.02) -- ({\leftbound-1.6}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=.5cm] {\tiny \(x\)};
+            \draw[darkgray, smooth, thick, samples=100, domain={\leftbound-1.5}:{\rightbound+1.5}] plot(\x, {\ruleEq{\x}});
+
+            \filldraw [gray] (\a, \fA) circle (1.5pt) node[xshift=-1.4cm] {\footnotesize \((x_0, f(x_0))\)};
+            \filldraw [gray] (\m, \fM) circle (1.5pt) node[xshift=-1.4cm] {\footnotesize \((x_1, f(x_1))\)};
+            \filldraw [gray] (\b, \fB) circle (1.5pt) node[xshift=-1.4cm] {\footnotesize \((x_2, f(x_2))\)};
+        \end{tikzpicture}
+    }
+    \vspace{-.3cm}
+    \caption{A sketch showing the way the Simpson's 1/3 rule uses pairs of subintervals}
+    \label{fig:smps_rule_bounds}
+\end{figure}
+\end{document}

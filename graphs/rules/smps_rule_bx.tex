@@ -1,0 +1,29 @@
+\documentclass[../../IA.tex]{subfiles}
+
+\begin{document}
+
+\newcommand{\leftbound}{-1}
+\newcommand{\rightbound}{1}
+
+\begin{figure}[ht]
+    \centering
+    \resizebox{.7\textwidth}{!}{
+        \begin{tikzpicture}[extended line/.style={shorten >=-#1,shorten <=-#1}, spy using outlines={circle, magnification=9, size=2cm, connect spies}]
+                \pgfmathsetmacro\a{-1}
+                \pgfmathsetmacro\b{1}
+
+                \pgfmathsetmacro\fA{\ruleEq{\a}}
+                \pgfmathsetmacro\fB{\ruleEq{\b}}
+
+                \draw [gray, thin, pattern=north west lines, pattern color=gray, samples=100, domain=\a:\b, variable=\x] (\a, 0) -- plot(\x,{\x}) -- (\b, 0) -- cycle;
+                \draw[black, thick] ({\rightbound+.1}, 0.0) -- ({\leftbound-.1}, 0.0) node[black, align=center, left, yshift=0.13cm, xshift=.5cm] {\scriptsize \(x\)};
+                \foreach \x in {\leftbound, ..., \rightbound} {
+                    \draw[color=black] (\x, 3pt) -- (\x, -3pt) node[below]{\tiny \(\x\)};
+                }
+        \end{tikzpicture}
+    }
+    \vspace{-.3cm}
+    \caption{A sketch showing that the area enclosed by \(y=Bx\) over the interval negates itself}
+    \label{fig:smps_rule_bx}
+\end{figure}
+\end{document}

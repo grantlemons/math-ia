@@ -27,18 +27,18 @@ My interest in this topic was sparked when we first covered integrals in our IB 
 In class we only covered the \hyperref[sec:rect_rule]{Rectangle Rule} and briefly mentioned the \hyperref[sec:trap_rule]{Trapezoid Rule}, but through consulting with my teacher and self-study, I quickly learned all about advanced methods such as \hyperref[sec:smps_rule]{Simpson's 1/3} and 3/8 Rules.
 I didn't have the opportunity to channel this passion until the IA, but have used this opportunity to deepen my knowledge of the means by which advanced methods operate and the pros and cons of different quadrature rules.
 I also used this opportunity to include one of my passions, computer science, applying it in a useful manner to contribute to my understanding and this investigation.
-%
+
 \section{Notation}
 \label{sec:notation}
 For clarity's sake, I will explain some of the specifics of the notation used within this paper, as well as define some of the commonly used variables.
 \cref{table:variables} describes the meaning of, and in some cases the equation for, the commonly used variables within the paper.
-%
+
 \subsection{Subscript Notation}
 Within this paper, numeric subscripts will denote an index in a set.
 For instance, \(x_j\) represents the \emph{j}-ith number in the set of \(x\)-values.
 Alphabetic subscripts, such as \(A_r\), will be used in order to specify that, for instance, a given equation defines the area of a rectangle instead of that of a trapezoid.
 These two uses of subscripts are sometimes combined in a form such as \(A_{r_1}\), denoting the area of rectangle 1 in a similar way to other subscripts throughout the paper.
-%
+
 \subsection{Table of Variables}
 \renewcommand{\arraystretch}{1.1}
 \begin{table}[ht]
@@ -62,7 +62,7 @@ These two uses of subscripts are sometimes combined in a form such as \(A_{r_1}\
     \caption{List of variables and their definitions.}
     \label{table:variables}
 \end{table}
-%
+
 \section{Background}
 \label{sec:background}
 \subsection{Definite Integrals}
@@ -71,12 +71,12 @@ For integrable functions, the area enclosed by a function over an interval can b
 The value obtained through definite integration is exact, having no error other than that from rounding.
 
 For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\), and the \(x\)-axis can be found exactly through the process in \crefrange{eqn:def_int_first_eqn}{eqn:def_int_result}.
-%
+
 \begin{equation}
     f(x) = \cos(x + 2) + 1
     \label{eqn:rule_eqn}
 \end{equation}
-%
+
 \begin{gather*}
     A = \int_0^6 \cos(x + 2) \,dx + \int_0^6 1 \,dx                             \tageq\label{eqn:def_int_first_eqn}         \\
     \text{let } u = x + 2                                                                                                               \\
@@ -91,37 +91,37 @@ For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\),
                                                         &=      \sin(8) - \sin(2) + 6                                       \\
     A                                                   &=      6.080060820    \tageq\label{eqn:def_int_result}
 \end{align*}
-%
+
 This result is exact, meaning the calculated area matches that enclosed by \(f(x)\) perfectly, as shown in \cref{fig:definite_integration}.
-%
+
 \subfile{graphs/definite}
-%
+
 This calculated value is useful when evaluating methods of quadrature, as it allows us to have a "true" value to compare the result of each method to.
 Of course, definite integration has its limitations: it needs to be performed by hand, it can be challenging with certain functions, and is impossible for a few functions.
 Because of this, quadrature can be used as a substitute to approximate the "true" value as closely as possible.
 
 \cref{eqn:rule_eqn} will be used to demonstrate the comparative effectiveness of each method of quadrature when discussed in following sections for the sake of comparison to the calculated value and calculated of error percentage.
-%
+
 \subsection{Rectangle Rule}
 \label{sec:rect_rule}
 The most basic method---or rule---used in quadrature is that of splitting the interval into smaller subintervals and fitting rectangles beneath the integrand.
 The height of each rectangle is based on the value of the function at one of its subinterval's bounds, which makes area easy to approximate to a reasonable degree of accuracy as shown by \cref{fig:rect_rule}.
 Since the area of a rectangle is extremely easy to calculate~(see \cref{eqn:rect_area}), this method is simple to implement over the entire function by summing the areas of each subinterval as demonstrated in \cref{eqn:rect_rule}.\autocite{num_methods}
-%
+
 \begin{gather*}
     A_{r} = w \cdot l \tageq\label{eqn:rect_area}                                               \\
     A_{r_{0}} = h \cdot f(x_0)                                                                  \\
     \int_a^b f(x) \,dx \approx h \sum^{n_s-1}_{j=0}f(x_j) \tageq\label{eqn:rect_rule}
 \end{gather*}
-%
+
 The subscripts within the summation refer to the index of the \(x\)-value within a set of subinterval boundaries (i.e. \(x_n = a + h \cdot n_s\)).
 For instance, in \cref{fig:rect_rule}, the set is \(\{0, 1.2, 2.4, 3.6, 4.8, 6\}\), and as such, \(x_1\) is equivalent to \(1.2\).
 
 Note that the set is zero-indexed, meaning the "first" value is at an index of \(0\).
 Keep this notation in mind, as it will be used in future rule equations.
-%
+
 \subfile{graphs/rules/rect_rule}
-%
+
 Applying the Rectangle Rule on \cref{eqn:rule_eqn} with 5 subdivisions (represented by \(n_s\)) (as in \cref{fig:rect_rule}), the calculations are as follows.
 \begin{gather*}
     \text{let } b = 6                              \tageq\label{eqn:rect_example_first}             \\
@@ -144,10 +144,10 @@ Comparing this value to the value calculated in \cref{sec:definite} as follows, 
                 &=      \left| \frac{5.907826664 - 6.080060820}{6.080060820} \right| \cdot 100\%    \\
                 &=      2.833\%                      \tageq\label{eqn:rect_example_last}           
 \end{align*}
-%
+
 More effective rules exist however, that can be used to compute a more accurate value with minimal extra computations.
 One such rule is the Trapezoid Rule.
-%
+
 \subsection{Trapezoid Rule}
 \label{sec:trap_rule}
 The Trapezoid Rule is an alternative means typically used in place of the Rectangle Rule that utilizes trapezoids instead of rectangles.
@@ -155,75 +155,93 @@ Instead of picking a single point at which to base the height on, the Trapezoid 
 This has the advantage that it can better account for slope in the integrand.\autocite{num_methods}
 
 The equation for the Trapezoid Rule~(see \cref{eqn:trap_rule}) is only marginally more complicated than that of the Rectangle Rule~(see \cref{eqn:rect_rule}), but fits functions more closely, which provides significantly more accuracy as can be observed in in \cref{fig:trap_rule}.
-%
+
 \begin{gather*}
     A_{t_{j}} = \frac{1}{2} h \left[ f(x_{j}) + f(x_{j+1}) \right]                                                                                                \\
     A_{t_{0}} = \frac{1}{2} h \left[f(x_0) + f(x_1)\right]                                                                  \\
     \int_a^b f(x) \,dx \approx \frac{1}{2}h \sum^{n_s-1}_{j=0}[f(x_{j}) + f(x_{j+1})] \tageq\label{eqn:trap_rule} 
 \end{gather*}
-%
+
 \subfile{graphs/rules/trap_rule}
-%
+
 Applying the same methodology of computation as in \crefrange{eqn:rect_example_first}{eqn:rect_example_last}---only using the Trapezoid Rule instead of the Rectangle Rule---the Trapezoid Rule's error in this example can be evaluated to be \(0.162\%\).
 
 Trapezoids have many advantages over rectangles for quadrature, but fail to account for change in slope over the interval.
 In moving from rectangles to trapezoids, we moved from fitting the function with a zeroth order polynomial to a first order polynomial, but in order to fit the function even more closely, polynomials of a higher order can be used.
-%
+
 \subsection{Composite Simpson's 1/3 Rule}
 \label{sec:smps_rule}
 The Composite Simpson's 1/3 Rule uses second degree polynomials (quadratics) in order to fit the function, even over sections with changing slope.
-This is done by using Lagrange Polynomial Interpolation using the left, right, and mid-interval values of each subinterval in order to calculate a 2nd degree polynomial per subinterval that passes through those points.
+This is done by using the left, right, and mid-interval values of each subinterval in order to calculate a 2nd degree polynomial per subinterval that passes through those points.
 The use of second degree polynomials allows the Composite Simpson's 1/3 Rule to approximate a complex integrand extremely closely as shown in \cref{fig:smps_rule}.
-%
+
 \subfile{graphs/rules/smps_rule}
-%
-Lagrange Polynomial Interpolation~(see \cref{eqn:lagrange}) is a means of constructing a polynomial that passes through a set of points.
-For the purposes of Simpson's 1/3 Rule, this method is used to construct more easily integrated polynomials (as demonstrated in \cref{eqn:lagrange_smps}), using the \(x\) and \(y\) values of the left-bound, right-bound, and mid-interval values of the subinterval.
-%
+
+Simpson's rule uses pairs of subintervals for its calculations.
+This means that a quadratic is constructed for each pair of subintervals that passes through the points \((x_0, f(x_0))\), \((x_1, f(x_1))\), \((x_2, f(x_2))\) as shown in \cref{fig:smps_rule_bounds}.
+For the sake of easier calculations, the following will use \((-h, y_0)\), \((0, y_1)\), \((h, y_2)\), as if the quadratic was shifted such that it is centered on the \(y\)-axis.
+
+\subfile{graphs/rules/smps_rule_bounds}
+
+Generalizing the equation of the quadratic to the standard form \cref{eqn:quadratic}, we can integrate it over the two subintervals.
 \begin{equation}
-    \label{eqn:lagrange}
-    P(x) = \sum_{j=0}^{n_s-1} f(x_j) \prod_{\substack{k = 0 \\ k \neq j}}^{n_s-1} \frac{x - x_k}{x_j - x_k}
+    Ax^2 + Bx + Cx
+    \label{eqn:quadratic}
 \end{equation}
-%
-Expanding \cref{eqn:lagrange} with the points \(m\), \(a\), and \(b\) for midpoint, left-bound, and right-bounds respectively produces \cref{eqn:lagrange_smps}.
-%
-\begin{equation}
-    \label{eqn:lagrange_smps}
-    P(x) = f(a) \frac{(x - m)(x - b)}{(a - m)(a - b)} + f(m) \frac{(x - a)(x - b)}{(m - a)(m - b)} + f(b) \frac{(x - a)(x - m)}{(b - a)(b - m)}
-\end{equation}
-%
-As \(m\) represents the midpoint \((a + b) / 2\), this can be restated in terms of \(a\) and \(b\) as demonstrated in \cref{eqn:lagrange_smps_ab}.
-%
-\begin{equation}
-    \label{eqn:lagrange_smps_ab}
-    \resizebox{.9\textwidth}{!} 
-    {
-    $P(x) = f(a) \frac{\left(x - \frac{a+b}{2}\right)\biggl(x - b\biggr)}{\left(a - \frac{a+b}{2}\right)\biggl(a - b\biggr)} + f\left(\frac{a+b}{2}\right) \frac{\biggl(x - a\biggr)\biggl(x - b\biggr)}{\left(\frac{a+b}{2} - a\right)\left(\frac{a+b}{2} - b\right)} + f(b) \frac{\biggl(x - a\biggr)\left(x - \frac{a+b}{2}\right)}{\biggl(b - a\biggr)\left(b - \frac{a+b}{2}\right)}$
-    }
-\end{equation}
-%
-Utilizing integration by substitution, \cref{eqn:lagrange_smps_ab} can be integrated into the form expressed in \cref{eqn:smps_rule}, which is the equation for Simpson's Rule.
-%
-\begin{gather*}
-    \int_a^b P(x) \,dx = \frac{b - a}{6} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]                                      \\
-    h = b - a                                                                                                                           \\
-\end{gather*}
-\vspace*{-1.2cm}
+
+\begin{equation*}
+    \int_{-h}^{h} \left[Ax^2 + Bx + Cx\right] \, dx   =  \int_{-h}^{h} \left[Ax^2 + Cx\right] + \int_{-h}^{h} \left[Bx\right]
+\end{equation*}
+
+As \(y=Bx\) is a linear function that passes through the origin, and the subinterval being evaluated extends the same distance in the positive and negative directions, the area enclosed by it is negated to zero (see \cref{fig:smps_rule_bx}).
+
+\subfile{graphs/rules/smps_rule_bx}
+
+As such, the equation can be evaluated without considering \(Bx\).
+As the function is symmetrical, the integral from \(-h\) to \(h\) is equal to two times the integral from \(0\) to \(h\).
+
 \begin{align*}
-    \int_a^b P(x) \,dx &= \frac{h}{3} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]                                         \\
-    \int_a^b f(x) \,dx & \approx \int_a^b P(x) \,dx                                                                                     \\
-    \int_a^b f(x) \,dx & \approx \frac{h}{3} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]  \tageq\label{eqn:smps_rule}
+    2\int_{0}^{h} \left[Ax^2 + Bx + Cx\right] \, dx &= 2\left[\frac{1}{3}Ax^3 + Cx\right]_0^h   \\
+                                                    &= 2[\frac{1}{3}Ah^3 + Ch] - [0 + 0]        \\
+                                                    &= \frac{2Ah^3}{3} + 2Ch                    \tageq\label{eqn:special_smps_thing}\\
+                                                    &= \frac{h}{3}(2Ah^2 + 6C)                  
 \end{align*}
-%
+
+Now we can create as system of equations to solve the equation of the quadratic using the coordinate pairs established above.
+
+\begin{align*}
+    y_0     &=      A(-h)^2 + B(-h) + C         \\
+            &=      Ah^2    - Bh    + C         \\
+    y_1     &=      A(0)^2 + B(0) + C           \\
+            &=                      C           \\
+    y_2     &=      A(h)^2 + B(h) + C           \\
+            &=      Ah^2   + Bh   + C
+\end{align*}
+
+Adding these equations together in a certain way \(y_0 + 4y_1 + y_2\) and combining like terms, we obtain an equation similar to \cref{eqn:special_smps_thing} derived above.
+\begin{align*}
+    y_0 + 4y_1 + y_2        &=       Ah^2 - Bh + C + C + Ah^2 + Bh + C    \\
+                            &=       2Ah^2 + 2C                           \tageq\label{eqn:special_matching_thing}
+\end{align*}
+Factoring out \(\frac{h}{3}\) from \cref{eqn:special_smps_thing}, we obtain \(\frac{h}{3}(2Ah^2 + 6C)\), which is equal to \(\frac{h}{3}\) times \cref{eqn:special_matching_thing}.
+This means that the equation for the area enclosed by the quadratic can be expressed in terms of \(y_0 + 4y_1 + y_2\), which, are values of \(f(x)\).
+Through this means, we can derive the equation for simpson's rule shown below.
+
+\begin{equation}
+    \int_{-h}^{h} f(x) \,dx \approx \frac{h}{3} \left[f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right]
+    \label{eqn:smps_rule}
+\end{equation}
+
+
 \cref{eqn:smps_rule} gives an approximate value for the integral of the subinterval using a single polynomial function.
 Like in the Trapezoid and Rectangle rules~(see \cref{eqn:trap_rule,eqn:rect_rule}), however, the interval can be split into smaller subintervals in order to increase accuracy.
 Expressed mathematically, the equation for the approximate value of the interval as a whole is equal to the sum of the values of each subinterval, the equation of which takes the form of \cref{eqn:composite_smps_rule}.
-%
+
 \begin{equation}
     \label{eqn:composite_smps_rule}
     \int_a^b f(x) \,dx \approx \frac{h}{3} \sum_{j=1}^{n_s / 2} \biggl[f(x_{2j-2}) + 4f(x_{2j-1}) + f(x_{2j})\biggr]
 \end{equation}
-%
+
 \subsection{Effectiveness}
 \label{sec:effectiveness}
 \subsubsection{Simple Function}
@@ -236,15 +254,15 @@ This means that, although both methods are effective at fitting a relatively sim
 \subsubsection{Complex Function}
 \label{sec:complex_examples}
 Had the integrand been more complex, as in \cref{fig:smps_rule_complex_low}, the fluctuations would not have been taken into account by either rule.
-%
+
 \subfile{graphs/complex/low/smps_complex_low}
-%
+
 The only way to improve the accuracy of the estimate is to increase the number of subintervals as in \cref{fig:smps_rule_complex_high}.
 The issue with this, however, is that---no matter the method---a large amount of subintervals requires a large amount of computing power.
 By scaling the number of subintervals by a factor of some value \(n\), the number of calculations required also scales linearly by \(n\).
-%
+
 \subfile{graphs/complex/high/smps_complex_high}
-%
+
 Moreover, although increasing the subinterval count is necessary and effective for complex portions of the integrand, it is inefficient and unnecessary over the portions of the integrand that are relatively simple such as \(1.5 < |x| < 2\) in \cref{fig:smps_rule_complex_high}.
 This means ideally, quadrature should seek to maximize subinterval count when necessary, and, in all other circumstances, minimize subintervals.
 
@@ -256,35 +274,39 @@ I seek to propose an alternative means of calculating a complexity value and to 
 
 \subsection{My Method}
 \label{sec:my_method}
-Because 2nd degree polynomials---which Simpson's 1/3 Rule uses---fit functions with consistant concavity well, and only encounter difficulty when the concavity changes over the course of the subinterval~(see \cref{fig:concavities}), my function for complexity will operate via detecting changes in concavity.
+Because 2nd degree polynomials---which Simpson's 1/3 Rule uses---fit functions with consistent concavity well, and only encounter difficulty when the concavity changes over the course of the subinterval~(see \cref{fig:concavities}), my function for complexity will operate via detecting changes in concavity.
 In order to accomplish this, my function~(see \cref{eqn:complexity}) finds the absolute value of the difference between the second derivatives of the two bounds.\\
 \emph{In order to avoid confusion with the use of absolute value and derivative notation, the following will use the notation \(f''(a)\) to indicate the same as \(\left.\frac{d^2f}{dx^2}\right|_{x=a}\)}
-%
+
 \subfile{graphs/concavity/concavity}
-%
+
 \begin{equation}
     \label{eqn:complexity}
     c(x_L, x_R) = \left|f''(x_R) - f''(x_L)\right|
 \end{equation}
-%
+
 The value of calculating using \cref{eqn:complexity} is then---similarly to in the established method---compared to a defined threshold value, and if it exceeds it, the subdivision is split in two and the process is repeated for each.
 
 An example of two steps in this process is shown in \cref{fig:my_adpt_stepone,fig:my_adpt_steptwo}.
 The numbers above each subinterval represent the value of \cref{eqn:complexity} with the two bounds of the subinterval as input, and the threshold for subdivision is a complexity of \(2.000\).
-%
+
 \subfile{graphs/steps/my_method/first_step}
+
 \subfile{graphs/steps/my_method/second_step}
 
 \subsection{Comparison}
 \label{sec:comparison}
 In order to compare the two methods, I created a program that obtains the subdivision bounds, calculates the integral, and calculates the error as a percentage.
 \crefrange{lst:rust_functions}{lst:rust_composite} show the main functions that make this program function.
-%
+
 \subfile{code/functions}
+
 \subfile{code/helpers}
+
 \subfile{code/rules}
+
 \subfile{code/composite}
-%
+
 The two methods, in terms of number of operations per subinterval are extremely similar.
 The primary only difference between the two is that the established method calls the Trapezoid Rule~(see \cref{lst:rust_rules}), while my method calls the complexity function~(see \cref{lst:rust_helpers}).
 Even within the two methods called, the number of operations performed is extremely similar.
@@ -300,14 +322,14 @@ The function I am using to test and compare both methods is a normal distributio
 A normal distribution is a good function to test quadrature on as it is impossible to integrate using the Fundamental Theorem of Calculus, and must be solved using quadrature.
 One effect that this has, however, is that error percentages cannot be 100\% correct, as the "correct value" has to be generated using quadrature as well.
 In order to mitigate this issue, the value considered "correct" was calculated with the Composite Simpson's 1/3 Rule with \(10,000\) subintervals.
-%
+
 \begin{equation}
     \label{eqn:normal}
     f(x) = \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}
 \end{equation}
-%
+
 In order to use my method, the second derivative of \cref{eqn:normal} must be calculated and hard coded into my program as in \cref{lst:rust_functions}.
-%
+
 \begin{align*}
     \der{f(x)} &= \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \cdot \der{-\frac{x^2}{2}}\\
     &= \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \cdot \left(-\frac{1}{2} \cdot 2x\right)\\
@@ -322,12 +344,13 @@ In order to use my method, the second derivative of \cref{eqn:normal} must be ca
     &= f(x)(x^2-1)\\
     \sder{x} &= \frac{10(x^2 - 1)}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \tageq\label{eqn:2nd_derivative_normal}
 \end{align*}
-%
+
 Using the program, my method and the established method subdivide the function as shown in \cref{fig:my_adpt_subdiv,fig:other_adpt_subdiv} respectively.
-%
+
 \subfile{graphs/adaptive/my_method/subdivisions}
+
 \subfile{graphs/adaptive/other_method/subdivisions}
-%
+
 These subdivisions make sense for each method, as my method increases the subintervals while the curvature is changing from concave-up to concave-down and vice versa, while the established method increases the subintervals any time that \textit{either} the Trapezoid Rule or Simpson's Rule does not perform well.
 Since the Trapezoid Rule does not perform well at the most concave sections and Simpson's Rule does, it is logical that those sections would have the most disparity between the two rules' values, and thus be the most subdivided.
 It is hard to compare the overall accuracy of the two methods, as the thresholds are completely different, but I've picked two thresholds that have a similar number of subdivisions.
