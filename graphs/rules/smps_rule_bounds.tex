@@ -3,8 +3,8 @@
 \begin{document}
 
 \newcommand{\sumdiv}{3}
-\newcommand{\leftbound}{2}
-\newcommand{\rightbound}{4}
+\newcommand{\leftbound}{0}
+\newcommand{\rightbound}{6}
 
 \begin{figure}[ht]
     \centering
@@ -24,12 +24,12 @@
                 \draw [gray, thin] (\b, \fB) -- (\b, 0) node[yshift=-.25cm] {\footnotesize \(x_1\)};
                 \draw [gray, thin, dashed] (\m, \fM) -- (\m, 0) node[yshift=-.25cm] {\footnotesize \(x_2\)};
 
-            \draw[black, thick] ({\rightbound+1.6}, -0.02) -- ({\leftbound-1.6}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=.5cm] {\tiny \(x\)};
-            \draw[darkgray, smooth, thick, samples=100, domain={\leftbound-1.5}:{\rightbound+1.5}] plot(\x, {\ruleEq{\x}});
+            \draw[black, thick] ({\rightbound+.1}, -0.02) -- ({\leftbound-.1}, -0.02) node[black, align=center, left, yshift=-0.13cm, xshift=.5cm] {\tiny \(x\)};
+            \draw[darkgray, smooth, thick, samples=100, domain={\leftbound-.05}:{\rightbound+.05}] plot(\x, {\ruleEq{\x}});
 
-            \filldraw [gray] (\a, \fA) circle (1.5pt) node[xshift=-1.2cm] {\footnotesize \((x_0, f(x_0))\)};
-            \filldraw [gray] (\m, \fM) circle (1.5pt) node[xshift=-1.2cm] {\footnotesize \((x_1, f(x_1))\)};
-            \filldraw [gray] (\b, \fB) circle (1.5pt) node[xshift=-1.2cm] {\footnotesize \((x_2, f(x_2))\)};
+            \filldraw [gray] (\a, \fA) circle (1.5pt) node[xshift=-.8cm, yshift=.1cm] {\scriptsize \((x_0, f(x_0))\)};
+            \filldraw [gray] (\m, \fM) circle (1.5pt) node[xshift=-.8cm, yshift=.1cm] {\scriptsize \((x_1, f(x_1))\)};
+            \filldraw [gray] (\b, \fB) circle (1.5pt) node[xshift=-.8cm, yshift=.1cm] {\scriptsize \((x_2, f(x_2))\)};
         \end{tikzpicture}
     }
     \vspace{-.3cm}

@@ -30,6 +30,7 @@
 \usepackage{subfiles}
 
 % Misc Setup
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{\normalsize}
 \titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{\normalsize}
 \titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{\large}
 \titleformat{\chapter}[display]{\vspace{-1.8cm}\normalfont\bfseries}{}{0pt}{\Large}

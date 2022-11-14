@@ -14,13 +14,13 @@
 
 \section{Introduction}
 \label{sec:intro}
-Integration is the process of calculating the area enclosed by a function (known as the integrand) over an interval via the calculation of the definite integral.
-This process is often done by hand using techniques such as the Fundamental Theorem of Calculus (see \cref{sec:definite}), but can be approximated by a computer.
-The means by which a computer conducts this operation is through a process called quadrature (also known as numerical integration).
+Integration is the process of calculating the area enclosed by a function~(known as the integrand) over an interval via the calculation of the definite integral.
+This process is often done by hand using techniques such as the Fundamental Theorem of Calculus~(see \cref{sec:definite}), but can be approximated by a computer.
+The means by which a computer conducts this operation is through a process called quadrature~(also known as numerical integration).
 Quadrature is the process of fitting shapes of a known area to the integrand in order to closely approximate the area enclosed by the integrand.
 This often involves splitting the interval into smaller \textit{subintervals}, and summing the approximate areas of each.
 In the most basic methods of quadrature, these subintervals are of a fixed width, but it is possible to use subintervals of varying widths for the sake of computational efficiency.
-This is known as Adaptive Quadrature, and can be accomplished in a variety of ways.
+This is known as \emph{adaptive quadrature}, and can be accomplished in a variety of ways.
 The aim of this paper is to compare an existing method of adaptive quadrature to one of my own design, and examine the effectiveness and efficiency of the two methods.
 
 My interest in this topic was sparked when we first covered integrals in our IB AA SL coursework.
@@ -28,16 +28,26 @@ In class we only covered the \hyperref[sec:rect_rule]{Rectangle Rule} and briefl
 I didn't have the opportunity to channel this passion until the IA, but have used this opportunity to deepen my knowledge of the means by which advanced methods operate and the pros and cons of different quadrature rules.
 I also used this opportunity to include one of my passions, computer science, applying it in a useful manner to contribute to my understanding and this investigation.
 
+This paper will begin with an exploration and explanation of different method of fixed quadrature, before moving into an explanation of adaptive quadrature, its benefits, and how I and others have chosen to approach it.
+It will conclude with a comparison of efficiency and accuracy between the effectiveness of my method and an established method before summarizing and theorizing about results and suggesting further research.
+
 \section{Notation}
 \label{sec:notation}
 For clarity's sake, I will explain some of the specifics of the notation used within this paper, as well as define some of the commonly used variables.
 \cref{table:variables} describes the meaning of, and in some cases the equation for, the commonly used variables within the paper.
+
+\subsection{Difficulty}
+Within this paper, for the sake of conciseness, I will use the term \emph{difficult} to describe functions or intervals that would require a large amount of subintervals to effectively approximate.
 
 \subsection{Subscript Notation}
 Within this paper, numeric subscripts will denote an index in a set.
 For instance, \(x_j\) represents the \emph{j}-ith number in the set of \(x\)-values.
 Alphabetic subscripts, such as \(A_r\), will be used in order to specify that, for instance, a given equation defines the area of a rectangle instead of that of a trapezoid.
 These two uses of subscripts are sometimes combined in a form such as \(A_{r_1}\), denoting the area of rectangle 1 in a similar way to other subscripts throughout the paper.
+
+\subsection{Indexes}
+Note that within the scope of this paper, sets are zero-indexed, meaning that the "first" value is at index \(0\).
+For example, in the set \(\{10, 20, 30\}\), index zero refers to the number \(10\).
 
 \subsection{Table of Variables}
 \renewcommand{\arraystretch}{1.1}
@@ -51,7 +61,7 @@ These two uses of subscripts are sometimes combined in a form such as \(A_{r_1}\
             \(a\)               &   Left bound of the interval      &                           \\
             \(b\)               &   Right bound of the interval     &                           \\
             \(x_L\)             &   Left bound of the subinterval   &                           \\
-            \(x_L\)             &   Right bound of the subinterval  &                           \\
+            \(x_R\)             &   Right bound of the subinterval  &                           \\
             \(h\)               &   Width of each subinterval       &   \(h=(b-a)/n_s\)         \\
             \(m\)               &   Mid-subinterval value           &   \(m=(x_L+x_R)/2\)       \\
             \(A\)               &   Area confined by \(f(x)\), \(a\), \(b\) and the \(x\)-axis. & \(A=\int_a^b f(x) \, dx\) \\
@@ -114,15 +124,9 @@ Since the area of a rectangle is extremely easy to calculate~(see \cref{eqn:rect
     \int_a^b f(x) \,dx \approx h \sum^{n_s-1}_{j=0}f(x_j) \tageq\label{eqn:rect_rule}
 \end{gather*}
 
-The subscripts within the summation refer to the index of the \(x\)-value within a set of subinterval boundaries (i.e. \(x_n = a + h \cdot n_s\)).
-For instance, in \cref{fig:rect_rule}, the set is \(\{0, 1.2, 2.4, 3.6, 4.8, 6\}\), and as such, \(x_1\) is equivalent to \(1.2\).
-
-Note that the set is zero-indexed, meaning the "first" value is at an index of \(0\).
-Keep this notation in mind, as it will be used in future rule equations.
-
 \subfile{graphs/rules/rect_rule}
 
-Applying the Rectangle Rule on \cref{eqn:rule_eqn} with 5 subdivisions (represented by \(n_s\)) (as in \cref{fig:rect_rule}), the calculations are as follows.
+Applying the Rectangle Rule on \cref{eqn:rule_eqn} with 5 subdivisions~(represented by \(n_s\))~(as in \cref{fig:rect_rule}), the calculations are as follows.
 \begin{gather*}
     \text{let } b = 6                              \tageq\label{eqn:rect_example_first}             \\
     \text{let } a = 0                                                                               \\
@@ -171,9 +175,9 @@ In moving from rectangles to trapezoids, we moved from fitting the function with
 
 \subsection{Composite Simpson's 1/3 Rule}
 \label{sec:smps_rule}
-The Composite Simpson's 1/3 Rule uses second degree polynomials (quadratics) in order to fit the function, even over sections with changing slope.
+The Composite Simpson's 1/3 Rule uses second degree polynomials~(quadratics) in order to fit the function, even over sections with changing slope.
 This is done by using the left, right, and mid-interval values of each subinterval in order to calculate a 2nd degree polynomial per subinterval that passes through those points.
-The use of second degree polynomials allows the Composite Simpson's 1/3 Rule to approximate a complex integrand extremely closely as shown in \cref{fig:smps_rule}.
+The use of second degree polynomials allows the Composite Simpson's 1/3 Rule to approximate a difficult integrand extremely closely as shown in \cref{fig:smps_rule}.
 
 \subfile{graphs/rules/smps_rule}
 
@@ -193,7 +197,7 @@ Generalizing the equation of the quadratic to the standard form \cref{eqn:quadra
     \int_{-h}^{h} \left[Ax^2 + Bx + Cx\right] \, dx   =  \int_{-h}^{h} \left[Ax^2 + Cx\right] + \int_{-h}^{h} \left[Bx\right]
 \end{equation*}
 
-As \(y=Bx\) is a linear function that passes through the origin, and the subinterval being evaluated extends the same distance in the positive and negative directions, the area enclosed by it is negated to zero (see \cref{fig:smps_rule_bx}).
+As \(y=Bx\) is a linear function that passes through the origin, and the subinterval being evaluated extends the same distance in the positive and negative directions, the area enclosed by it is negated to zero~(see \cref{fig:smps_rule_bx}).
 
 \subfile{graphs/rules/smps_rule_bx}
 
@@ -249,11 +253,11 @@ Expressed mathematically, the equation for the approximate value of the interval
 The effectiveness of the Trapezoid Rule and the composite Simpson's 1/3 Rule can be seen in \cref{fig:trap_rule,fig:smps_rule}.
 Even with the relatively large subinterval size, these methods are effective, because the function has no fluctuations that the method would not account for with the subinterval count being used.
 Because the methods only sample a few points of the integrand, however, if these few points are not representative of the integrand over the subinterval, neither method will effectively approximate the integral value.
-This means that, although both methods are effective at fitting a relatively simple function such as a polynomial with relatively few subintervals, they get significantly less effective the more complex the integrand.
+This means that, although both methods are effective at fitting a relatively simple function such as a polynomial with relatively few subintervals, they get significantly less effective the more difficult the integrand.
 
-\subsubsection{Complex Function}
+\subsubsection{Difficult Function}
 \label{sec:complex_examples}
-Had the integrand been more complex, as in \cref{fig:smps_rule_complex_low}, the fluctuations would not have been taken into account by either rule.
+Had the integrand been more difficult, as in \cref{fig:smps_rule_complex_low}, the fluctuations would not have been taken into account by either rule.
 
 \subfile{graphs/complex/low/smps_complex_low}
 
@@ -263,18 +267,18 @@ By scaling the number of subintervals by a factor of some value \(n\), the numbe
 
 \subfile{graphs/complex/high/smps_complex_high}
 
-Moreover, although increasing the subinterval count is necessary and effective for complex portions of the integrand, it is inefficient and unnecessary over the portions of the integrand that are relatively simple such as \(1.5 < |x| < 2\) in \cref{fig:smps_rule_complex_high}.
+Moreover, although increasing the subinterval count is necessary and effective for difficult portions of the integrand, it is inefficient and unnecessary over the portions of the integrand that are relatively simple such as \(1.5 < |x| < 2\) in \cref{fig:smps_rule_complex_high}.
 This means ideally, quadrature should seek to maximize subinterval count when necessary, and, in all other circumstances, minimize subintervals.
 
 \section{Adaptive Quadrature}
 \label{sec:adaptive}
-Adaptive Quadrature is the process of changing the width of each subinterval dependent on the complexity of the function within each subinterval.
+Adaptive quadrature is the process of changing the width of each subinterval dependent on the difficulty of the function within each subinterval.
 An easy-to-implement process for this calculates the values of both the trapezoid and composite Simpson's 1/3 rules for the current subinterval, compares the two, and---should they significantly differ---splits the subinterval in two and repeats the process.\autocite[p. 1]{established}
-I seek to propose an alternative means of calculating a complexity value and to compare the computational efficiency and accuracy of the two methods.
+I seek to propose an alternative means of calculating a difficulty value and to compare the computational efficiency and accuracy of the two methods.
 
 \subsection{My Method}
 \label{sec:my_method}
-Because 2nd degree polynomials---which Simpson's 1/3 Rule uses---fit functions with consistent concavity well, and only encounter difficulty when the concavity changes over the course of the subinterval~(see \cref{fig:concavities}), my function for complexity will operate via detecting changes in concavity.
+Because 2nd degree polynomials---which Simpson's 1/3 Rule uses---fit functions with consistent concavity well, and only encounter difficulty when the concavity changes over the course of the subinterval~(see \cref{fig:concavities}), my function for difficulty will operate via detecting changes in concavity.
 In order to accomplish this, my function~(see \cref{eqn:complexity}) finds the absolute value of the difference between the second derivatives of the two bounds.\\
 \emph{In order to avoid confusion with the use of absolute value and derivative notation, the following will use the notation \(f''(a)\) to indicate the same as \(\left.\frac{d^2f}{dx^2}\right|_{x=a}\)}
 
@@ -282,13 +286,19 @@ In order to accomplish this, my function~(see \cref{eqn:complexity}) finds the a
 
 \begin{equation}
     \label{eqn:complexity}
-    c(x_L, x_R) = \left|f''(x_R) - f''(x_L)\right|
+    D(x_L, x_R) = \left|f''(x_R) - f''(x_L)\right|
 \end{equation}
 
-The value of calculating using \cref{eqn:complexity} is then---similarly to in the established method---compared to a defined threshold value, and if it exceeds it, the subdivision is split in two and the process is repeated for each.
+The value calculated using \cref{eqn:complexity} is then---similarly to in the established method---compared to a defined threshold value, and if it exceeds it, the subdivision is split in two and the process is repeated for each.
 
 An example of two steps in this process is shown in \cref{fig:my_adpt_stepone,fig:my_adpt_steptwo}.
-The numbers above each subinterval represent the value of \cref{eqn:complexity} with the two bounds of the subinterval as input, and the threshold for subdivision is a complexity of \(2.000\).
+The numbers above each subinterval represent the value of \cref{eqn:complexity} with the two bounds of the subinterval as input, and the threshold for subdivision is a difficulty of \(2.000\).
+The second derivative is shown as a dashed dark gray function on the sketches in order to show how my difficulty function operates.
+
+\emph{
+Note: \cref{fig:my_adpt_stepone,fig:my_adpt_steptwo} are examples of Normal Distributions.
+The reasoning for this is discussed in \cref{sec:normal}.
+}
 
 \subfile{graphs/steps/my_method/first_step}
 
@@ -308,10 +318,10 @@ In order to compare the two methods, I created a program that obtains the subdiv
 \subfile{code/composite}
 
 The two methods, in terms of number of operations per subinterval are extremely similar.
-The primary only difference between the two is that the established method calls the Trapezoid Rule~(see \cref{lst:rust_rules}), while my method calls the complexity function~(see \cref{lst:rust_helpers}).
+The primary only difference between the two is that the established method calls the Trapezoid Rule~(see \cref{lst:rust_rules}), while my method calls the difficulty function~(see \cref{lst:rust_helpers}).
 Even within the two methods called, the number of operations performed is extremely similar.
 In the Trapezoid Rule function, two calls to the function \(f(x)\) are made and four additional arithmetic operations are performed.
-On the other hand, using the complexity function, two calls to the function \(f(x)\) are made, and seven additional arithmetic operations are performed.
+On the other hand, using the difficulty function, two calls to the function \(f(x)\) are made, and seven additional arithmetic operations are performed.
 This means that per subinterval, my method performs three more arithmetic operations than the existing method.
 Although this is proportional to the number of subintervals, considering the extreme speed of an arithmetic operation, there is very little difference in performance between the methods.
 The major downside to my method is that it requires the user to calculate the second derivative by hand before using the method.
@@ -334,16 +344,23 @@ In order to use my method, the second derivative of \cref{eqn:normal} must be ca
     \der{f(x)} &= \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \cdot \der{-\frac{x^2}{2}}\\
     &= \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \cdot \left(-\frac{1}{2} \cdot 2x\right)\\
     &= -x \cdot \frac{10}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\\
-    \der{f(x)} &= -x \cdot f(x)
+    \der{f(x)} &= -x \cdot f(x) \tageq\label{eqn:first_der}
 \end{align*}
+
+Note that \cref{eqn:first_der} includes \cref{eqn:normal}.
+This makes calculating the second derivative simpler and makes code reuse possible in my program.
+
 \begin{align*}
-    \sder{x} &= \der{-x \cdot f(x)}\\
+    \frac{d(f(x))}{dx} &= \der{-x \cdot f(x)}\\
     &= (-x) \cdot \der{f(x)} + \der{-x} \cdot f(x)\\
     &= (-x) \cdot (-x \cdot f(x)) + (-1) \cdot f(x)\\
-    &= -x^2f(x) + -f(x)\\
-    &= f(x)(x^2-1)\\
-    \sder{x} &= \frac{10(x^2 - 1)}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \tageq\label{eqn:2nd_derivative_normal}
+    &= -x^2f(x) - f(x)\\
+    \frac{d(f(x))}{dx} &= f(x)(x^2-1)\tageq\label{eqn:2nd_derivative_normal}\\
+    &= \frac{10(x^2 - 1)}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}
 \end{align*}
+
+Note again that \cref{eqn:2nd_derivative_normal} also includes \cref{eqn:normal}.
+Like with the first derivative, this allows code reuse within my program.
 
 Using the program, my method and the established method subdivide the function as shown in \cref{fig:my_adpt_subdiv,fig:other_adpt_subdiv} respectively.
 
@@ -367,10 +384,10 @@ This is probably because on this function specifically, the portion over which t
 This meant that even with a relatively low subinterval count, this portion was easy to fit a quadratic to closely.
 Had the function's concavity shifted more rapidly, my method may have seen better results than the established method.
 
-Regardless of which performed better, both methods were extremely effective. An error percentage of \(0.004\) (produced by my method), is still extremely low.
-This low error was accomplished with only 40 subintervals, which is significantly less than would have been needed had this function been evaluated in a non-adaptive manner.
+Regardless of which performed better, both methods were extremely effective. An error percentage of \(0.004\)~(produced by my method), is still extremely low.
+This low error was accomplished with only 40 subintervals, which is significantly less than would have been needed for such a degree of accuracy had this function been evaluated in a non-adaptive manner.
 
-A further investigation could consider the effectiveness of the two methods on more complex functions.
+A further investigation could consider the effectiveness of the two methods on more difficult functions.
 Although my method performed more poorly than the established one on this particular function, this could be attributed to the portion of the function at which the change in curvature was greatest being the simplest portion of the whole.
 
 \label{mylastpage}

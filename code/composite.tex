@@ -38,7 +38,7 @@ pub fn composite(mode: Mode, subints: u16, a: f32, b: f32, xcoords: &mut Vec<f32
                 f32::abs(trapezoid_rule(left, right) - simpsons_value.unwrap())
                     > mode.threshold()
             }
-            Mode::Complexity => complexity(left, right) > mode.threshold(),
+            Mode::Difficulty => difficulty(left, right) > mode.threshold(),
             Mode::Simple => false,
         };
 
