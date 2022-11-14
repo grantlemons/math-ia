@@ -102,7 +102,7 @@ For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\),
     A                                                   &=      6.080060820    \tageq\label{eqn:def_int_result}
 \end{align*}
 
-This result is exact, meaning the calculated area matches that enclosed by \(f(x)\) perfectly, as shown in \cref{fig:definite_integration}.
+Although this result isn't exact, having been rounded, for the sake of comparing methods of quadrature we will treat this as the "true" value and as if it fits the area enclosed by \(f(x)\) as shown in \cref{fig:definite_integration}.
 
 \subfile{graphs/definite}
 
@@ -246,7 +246,7 @@ Expressed mathematically, the equation for the approximate value of the interval
     \int_a^b f(x) \,dx \approx \frac{h}{3} \sum_{j=1}^{n_s / 2} \biggl[f(x_{2j-2}) + 4f(x_{2j-1}) + f(x_{2j})\biggr]
 \end{equation}
 
-Calculating the percent error using \cref{eqn:rule_eqn} in the same fashion as in \cref{sec:rect_rule, sec:trap_rule}, the Composite Simpson's 1/3 Rule only had an error of \(0.008288\%\).
+Calculating the percent error using \cref{eqn:rule_eqn} in the same fashion as in \cref{sec:rect_rule,sec:trap_rule}, the Composite Simpson's 1/3 Rule only had an error of \(0.008288\%\).
 This extremely low error demonstrates well the performance of this rule in comparison to others, but how does it fare on different functions?
 
 \subsection{Effectiveness}
