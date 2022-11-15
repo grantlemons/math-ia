@@ -43,7 +43,7 @@ Within this paper, for the sake of conciseness, I will use the term \emph{diffic
 Within this paper, numeric subscripts or lowercase variables in subscripts will denote an index in a set.
 For instance, \(x_j\) represents the \emph{j}-ith number in the set of \(x\)-values.
 Alphabetic subscripts, such as \(A_R\), will be used in order to specify that, for instance, a given equation defines the area of a rectangle instead of that of a trapezoid.
-These two uses of subscripts are sometimes combined in a form such as \(A_{r_1}\), denoting the area of rectangle 1 in a similar way to other subscripts throughout the paper.
+These two uses of subscripts are sometimes combined in a form such as \(A_{R_1}\), denoting the area of rectangle 1 in a similar way to other subscripts throughout the paper.
 
 \subsection{Indexes}
 Note that within the scope of this paper, sets are zero-indexed, meaning that the "first" value is at index \(0\).
@@ -102,7 +102,7 @@ For instance, the area constrained by \cref{eqn:rule_eqn}, \(x = 0\), \(x = 6\),
     A                                                   &=      6.080060820    \tageq\label{eqn:def_int_result}
 \end{align*}
 
-Although this result isn't exact, having been rounded, for the sake of comparing methods of quadrature we will treat this as the "true" value and as if it fits the area enclosed by \(f(x)\) as shown in \cref{fig:definite_integration}.
+Although this result isn't exact~(having been rounded), for the sake of comparing methods of quadrature we will treat this as the "true" value and as if it fits the area enclosed by \(f(x)\) as shown in \cref{fig:definite_integration}.
 
 \subfile{graphs/definite}
 
@@ -228,7 +228,7 @@ Adding these equations together in a certain way \(y_0 + 4y_1 + y_2\) and combin
                             &=       2Ah^2 + 2C                           \tageq\label{eqn:special_matching_thing}
 \end{align*}
 Factoring out \(\frac{h}{3}\) from \cref{eqn:special_smps_thing}, we obtain \(\frac{h}{3}(2Ah^2 + 6C)\), which is equal to \(\frac{h}{3}\) times \cref{eqn:special_matching_thing}.
-This means that the equation for the area enclosed by the quadratic can be expressed in terms of \(y_0 + 4y_1 + y_2\), which, are values of \(f(x)\).
+This means that the equation for the area enclosed by the quadratic can be expressed as \(y_0 + 4y_1 + y_2\), which is equivalent to \(f(x_0) + 4f(x_1) + f(x_2)\).
 Through this means, we can derive the equation for simpson's rule shown below.\autocite{smps}
 
 \begin{equation}
@@ -298,9 +298,9 @@ An example of two steps in this process is shown in \cref{fig:my_adpt_stepone,fi
 The numbers above each subinterval represent the value of \cref{eqn:complexity} with the two bounds of the subinterval as input, and the threshold for subdivision is a difficulty of \(2.000\).
 The second derivative is shown as a dashed dark gray function on the sketches in order to show how my difficulty function operates.
 
-\emph{
+\emph{%
 Note: \cref{fig:my_adpt_stepone,fig:my_adpt_steptwo} are examples of Normal Distributions.
-The reasoning for this is discussed in \cref{sec:normal}.
+The reasoning for this is discussed in \cref{sec:normal}.%
 }
 
 \subfile{graphs/steps/my_method/first_step}
