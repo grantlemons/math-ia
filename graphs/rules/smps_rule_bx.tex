@@ -16,7 +16,7 @@
                 \pgfmathsetmacro\fB{\ruleEq{\b}}
 
                 \draw [gray, thin, pattern=north west lines, pattern color=gray, samples=100, domain=\a:\b, variable=\x] (\a, 0) -- plot(\x,{\x}) -- (\b, 0) -- cycle;
-                \draw [darkgray, thin, samples=100, domain=\a:\b, variable=\x] plot(\x,{\x});
+                \draw [darkgray, thin, samples=100, domain=\a:\b, variable=\x] plot(\x,{\x}) node[darkgray, align=left, right, scale=0.4, yshift=-1cm, xshift=-2.6cm] {\small\(y=Bx\)};
                 \draw[black, thick] ({\rightbound+.1}, 0.0) -- ({\leftbound-.1}, 0.0) node[black, align=center, left, yshift=0.13cm, xshift=.5cm] {\scriptsize \(x\)};
                 \foreach \x in {\leftbound, ..., \rightbound} {
                     \draw[color=black] (\x, 3pt) -- (\x, -3pt) node[below]{\tiny \(\x\)};

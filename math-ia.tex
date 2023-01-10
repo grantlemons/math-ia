@@ -1,7 +1,5 @@
 \documentclass{paper}
 
-% that would require very small step sizes
-
 \begin{document}
 \insertTitlePage
 \pagenumbering{roman}
@@ -127,11 +125,11 @@ Since the area of a rectangle is extremely easy to calculate~(see \cref{eqn:rect
 \subfile{graphs/rules/rect_rule}
 
 Applying the Rectangle Rule on \cref{eqn:rule_eqn} with 5 subdivisions~(represented by \(n_s\))~(as in \cref{fig:rect_rule}), the calculations are as follows.
-\begin{gather*}
-    \text{let } a = 0                              \tageq\label{eqn:rect_example_first}             \\
-    \text{let } b = 6                                                                               \\
-    \text{let } n_s = 5                                                                             
-\end{gather*}
+\begin{align*}
+    \text{let } a   &= 0                              \tageq\label{eqn:rect_example_first}             \\
+    \text{let } b   &= 6                                                                               \\
+    \text{let } n_s &= 5                                                                             
+\end{align*}
 \begin{align*}
     h &= (6 - 0) / 5                                                                                \\
     h &= \frac{6}{5}                                                                                
@@ -194,7 +192,7 @@ Generalizing the equation of the quadratic to the standard form \cref{eqn:quadra
 \end{equation}
 
 \begin{equation*}
-    \int_{-h}^{h} \left[Ax^2 + Bx + C\right] \, dx   =  \int_{-h}^{h} \left[Ax^2 + Cx\right] \, dx + \int_{-h}^{h} \left[Bx\right] \, dx
+    \int_{-h}^{h} \left[Ax^2 + Bx + C\right] \, dx   =  \int_{-h}^{h} \left[Ax^2 + C\right] \, dx + \int_{-h}^{h} \left[Bx\right] \, dx
 \end{equation*}
 
 As \(y=Bx\) is a linear function that passes through the origin, and the subinterval being evaluated extends the same distance in the positive and negative directions, the area enclosed by it is negated to zero~(see \cref{fig:smps_rule_bx}).

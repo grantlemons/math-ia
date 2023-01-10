@@ -5,8 +5,8 @@
 \newcommand{\rightbound}{1.5}
 \newcommand{\constantEq}[1]{(1/2)*(#1)^2}
 \newcommand{\nonconstantEq}[1]{abs((1/6)*(#1)^3)}
-\newcommand{\constant}{\draw[opacity=0.5, gray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x, {\constantEq{\x}}); \node[darkgray, align=center, right, xshift=-.7cm, yshift=.8cm] {\tiny \(f(x)=\dfrac{x^2}{2}\)};}
-\newcommand{\nonconstant}{\draw[opacity=0.5, gray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x, {\nonconstantEq{\x}}); \node[darkgray, align=center, right, xshift=-.7cm, yshift=.8cm] {\tiny \(f(x)=\dfrac{x^3}{6}\)};}
+\newcommand{\constant}{\draw[opacity=0.7, gray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x, {\constantEq{\x}}); \node[darkgray, align=center, right, xshift=-.7cm, yshift=.8cm] {\tiny \(f(x)=\dfrac{x^2}{2}\)};}
+\newcommand{\nonconstant}{\draw[opacity=0.7, gray, smooth, thick, samples=100, domain=\leftbound:\rightbound] plot(\x, {\nonconstantEq{\x}}); \node[darkgray, align=center, right, xshift=-.7cm, yshift=.8cm] {\tiny \(f(x)=\dfrac{x^3}{6}\)};}
 
 \newcommand{\rulesep}{\unskip\vrule}
 
@@ -24,7 +24,7 @@
                 \pgfmathsetmacro\fM{\constantEq{\m}}
                 \pgfmathsetmacro\fB{\constantEq{\b}}
                 
-                \draw [darkgray, very thin, dashed, samples=100, domain={\leftbound-.25}:{\rightbound+.25}, variable=\x] plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))});
+                \draw [black, very thin, dashed, samples=100, domain={\leftbound-.25}:{\rightbound+.25}, variable=\x] plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))});
             \end{tikzpicture}
         }
         \subcaption{Constant concavity}
@@ -45,7 +45,7 @@
                 \pgfmathsetmacro\fM{\nonconstantEq{\m}}
                 \pgfmathsetmacro\fB{\nonconstantEq{\b}}
 
-                \draw [darkgray, very thin, dashed, samples=100, domain={\leftbound-.25}:{\rightbound+.25}, variable=\x] plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))});
+                \draw [black, very thin, dashed, samples=100, domain={\leftbound-.25}:{\rightbound+.25}, variable=\x] plot(\x,{((\fA*(\x-\m)*(\x-\b))/((\a-\m)*(\a-\b))) + ((\fM*(\x-\a)*(\x-\b))/((\m-\a)*(\m-\b))) + ((\fB*(\x-\a)*(\x-\m))/((\b-\a)*(\b-\m)))});
             \end{tikzpicture}
         }
         \subcaption{Non-constant concavity}

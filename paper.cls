@@ -61,7 +61,7 @@
 
 %Document Info
 \newcommand{\thetitle}{Methods of Adaptive Quadrature}
-\newcommand{\researchquestion}{Comparing a new method of adaptive quadrature to an existing strategy.}
+\newcommand{\researchquestion}{Comparing a new method of adaptive quadrature to an existing strategy}
 \newcommand{\theauthor}{Grant Lemons}
 
 %Random imports
